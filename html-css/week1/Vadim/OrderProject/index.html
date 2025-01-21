@@ -52,16 +52,16 @@
             <article class="card__input">
                 <div class="card__data">
                     <label for="card_number" class="card__text">Card number</label>
-                    <input class="card__number" name="card_number" id="card__number" type="text" maxlength="19" placeholder="1234 1234 1234 1234" required>
+                    <input class="card__number" name="card_number" id="card__number" type="text" pattern="\s*(\S\s*){16,}" maxlength="19" placeholder="1234 1234 1234 1234" required>
                 </div>
                 <div class="card__safety">
                     <div class="card__expiry">
                         <label for="card__date" class="card__text">Expiry date</p></label>
-                        <input class="card__date" name="card__date" id="card__date" type="text" maxlength="8" placeholder="MM / YY" required>
+                        <input class="card__date" name="card__date" id="card__date" type="text" pattern="\s*(\S\s*){5,}" maxlength="8" placeholder="MM / YY" required>
                     </div>
                     <div class="card__sec">
                         <label for="card__security" class="card__text">Security code</p></label>
-                        <input class="card__security" name="card__security" id="card__security" type="text" maxlength="3" placeholder="CVV" required>
+                        <input class="card__security" name="card__security" id="card__security" type="text" pattern="\s*(\S\s*){3,}" maxlength="3" placeholder="CVV" required>
                     </div>
                 </div>
             </article>
