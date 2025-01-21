@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="./Files/css/styles.css">
+        <title>ORDER FORM</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    </head>
+
+    <body>
+        <!-- Header -->
+        <header class="order">
+            <div class="order__summary">
+                <h1>Order Summary</h1>
+            </div>
+            <div class="order__total">
+                <div class="order__totalpermonth">
+                    <p>Total</p>
+                    <p>$333 / month</p>
+                </div>
+                <hr class="order__line">
+                <div class="order__totalnow">
+                    <p>Total</p>
+                    <p>$100</p>
+                </div>
+            </div>
+        </header>
+
+        <!-- Payment Method -->
+        <section class="payment">
+            <h2 class="payment__method">Payment Method</h2>
+            <div class="payment__option">
+                <button class="payment__button" id="payment__button1" type="button"><img class="payment__img1" src=Files/images/cards.png>Credit / Debit</button>
+                <button class="payment__button" id="payment__button2" type="button"><img class="payment__img2" src=Files/images/paypal.png>PayPal</button>
+            </div>
+        </section>
+    
+        <!-- Card Data Input -->
+        <section class="card">
+            <h2 class="card__info">Card Info</h2>
+            <article class="card__input">
+                <div class="card__data">
+                    <p class="card__text">Card number</p>
+                    <input class="card__number" type="text" placeholder="1234 1234 1234 1234" required>
+                </div>
+                <div class="card__safety">
+                    <div class="card__expiry">
+                        <p class="card__text">Expiry date</p>
+                        <input class="card__date" type="text" placeholder="MM / YY" required>
+                    </div>
+                    <div class="card__sec">
+                        <p class="card__text">Security code</p>
+                        <input class="card__security" type="text" placeholder="CVV" required>
+                    </div>
+                </div>
+            </article>
+        </section>
+
+        <!-- Buy-Now Button -->
+        <section class="buy">
+            <button class="buy__now" type="submit" value="Buy now">Buy Now</button>
+        </section>
+        
+        <!-- Help Anchor -->
+        <footer class="help">
+                <a href="#" class="help__needed">Need Help?</a>
+        </footer>
+        
+        <!-- Script to Blur out the button and reset focus -->
+        <script>
+            const button1 = document.getElementById('payment__button1');
+            const button2 = document.getElementById('payment__button2');
+
+            const handleFocusHover = (focusedButton, otherButton) => {
+                otherButton.classList.add('disabled');
+                otherButton.tabIndex = -1; 
+            };
+
+            const removeFocusHover = (otherButton) => {
+                otherButton.classList.remove('disabled');
+                otherButton.tabIndex = 0; 
+            };
+
+
+            button1.addEventListener('focus', () => handleFocusHover(button1, button2));
+            button1.addEventListener('blur', () => removeFocusHover(button2));
+
+            button2.addEventListener('focus', () => handleFocusHover(button2, button1));
+            button2.addEventListener('blur', () => removeFocusHover(button1));
+
+
+            button1.addEventListener('mouseover', () => handleFocusHover(button1, button2));
+            button1.addEventListener('mouseout', () => removeFocusHover(button2));
+
+            button2.addEventListener('mouseover', () => handleFocusHover(button2, button1));
+            button2.addEventListener('mouseout', () => removeFocusHover(button1));
+        </script>
+    </body>
+</html>
