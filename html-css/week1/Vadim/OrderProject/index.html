@@ -33,79 +33,49 @@
         <section class="payment">
             <h2 class="payment__method">Payment Method</h2>
             <div class="payment__option">
-                <button class="payment__button" id="payment__button1" type="button"><img class="payment__img1" src="./files/images/cards.webp">Credit / Debit</button>
-                <button class="payment__button" id="payment__button2" type="button"><img class="payment__img2" src="./files/images/paypal.webp">PayPal</button>
+                <input type="radio" name="select" id="option-1" checked>
+                <input type="radio" name="select" id="option-2">
+                <label for="option-1" class="option option-1">
+                    <img class="payment__img1" src="./files/images/cards.webp" alt="Pay with Credit or Debit Cards" />
+                    <span>Credit / Debit</span>
+                </label>
+                <label for="option-2" class="option option-2">
+                    <img class="payment__img2" src="./files/images/paypal.webp" alt="Pay with Paypal" />
+                    <span>PayPal</span>
+                </label>
             </div>
         </section>
-    
+
         <!-- Card Data Input -->
-        <section class="card">
+        <form class="card">
             <h2 class="card__info">Card Info</h2>
             <article class="card__input">
                 <div class="card__data">
-                    <p class="card__text">Card number</p>
-                    <input class="card__number" id="card__number" type="text" maxlength="19" placeholder="1234 1234 1234 1234" required>
+                    <label for="card_number" class="card__text">Card number</label>
+                    <input class="card__number" name="card_number" id="card__number" type="text" maxlength="19" placeholder="1234 1234 1234 1234" required>
                 </div>
                 <div class="card__safety">
                     <div class="card__expiry">
-                        <p class="card__text">Expiry date</p>
-                        <input class="card__date" id="card__date" type="text" maxlength="8" placeholder="MM / YY" required>
+                        <label for="card__date" class="card__text">Expiry date</p></label>
+                        <input class="card__date" name="card__date" id="card__date" type="text" maxlength="8" placeholder="MM / YY" required>
                     </div>
                     <div class="card__sec">
-                        <p class="card__text">Security code</p>
-                        <input class="card__security" id="card__security" type="text" maxlength="3" placeholder="CVV" required>
+                        <label for="card__security" class="card__text">Security code</p></label>
+                        <input class="card__security" name="card__security" id="card__security" type="text" maxlength="3" placeholder="CVV" required>
                     </div>
                 </div>
             </article>
-        </section>
-
-        <!-- Buy-Now Button -->
-        <section class="buy">
-            <button class="buy__now" type="submit" value="Buy now">Buy Now</button>
-        </section>
-        
+            <article class="buy">
+                <input class="buy__now" type="submit" value="Buy now">
+            </article>
+        </form>
+       
         <!-- Help Anchor -->
         <footer class="help">
                 <a href="#" class="help__needed">Need Help?</a>
         </footer>
         
         <script>
-            //Blur out the button and reset focus
-            document.addEventListener('DOMContentLoaded', () => {
-                const button1 = document.getElementById('payment__button1');
-                const button2 = document.getElementById('payment__button2');
-
-                if (!button1 || !button2) return;
-
-                const handleFocusHover = (focusedButton, otherButton) => {
-                    otherButton.classList.add('disabled');
-                    otherButton.tabIndex = -1;
-                };
-
-                const removeFocusHover = (otherButton) => {
-                    if (!otherButton.matches(':focus')) {
-                        otherButton.classList.remove('disabled');
-                        otherButton.tabIndex = 0;
-                    }
-                };
-
-                button1.addEventListener('focus', () => handleFocusHover(button1, button2));
-                button2.addEventListener('focus', () => handleFocusHover(button2, button1));
-
-                    
-                button1.addEventListener('blur', () => {
-                    if (!button2.matches(':focus')) { //
-                        removeFocusHover(button2);
-                    }
-                });
-
-                button2.addEventListener('blur', () => {
-                    if (!button1.matches(':focus')) { 
-                        removeFocusHover(button1);
-                    }
-                });
-            });
-  
                 //function to format card data
             function formatCardNumber(value) {
                 //Only Numbers
@@ -113,11 +83,13 @@
                 //Only 4 digits
                 return numericValue.match(/.{1,4}/g)?.join(' ') || numericValue;
             }
+
                 //Card input field setup
             function setupCardNumberInput(inputId) {
                 const input = document.querySelector(inputId);
 
                 input.addEventListener('input', (e) => {
+                
                 //Saving cursor position
                 const cursorPosition = e.target.selectionStart;
                 const previousValueLength = e.target.value.length;
