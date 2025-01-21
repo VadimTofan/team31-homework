@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="/OrderProject/files/css/styles.css">
+        <link rel="stylesheet" href="./files/css/styles.css">
         <title>ORDER FORM</title>
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -33,8 +33,8 @@
         <section class="payment">
             <h2 class="payment__method">Payment Method</h2>
             <div class="payment__option">
-                <button class="payment__button" id="payment__button1" type="button"><img class="payment__img1" src="/OrderProject/files/images/cards.webp">Credit / Debit</button>
-                <button class="payment__button" id="payment__button2" type="button"><img class="payment__img2" src="/OrderProject/files/images/paypal.webp">PayPal</button>
+                <button class="payment__button" id="payment__button1" type="button"><img class="payment__img1" src="./files/images/cards.webp">Credit / Debit</button>
+                <button class="payment__button" id="payment__button2" type="button"><img class="payment__img2" src="./files/images/paypal.webp">PayPal</button>
             </div>
         </section>
     
@@ -44,16 +44,16 @@
             <article class="card__input">
                 <div class="card__data">
                     <p class="card__text">Card number</p>
-                    <input class="card__number" type="text" placeholder="1234 1234 1234 1234" required>
+                    <input class="card__number" id="card__number" type="text" maxlength="19" placeholder="1234 1234 1234 1234" required>
                 </div>
                 <div class="card__safety">
                     <div class="card__expiry">
                         <p class="card__text">Expiry date</p>
-                        <input class="card__date" type="text" placeholder="MM / YY" required>
+                        <input class="card__date" id="card__date" type="text" maxlength="8" placeholder="MM / YY" required>
                     </div>
                     <div class="card__sec">
                         <p class="card__text">Security code</p>
-                        <input class="card__security" type="text" placeholder="CVV" required>
+                        <input class="card__security" id="card__security" type="text" maxlength="3" placeholder="CVV" required>
                     </div>
                 </div>
             </article>
@@ -69,34 +69,109 @@
                 <a href="#" class="help__needed">Need Help?</a>
         </footer>
         
-        <!-- Script to Blur out the button and reset focus -->
         <script>
-            const button1 = document.getElementById('payment__button1');
-            const button2 = document.getElementById('payment__button2');
+                //function to Blur out the button and reset focus
+            function disabled() {
+                const button1 = document.getElementById('payment__button1');
+                const button2 = document.getElementById('payment__button2');
 
-            const handleFocusHover = (focusedButton, otherButton) => {
+                const handleFocusHover = (focusedButton, otherButton) => {
                 otherButton.classList.add('disabled');
-                otherButton.tabIndex = -1; 
-            };
+                otherButton.tabIndex = -1;
+                };
 
-            const removeFocusHover = (otherButton) => {
+                const removeFocusHover = (otherButton) => {
                 otherButton.classList.remove('disabled');
-                otherButton.tabIndex = 0; 
-            };
+                otherButton.tabIndex = 0;
+                };
 
 
-            button1.addEventListener('focus', () => handleFocusHover(button1, button2));
-            button1.addEventListener('blur', () => removeFocusHover(button2));
+                button1.addEventListener('focus', () => handleFocusHover(button1, button2));
+                button1.addEventListener('blur', () => removeFocusHover(button2));
 
-            button2.addEventListener('focus', () => handleFocusHover(button2, button1));
-            button2.addEventListener('blur', () => removeFocusHover(button1));
+                button2.addEventListener('focus', () => handleFocusHover(button2, button1));
+                button2.addEventListener('blur', () => removeFocusHover(button1));
 
 
-            button1.addEventListener('mouseover', () => handleFocusHover(button1, button2));
-            button1.addEventListener('mouseout', () => removeFocusHover(button2));
+                button1.addEventListener('mouseover', () => handleFocusHover(button1, button2));
+                button1.addEventListener('mouseout', () => removeFocusHover(button2));
 
-            button2.addEventListener('mouseover', () => handleFocusHover(button2, button1));
-            button2.addEventListener('mouseout', () => removeFocusHover(button1));
+                button2.addEventListener('mouseover', () => handleFocusHover(button2, button1));
+                button2.addEventListener('mouseout', () => removeFocusHover(button1));
+            }
+
+                //function to format card data
+            function formatCardNumber(value) {
+                //Only Numbers
+                const numericValue = value.replace(/\D/g, ''); 
+                //Only 4 digits
+                return numericValue.match(/.{1,4}/g)?.join(' ') || numericValue;
+            }
+                //Card input field setup
+            function setupCardNumberInput(inputId) {
+                const input = document.querySelector(inputId);
+
+                input.addEventListener('input', (e) => {
+                //Saving cursor position
+                const cursorPosition = e.target.selectionStart;
+                const previousValueLength = e.target.value.length;
+
+                //Format the input
+                const formattedValue = formatCardNumber(e.target.value);
+                e.target.value = formattedValue;
+
+                //Adjust the cursor
+                const adjustment = formattedValue.length - previousValueLength;
+                e.target.selectionStart = e.target.selectionEnd = cursorPosition + adjustment;
+                });
+            }
+
+                //Execute
+                document.addEventListener('DOMContentLoaded', () => {
+                setupCardNumberInput('#card__number');
+            });
+
+                //Function for the Expiry Date
+            function setupExpiryDateInput(inputId) {
+                const input = document.querySelector(inputId);
+                //Input is only numbers
+                input.addEventListener('input', (e) => {
+                    let value = e.target.value.replace(/\D/g, '');
+
+                //Checks if month is <=12
+                    if (value.length >= 2) {
+                        const month = parseInt(value.slice(0, 2), 10);
+                        if (month > 12) {
+                            value = '12' + value.slice(2);
+                        }
+                    }
+
+                    //Add space after month
+                    if (value.length >= 2) {
+                        value = value.slice(0, 2) + ' / ' + value.slice(2, 4);
+                    }
+
+                    e.target.value = value;
+                });
+            }
+
+                document.addEventListener('DOMContentLoaded', () => {
+                    setupExpiryDateInput('#card__date');
+                });
+
+                //Cvv only numbers
+            function setupCvvInput(inputSelector) {
+                const input = document.querySelector(inputSelector);
+
+                input.addEventListener('input', (e) => {
+                    const value = e.target.value.replace(/\D/g, ''); 
+                    e.target.value = value;
+                });
+            }
+
+                document.addEventListener('DOMContentLoaded', () => {
+                    setupCardNumberInput('#card__security');
+            });
         </script>
     </body>
 </html>

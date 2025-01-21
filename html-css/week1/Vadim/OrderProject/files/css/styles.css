@@ -130,13 +130,12 @@ body a {
 }
 
 .card__number {
-  width: 90%;
+  width: 100%;
   height: 44px;
-  padding-left: 10%;
   background: #F3F1F2;
   border: 1px solid #939393;
   border-radius: 4px;
-  background-image: url("/OrderProject/files/images/icon8.webp");
+  background-image: url("../images/icon8.webp");
   background-repeat: no-repeat;
   background-position: 96% 50%;
 }
@@ -173,9 +172,8 @@ body a {
 }
 
 .card__date {
-  width: 90%;
+  width: 100%;
   height: 44px;
-  padding-left: 10%;
   background: #F3F1F2;
   border: 1px solid #939393;
   border-radius: 4px;
@@ -197,13 +195,12 @@ body a {
 }
 
 .card__security {
-  width: 90%;
+  width: 100%;
   height: 44px;
-  padding-left: 10%;
   background: #F3F1F2;
   border: 1px solid #939393;
   border-radius: 4px;
-  background-image: url("/OrderProject/files/images/icon8.webp");
+  background-image: url("../images/icon8.webp");
   background-repeat: no-repeat;
   background-position: 90% 50%;
 }
@@ -214,6 +211,16 @@ body a {
   font-weight: 400;
   font-size: 16px;
   line-height: 20px;
+  padding-right: 50px;
+}
+
+input[type=text] {
+  font-size: 24px;
+  text-align: center;
+}
+
+input {
+    text-align:left;
 }
 
 /* --- Buy-Now Button --- */
