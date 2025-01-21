@@ -246,12 +246,13 @@ input {
   cursor: pointer;
   transition: all 0.2s ease-in-out;
   transform: scale(1.02);
-  background: linear-gradient(92.74deg, #FE4E9B 1.15%, #FD7B46 98.48%);
+
 }
 
 .buy__now:active {
   transform: scale(0.95);
   transition: all 0.2s ease-in-out;
+  background: linear-gradient(92.74deg, #FE4E9B 1.15%, #FD7B46 98.48%);
 }
 
 /* --- Help Anchor --- */

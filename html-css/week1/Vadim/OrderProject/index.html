@@ -70,36 +70,42 @@
         </footer>
         
         <script>
-                //function to Blur out the button and reset focus
-            function disabled() {
+            //Blur out the button and reset focus
+            document.addEventListener('DOMContentLoaded', () => {
                 const button1 = document.getElementById('payment__button1');
                 const button2 = document.getElementById('payment__button2');
 
+                if (!button1 || !button2) return;
+
                 const handleFocusHover = (focusedButton, otherButton) => {
-                otherButton.classList.add('disabled');
-                otherButton.tabIndex = -1;
+                    otherButton.classList.add('disabled');
+                    otherButton.tabIndex = -1;
                 };
 
                 const removeFocusHover = (otherButton) => {
-                otherButton.classList.remove('disabled');
-                otherButton.tabIndex = 0;
+                    if (!otherButton.matches(':focus')) {
+                        otherButton.classList.remove('disabled');
+                        otherButton.tabIndex = 0;
+                    }
                 };
 
-
                 button1.addEventListener('focus', () => handleFocusHover(button1, button2));
-                button1.addEventListener('blur', () => removeFocusHover(button2));
-
                 button2.addEventListener('focus', () => handleFocusHover(button2, button1));
-                button2.addEventListener('blur', () => removeFocusHover(button1));
 
+                    
+                button1.addEventListener('blur', () => {
+                    if (!button2.matches(':focus')) { //
+                        removeFocusHover(button2);
+                    }
+                });
 
-                button1.addEventListener('mouseover', () => handleFocusHover(button1, button2));
-                button1.addEventListener('mouseout', () => removeFocusHover(button2));
-
-                button2.addEventListener('mouseover', () => handleFocusHover(button2, button1));
-                button2.addEventListener('mouseout', () => removeFocusHover(button1));
-            }
-
+                button2.addEventListener('blur', () => {
+                    if (!button1.matches(':focus')) { 
+                        removeFocusHover(button1);
+                    }
+                });
+            });
+  
                 //function to format card data
             function formatCardNumber(value) {
                 //Only Numbers
