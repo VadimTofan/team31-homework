@@ -136,7 +136,7 @@ body a {
   background: #F3F1F2;
   border: 1px solid #939393;
   border-radius: 4px;
-  background-image: url(/files/Images/icon8.webp);
+  background-image: url("/OrderProject/files/images/icon8.webp");
   background-repeat: no-repeat;
   background-position: 96% 50%;
 }
@@ -203,7 +203,7 @@ body a {
   background: #F3F1F2;
   border: 1px solid #939393;
   border-radius: 4px;
-  background-image: url(/files/Images/icon8.webp);
+  background-image: url("/OrderProject/files/images/icon8.webp");
   background-repeat: no-repeat;
   background-position: 90% 50%;
 }
