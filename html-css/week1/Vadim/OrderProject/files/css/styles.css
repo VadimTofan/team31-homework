@@ -105,7 +105,8 @@ body a {
 }
 
 input[type="radio"] {
-  display: none;
+  appearance: none;
+  outline: 0;
 }
 
 #option-1:checked:checked~.option-1,
