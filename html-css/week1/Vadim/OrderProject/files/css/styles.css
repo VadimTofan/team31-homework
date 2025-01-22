@@ -58,10 +58,14 @@ body a {
 .payment__option {
   display: inline-flex;
   height: 110px;
-  width: 100%;
+  width: 95%;
   align-items: center;
   justify-content: space-around;
   padding: 20px 0;
+}
+
+.payment__radio {
+  position: absolute;
 }
 
 .option-1 {
