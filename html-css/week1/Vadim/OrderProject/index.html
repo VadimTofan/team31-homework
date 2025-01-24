@@ -4,10 +4,11 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="./files/css/styles.css">
-        <title>ORDER FORM</title>
+        <title>Order Form</title>
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto:wght@700&display=swap" rel="stylesheet">
+
     </head>
 
     <body>
@@ -16,63 +17,63 @@
             <div class="order__summary">
                 <h1>Order Summary</h1>
             </div>
-            <div class="order__total">
-                <div class="order__totalpermonth">
-                    <p>Total</p>
-                    <p>$333 / month</p>
-                </div>
-                <hr class="order__line">
-                <div class="order__totalnow">
-                    <p>Total</p>
-                    <p>$100</p>
-                </div>
+            <div class="order__totalpermonth">
+                <p>Total</p>
+                <p>$333 / month</p>
+            </div>
+            <div class="order__totalnow">
+                <p>Total</p>
+                <p>$100</p>
             </div>
         </header>
-
-        <!-- Payment Method -->
-        <section class="payment">
-            <h2 class="payment__method">Payment Method</h2>
-            <div class="payment__option">
-                <input type="radio" name="select" id="option-1" class="payment__radio" checked />
-                <input type="radio" name="select" id="option-2" class="payment__radio" />
-                <label for="option-1" class="option option-1">
-                    <img class="payment__img1" src="./files/images/cards.webp" alt="Pay with Credit or Debit Cards" />
-                    <span>Credit / Debit</span>
-                </label>
-                <label for="option-2" class="option option-2">
-                    <img class="payment__img2" src="./files/images/paypal.webp" alt="Pay with Paypal" />
-                    <span>PayPal</span>
-                </label>
-            </div>
-        </section>
-
-        <!-- Card Data Input -->
-        <form class="card">
-            <h2 class="card__info">Card Info</h2>
-            <article class="card__input">
-                <div class="card__data">
-                    <label for="card_number" class="card__text">Card number</label>
-                    <input class="card__number" name="card_number" id="card__number" type="text" pattern="\s*(\S\s*){16,}" maxlength="19" placeholder="1234 1234 1234 1234" required>
+        
+        <main>
+            <!-- Payment Method -->
+            <section class="payment">
+                <h2 class="payment__method">Payment Method</h2>
+                <div class="payment__option">
+                    <input type="radio" name="select" id="option-1" class="payment__radio payment__radio1" checked />
+                    <input type="radio" name="select" id="option-2" class="payment__radio payment__radio2" />
+                    <label for="option-1" class="option option-1">
+                        <img class="payment__img1" src="./files/images/cards.webp" alt="Pay with Credit or Debit Cards" />
+                        <span>Credit / Debit</span>
+                    </label>
+                    <label for="option-2" class="option option-2">
+                        <img class="payment__img2" src="./files/images/paypal.webp" alt="Pay with Paypal" />
+                        <span>PayPal</span>
+                    </label>
                 </div>
-                <div class="card__safety">
-                    <div class="card__expiry">
-                        <label for="card__date" class="card__text">Expiry date</p></label>
-                        <input class="card__date" name="card__date" id="card__date" type="text" pattern="\s*(\S\s*){5,}" maxlength="8" placeholder="MM / YY" required>
+            </section>
+        
+            <!-- Card Data Input -->
+            <form class="card">
+                <h2 class="card__info">Card Info</h2>
+                <section class="card__input">
+                    <div class="card__data">
+                        <label for="card__number" class="card__text">Card number</label>
+                        <input class="card__number" name="card__number" id="card__number" type="text" pattern="\s*(\S\s*){16,}"
+                            maxlength="19" placeholder="1234 1234 1234 1234" required>
                     </div>
-                    <div class="card__sec">
-                        <label for="card__security" class="card__text">Security code</p></label>
-                        <input class="card__security" name="card__security" id="card__security" type="text" pattern="\s*(\S\s*){3,}" maxlength="3" placeholder="CVV" required>
+                    <div class="card__safety">
+                        <div class="card__expiry">
+                            <label for="card__date" class="card__text">Expiry date</p></label>
+                            <input class="card__date" name="card__date" id="card__date" type="text" pattern="\s*(\S\s*){5,}"
+                                maxlength="8" placeholder="MM / YY" required>
+                        </div>
+                        <div class="card__sec">
+                            <label for="card__security" class="card__text">Security code</p></label>
+                            <input class="card__security" name="card__security" id="card__security" type="text"
+                                pattern="\s*(\S\s*){3,}" maxlength="3" placeholder="CVV" required>
+                        </div>
                     </div>
-                </div>
-            </article>
-            <article class="buy">
-                <input class="buy__now" type="submit" value="Buy now">
-            </article>
-        </form>
-       
+                </section>
+                <button class="primary-button" type="submit">Buy Now</button>
+            </form>
+        </main>
+
         <!-- Help Anchor -->
         <footer class="help">
-                <a href="#" class="help__needed">Need Help?</a>
+                <a href="#" class="help__link">Need Help?</a>
         </footer>
         
         <script>
