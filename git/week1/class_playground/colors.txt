@@ -1,3 +1,4 @@
 beige
 red
 blue
+red
