@@ -2,7 +2,7 @@
 
 console.log("===== PART 2 =====");
 
-// Info about us
+
 const owner = 'Carlo';
 const restaurantName = 'Bella Napoli';
 const specialOffer = "Pesto Pizza";
