@@ -78,3 +78,40 @@ function getEventWeekday (daysFomToday){
 
 console.log(getEventWeekday(199));
 
+
+
+
+
+
+console.log("======= Exercise 4 =======");
+
+
+function clothesToWear (temperature){
+    const clothesForThirtyPlus = ["Shorts", " T-shirt", " Sandals", " Sunglasses", " Sunscreen", " Baseball cap"];
+    const clothesForTwentyFiveToThirty = ["Shirt", " Jeans", " Sneakers", " Sunglasses", " Sunscreen", " Baseball cap"];
+    const clothesForTwentyToTwentyFive = ["Shirt", " Jeans", " Sneakers", " Baseball cap"];
+    const clothesForFifteenToTwenty = ["Shirt", " Trousers", " Sneakers", " Coat", " Baseball cap"];
+    const clothesForTenToFifteen = ["Sweater", " Trousers", " Coat", "G loves", " Hat", " Boots", " Scarf"];
+    const clothesForZeroToTen = ["Sweater", " Trousers", " Winter Jacket", " Isothermal Wear", " Gloves", " Hat", " Boots", " Scarf"];
+    const clothesForMinus = ["Sweater", " Three pairs of Trousers", " Some Napapijri Winter Jacket", " Isothermal Wear", " Gloves", " Hat", " Thick Boots", " Kanye's Scarf"];
+    if (temperature >= 30){
+        return `It is hawt as hell outside! Gotta go Light: ${clothesForThirtyPlus}`;
+    } else if (temperature >= 25 && temperature < 30){      
+        return `The weather is OK! You may go with: ${clothesForTwentyFiveToThirty}`;
+    } else if (temperature >= 20 && temperature < 25){
+        return `The weather is OK-ish! Go for: ${clothesForTwentyToTwentyFive}`;
+    } else if (temperature >= 15 && temperature < 20){
+        return `It is chilly outside, chose something thicker: ${clothesForFifteenToTwenty}`;
+    } else if (temperature >= 10 && temperature < 15){
+        return `It is quite cold, go for: ${clothesForTenToFifteen}`;
+    } else if (temperature >= 0 && temperature < 10){
+        return `It is freezing outside, go with: ${clothesForZeroToTen}`;
+    } else {
+        return `Oh lawd, either stay at home or wear: ${clothesForMinus}`;
+    }   
+}
+
+console.log(clothesToWear(-15));
+
+
+
