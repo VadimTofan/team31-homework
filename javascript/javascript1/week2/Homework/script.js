@@ -34,3 +34,27 @@ console.log(formalName("Carl-Philip", "Bertil", false));
 console.log(formalName("George-Alexander", "Louis", true));
 console.log(formalName("George-Alexander", "Louis", false));
 
+//If the the person was a woman I would have used "Lady" instead of "Lord".
+//To achieve that I would have added an if to check if the person
+//Is actually a woman or not. That would require also a checkbox in the form.
+//If the checkbox is checked then the person is Lady, if not then the person is Lord.
+//In formula i would add a new parameter called isWoman and check if it is true or false.
+//If it is true then the person is Lady, if not then the person is Lord.
+//If the person wouldn't chose any of the options then the person would be called by the full name.
+
+/*
+function formalName (firstname, surname, useFormalName, isWoman){
+    if (useFormalName){
+        if (isWoman){
+            return "Lady " + firstname + " " + surname;
+        } else {
+            return "Lord " + firstname + " " + surname;
+        }
+    } else {
+        return firstname + " " + surname;
+    }s
+}
+*/
+
+
+
