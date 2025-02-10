@@ -87,31 +87,35 @@ console.log("======= Exercise 4 =======");
 
 
 function clothesToWear (temperature){
-    const clothesForThirtyPlus = ["Shorts", " T-shirt", " Sandals", " Sunglasses", " Sunscreen", " Baseball cap"];
-    const clothesForTwentyFiveToThirty = ["Shirt", " Jeans", " Sneakers", " Sunglasses", " Sunscreen", " Baseball cap"];
-    const clothesForTwentyToTwentyFive = ["Shirt", " Jeans", " Sneakers", " Baseball cap"];
-    const clothesForFifteenToTwenty = ["Shirt", " Trousers", " Sneakers", " Coat", " Baseball cap"];
-    const clothesForTenToFifteen = ["Sweater", " Trousers", " Coat", "G loves", " Hat", " Boots", " Scarf"];
-    const clothesForZeroToTen = ["Sweater", " Trousers", " Winter Jacket", " Isothermal Wear", " Gloves", " Hat", " Boots", " Scarf"];
-    const clothesForMinus = ["Sweater", " Three pairs of Trousers", " Some Napapijri Winter Jacket", " Isothermal Wear", " Gloves", " Hat", " Thick Boots", " Kanye's Scarf"];
+
+    const clothes30 = ["Shorts", "T-shirt", "Sandals", "Sunglasses", "Sunscreen", "Baseball cap!"];
+    const clothes25 = ["Shirt", "Jeans", "Sneakers", "Sunglasses", "Sunscreen", "Baseball cap!"];
+    const clothes20 = ["Shirt", "Jeans", "Sneakers", "Baseball cap!"];
+    const clothes15 = ["Shirt", "Trousers", "Sneakers", "Coat", "Baseball cap!"];
+    const clothes10 = ["Sweater", "Trousers", "Coat", "G loves", "Hat", "Boots", "Scarf!"];
+    const clothes00 = ["Sweater", "Trousers", "Winter Jacket", "Isothermal Wear", "Gloves", "Hat", "Boots", "Scarf!"];
+    const clothesMinus = ["Sweater", "Three pairs of Trousers", "Some Napapijri Winter Jacket", "Isothermal Wear", "Gloves", "Hat", "Thick Boots", "Kanye's Scarf!"];
+    
     if (temperature >= 30){
-        return `It is hawt as hell outside! Gotta go Light: ${clothesForThirtyPlus}`;
-    } else if (temperature >= 25 && temperature < 30){      
-        return `The weather is OK! You may go with: ${clothesForTwentyFiveToThirty}`;
-    } else if (temperature >= 20 && temperature < 25){
-        return `The weather is OK-ish! Go for: ${clothesForTwentyToTwentyFive}`;
-    } else if (temperature >= 15 && temperature < 20){
-        return `It is chilly outside, chose something thicker: ${clothesForFifteenToTwenty}`;
-    } else if (temperature >= 10 && temperature < 15){
-        return `It is quite cold, go for: ${clothesForTenToFifteen}`;
-    } else if (temperature >= 0 && temperature < 10){
-        return `It is freezing outside, go with: ${clothesForZeroToTen}`;
+        return `It is hawt as hell outside! Gotta go Light: ${clothes30.join(", ")}`;
+    } else if (temperature >= 25){      
+        return `The weather is OK! You may go with: ${clothes25.join(", ")}`;
+    } else if (temperature >= 20){
+        return `The weather is OK-ish! Go for: ${clothes20.join(", ")}`;
+    } else if (temperature >= 15){
+        return `It is chilly outside, chose something thicker: ${clothes15.join(", ")}`;    
+    } else if (temperature >= 10){
+        return `It is quite cold, go for: ${clothes10.join(", ")}`;
+    } else if (temperature >= 0){
+        return `It is freezing outside, go with: ${clothes00.join(", ")}`;
     } else {
-        return `Oh lawd, either stay at home or wear: ${clothesForMinus}`;
+        return `Oh lawd, either stay at home or wear: ${clothesMinus.join(", ")}`;  
     }   
 }
 
-console.log(clothesToWear(-15));
+console.log(clothesToWear(15));
 
 
 
+
+console.log("======= Exercise 5 =======");
