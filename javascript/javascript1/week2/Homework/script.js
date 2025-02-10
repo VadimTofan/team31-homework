@@ -1,6 +1,11 @@
 
 
+//Homework Week 2 - JavaScript 1
+// https://www.freecodecamp.org/vadimto
+
 console.log("======= Homework Week 2 =======");
+
+//Exercise 1
 console.log("======= Exercise 1 =======");
 
 
@@ -16,7 +21,7 @@ console.log(fullname2);
 
 
 
-
+//Exercise 2
 console.log("======= Exercise 2 =======");
 
 
@@ -59,7 +64,7 @@ function formalName (firstname, surname, useFormalName, isWoman){
 */
 
 
-
+//Exercise 3
 console.log("======= Exercise 3 =======");
 
 
@@ -82,7 +87,7 @@ console.log(getEventWeekday(199));
 
 
 
-
+//Exercise 4
 console.log("======= Exercise 4 =======");
 
 
@@ -117,5 +122,40 @@ console.log(clothesToWear(15));
 
 
 
-
+//Exercise 5
 console.log("======= Exercise 5 =======");
+
+const class07Students = [];
+
+function addStudentToClass(studentName) {
+    if (!studentName) {
+        return `You cannot add an empty string to a class`;
+    } else if (class07Students.includes(studentName)) {
+        return `Student ${studentName} is already in the class`;
+    } else if (class07Students.length >= 6 && studentName !== "Queen"){
+        return `Cannot add more students to class 07`;
+    } else {
+        class07Students.push(studentName);
+        return `Student ${studentName} added to the class 07`;
+    }
+}
+
+function getNumberOfStudents() {
+    return `The total amount of students is ${class07Students.length}`;
+}
+
+console.log(addStudentToClass("Vadim"));
+console.log(addStudentToClass("Vadim"));
+console.log(addStudentToClass());
+console.log(addStudentToClass("Lorem"));
+console.log(addStudentToClass("Ipsum"));
+console.log(addStudentToClass("Dolor"));
+console.log(addStudentToClass("Sit"));
+console.log(addStudentToClass("Amet"));
+console.log(addStudentToClass("Queen"));
+
+console.log(getNumberOfStudents());
+
+
+
+
