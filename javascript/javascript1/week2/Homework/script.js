@@ -25,11 +25,11 @@ console.log(fullname2);
 console.log("======= Exercise 2 =======");
 
 
-function formalName (firstname, surname, useFormalName){
+function formalName (firstName, surname, useFormalName){
     if (useFormalName){
-        return "Lord " + firstname + " " + surname;
+        return "Lord " + firstName + " " + surname;
     } else {
-        return firstname + " " + surname;
+        return firstName + " " + surname;
     }
 }
 
@@ -50,15 +50,15 @@ console.log(formalName("George-Alexander", "Louis", false));
 //If the person wouldn't chose any of the options then the person would be called by the full name.
 
 /*
-function formalName (firstname, surname, useFormalName, isWoman){
+function formalName (firstName, surname, useFormalName, isWoman){
     if (useFormalName){
         if (isWoman){
-            return "Lady " + firstname + " " + surname;
+            return "Lady " + firstName + " " + surname;
         } else {
-            return "Lord " + firstname + " " + surname;
+            return "Lord " + firstName + " " + surname;
         }
     } else {
-        return firstname + " " + surname;
+        return firstName + " " + surname;
     }s
 }
 */
@@ -159,3 +159,60 @@ console.log(getNumberOfStudents());
 
 
 
+
+
+//Exercise 6
+console.log("======= Exercise 6 =======");
+
+const sweet = 0.5;
+const chocolate = 0.7;
+const toffee = 1.1;
+const chewingGum = 0.03;
+const boughtCandyPrices = [];
+const amountToSpend = Math.random() * 100;
+
+function addCandy(candyType, weight) {
+    let candyPrice = 0;
+    if (candyType === "Sweet") {
+        candyPrice = sweet * weight;
+    } else if (candyType === "Chocolate") {
+        candyPrice = chocolate * weight;
+    } else if (candyType === "Toffee") {
+        candyPrice = toffee * weight;
+    } else {
+        candyPrice = chewingGum * weight; 
+    }
+    boughtCandyPrices.push(candyPrice);
+}
+
+function totalPrice() {
+    let price = 0;
+    for (let i = 0; i < boughtCandyPrices.length; i++) {
+        price += boughtCandyPrices[i];
+    }
+    return price; 
+}
+
+function canBuyMoreCandy() {
+    const currentTotal = totalPrice();
+    if (currentTotal < amountToSpend) {
+        let amountLeft = amountToSpend - currentTotal;
+        return `You can buy more candy! Remaining amount: ${amountLeft.toFixed(2)}`;
+    } else if (currentTotal === amountToSpend){
+        return `Your budget was just enough!`;
+    } else 
+        amountOver = currentTotal - amountToSpend
+        return `Actually, you are over the budget by: ${amountOver.toFixed(2)}`;
+}
+
+
+addCandy("Sweet", 20);
+addCandy("Sweet", 20);
+addCandy("Chewing-Gum", 20);
+addCandy("Sweet", 20); 
+addCandy("Sweet", 20); 
+addCandy("Sweet", 20); 
+
+console.log("Your budget is:", amountToSpend.toFixed(2));
+console.log("Total Price:", totalPrice().toFixed(2));
+console.log(canBuyMoreCandy());
