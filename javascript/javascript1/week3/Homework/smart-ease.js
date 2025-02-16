@@ -1,3 +1,5 @@
+console.log("=========Smart-Ease=========");
+
 const notes = [];
 
 function saveNote(content, id) {
