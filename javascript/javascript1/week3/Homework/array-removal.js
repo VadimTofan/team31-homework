@@ -13,9 +13,17 @@ const names = [
 ];
 const nameToRemove = "Ahmad";
 
-const index = names.indexOf(nameToRemove);
-if (index > -1) {
+function removeName(names, nameToRemove) {
+  const index = names.indexOf(nameToRemove);
+  
+  if (index === -1) {
+    console.log(`Name not found`)
+    return; 
+  }
+
   names.splice(index, 1);
+
+  console.log(names); 
 }
 
-console.log(names); 
+removeName(names, nameToRemove);
