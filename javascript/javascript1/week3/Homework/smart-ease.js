@@ -4,7 +4,7 @@ const notes = [];
 
 function saveNote(content, id) {
     if (typeof content === "string" && typeof id === "number"){
-        notes.push({'content':content, 'id':id });
+        notes.push({content, id });
         console.log("Note saved!")
     } else {
         console.log("Please insert valid text and a numeric ID.");
@@ -39,7 +39,4 @@ function logOutNotesFormatted() {
     }
 }
 
-
-  
-  logOutNotesFormatted();
-
+logOutNotesFormatted();

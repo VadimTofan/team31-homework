@@ -4,7 +4,7 @@ console.log("=========Job Matching-1!=========");
 
 function match(candidat, job) {
   if (!candidat.minSalary || !job.maxSalary) {
-    return "The provided data was not complete.";
+    throw new Error("The provided data was not complete.");
   }
   const wiggledSalary = candidat.minSalary - (candidat.minSalary * 0.1);
 

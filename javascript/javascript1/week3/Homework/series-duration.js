@@ -23,15 +23,15 @@ const series = [
 
 function seriesDuration() {  //function logOutSeriesText() didn't make much sense (as was written in homework)
   let totalViewTime = 0; 
-  const ageInMinutes = 80 * 365 * 24 * 60;  
+  const lifeTimeInMinutes  = 80 * 365 * 24 * 60;  
 
   for (i = 0; i < series.length; i++){
     const seriesTime = (series[i].days * 24 * 60) + (series[i].hours * 60) + series[i].minutes;
-    const percentOfAge = (seriesTime / ageInMinutes) * 100;
+    const percentOfAge = (seriesTime / lifeTimeInMinutes ) * 100;
     console.log(`${series[i].title} took ${(percentOfAge).toFixed(3)}% of my life`);
-    totalViewTime = totalViewTime + seriesTime;
+    totalViewTime += seriesTime;
   }   
-    totalViewTime = (totalViewTime / ageInMinutes) * 100;
+    totalViewTime = (totalViewTime / lifeTimeInMinutes ) * 100;
     console.log(`In total that took ${totalViewTime.toFixed(3)}% of my life`);
 }
 

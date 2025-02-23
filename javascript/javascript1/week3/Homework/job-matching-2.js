@@ -29,7 +29,7 @@ function match2(jobs, candidates) {
         break;
       }
     }
-    results.push({candidate: i + 1, equityMatch: equityMatch, locationMatch: locationMatch })
+    results.push({candidate: i++, equityMatch: equityMatch, locationMatch: locationMatch })
   }
 
   return results

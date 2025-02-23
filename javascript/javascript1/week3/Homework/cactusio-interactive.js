@@ -10,8 +10,8 @@ const today = new Date();
 const todayDate = today.toLocaleDateString("en-GB")
 
 function addActivity(activity, duration) {
-    if (typeof activity === "string" && typeof duration === "number" && duration > 0) {
-        activities.push({ date: todayDate, activity: activity, duration: duration });
+    if (typeof activity === "string" && duration > 0) {
+        activities.push({ date: todayDate, activity, duration });
         console.log("Activity added:", activities);
     } else {
         console.warn(`You have made a mistake in the input. Format: activity -> 'string', Duration -> number > 0`);
@@ -30,18 +30,18 @@ function showStatus() {
     let activitiesToday = 0;
 
     for (let i = 0; i < activities.length; i++) {
-        activityDuration = activities[i].duration + activityDuration;
+        activityDuration += activities[i].duration;
     }
 
     for (let i = 0; i < activities.length; i++) {
         if (activities[i].date === todayDate) {
-            activitiesToday = activitiesToday+1;
+            activitiesToday++;
         }
     }
 
-    if (activitiesToday  === 0) {
+    if (!activitiesToday) {
         console.log("You don't have any activities registered for today.")
-    } else if (activities.length === 0) {
+    } else if (!activities.length) {
         console.log("You don't have any registered activities.")
     } else {
         console.log(`You have added ${activitiesToday} activities. They amount to ${activityDuration} min. of usage`)

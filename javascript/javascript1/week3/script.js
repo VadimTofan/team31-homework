@@ -29,13 +29,13 @@ const friends = [{
             friendsStatus.away.push(friend.username)
           }
       }
-      if (friendsStatus.online.length === 0){
+      if (!friendsStatus.online.length){
         delete friendsStatus.online
       }
-      if (friendsStatus.offline.length === 0){
+      if (!friendsStatus.offline.length){
         delete friendsStatus.offline
       }
-      if (friendsStatus.away.length === 0){
+      if (!friendsStatus.away.length){
         delete friendsStatus.away
       }
 
