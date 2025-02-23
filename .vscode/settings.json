@@ -6,5 +6,6 @@
     "totalnow",
     "totalpermonth",
     "Vadim"
-  ]
+  ],
+  "editor.formatOnSave": true
 }
