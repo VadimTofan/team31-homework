@@ -1,6 +1,6 @@
 console.log("===========Voice Assistant===========");
 
-let voiceAssistant = {
+const voiceAssistant = {
   hello: ["Hello", "Hi there", "Greetings", "Hey", "Good to see you", "Howdy"],
   yourName: [
     "Your name is:",
@@ -113,14 +113,14 @@ let voiceAssistant = {
   ],
 };
 
-let userData = {};
+const userData = {};
 
 function getRandomAnswer(answer) {
   return answer[Math.floor(Math.random() * answer.length)];
 }
 
 function fetchRandomHello(command) {
-  let userName = command.split(" ").slice(-1)[0];
+  const userName = command.split(" ").slice(-1)[0];
   if (!userName) {
     return `${getRandomAnswer(voiceAssistant.yourNameError)}`;
   }
@@ -131,7 +131,7 @@ function fetchRandomHello(command) {
 }
 
 function addToTodoList(command) {
-  let todoItem = command.toLowerCase().match(/add (.+?) to my todo/i)[1];
+  const todoItem = command.toLowerCase().match(/add (.+?) to my todo/i)[1];
   if (!userData.todoList) {
     userData.todoList = [];
   }
@@ -144,50 +144,13 @@ function addToTodoList(command) {
 }
 
 function removeFromTodoList(command) {
-  let todoItem = command.toLowerCase().match(/remove (.+?) from my todo/i)[1];
-  let itemIndex = userData.todoList.indexOf(todoItem);
+  const todoItem = command.toLowerCase().match(/remove (.+?) from my todo/i)[1];
+  const itemIndex = userData.todoList.indexOf(todoItem);
   if (itemIndex > -1) {
     userData.todoList.splice(itemIndex, 1);
     return `${todoItem} ${getRandomAnswer(voiceAssistant.remove)}`;
   }
   return `${todoItem} ${getRandomAnswer(voiceAssistant.todoNotExists)}`;
-}
-
-function setTimer(command) {
-  let timerMatch = command.match(/(\d+)\s*minutes/);
-  if (timerMatch) {
-    let minutes = parseInt(timerMatch[1]);
-    setTimeout(() => {
-      console.log("Timer done!");
-    }, minutes * 60 * 1000);
-    return `${getRandomAnswer(voiceAssistant.timer)} ${minutes} minutes`;
-  }
-  return `${getRandomAnswer(voiceAssistant.timerError)}`;
-}
-
-function doBasicMath(command) {
-  let calculationMatch = command.match(/\d+\s*[\+\-\*/]\s*\d+/);
-  //I could not figure this out myself. had to use chat gpt as
-  //There is clearly not enough material explaining regex on the web.
-  //As far as i understood \d+ is to match the digits 1<
-  //s* to match all spaces, [\+\-\*/] to match operators
-  if (calculationMatch) {
-    let calculation = calculationMatch[0];
-    {
-      let result = eval(calculation);
-      return `${getRandomAnswer(voiceAssistant.result)} ${result}`;
-    }
-  }
-  return `${getRandomAnswer(voiceAssistant.resultError)}`;
-}
-
-function getDate(command) {
-  let todayDate = new Date();
-  let day = todayDate.getDate();
-  let month = todayDate.toLocaleString("default", { month: "long" });
-  let year = todayDate.getFullYear();
-  let formattedDate = `${day}. of ${month} ${year}`;
-  return `${getRandomAnswer(voiceAssistant.day)} ${formattedDate}`;
 }
 
 function whatIsOnTodoList(command) {
@@ -199,6 +162,43 @@ function whatIsOnTodoList(command) {
     reply += `\n ${i + 1}. ${userData.todoList[i]}`;
   }
   return reply;
+}
+
+function getDate(command) {
+  const todayDate = new Date();
+  const day = todayDate.getDate();
+  const month = todayDate.toLocaleString("default", { month: "long" });
+  const year = todayDate.getFullYear();
+  const formattedDate = `${day}. of ${month} ${year}`;
+  return `${getRandomAnswer(voiceAssistant.day)} ${formattedDate}`;
+}
+
+function doBasicMath(command) {
+  const calculationMatch = command.match(/\d+\s*[\+\-\*/]\s*\d+/);
+  //I could not figure this out myself. had to use chat gpt as
+  //There is clearly not enough material explaining regex on the web.
+  //As far as i understood \d+ is to match the digits 1<
+  //s* to match all spaces, [\+\-\*/] to match operators
+  if (calculationMatch) {
+    const calculation = calculationMatch[0];
+    {
+      const result = eval(calculation);
+      return `${getRandomAnswer(voiceAssistant.result)} ${result}`;
+    }
+  }
+  return `${getRandomAnswer(voiceAssistant.resultError)}`;
+}
+
+function setTimer(command) {
+  const timerMatch = command.match(/(\d+)\s*minutes/);
+  if (timerMatch) {
+    const minutes = parseInt(timerMatch[1]);
+    setTimeout(() => {
+      console.log("Timer done!");
+    }, minutes * 60 * 1000);
+    return `${getRandomAnswer(voiceAssistant.timer)} ${minutes} minutes`;
+  }
+  return `${getRandomAnswer(voiceAssistant.timerError)}`;
 }
 
 function getReply(command) {
