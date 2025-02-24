@@ -8,7 +8,15 @@ let voiceAssistant = {
     "I think your name is:",
     "As far as i can remember, your name is:",
   ],
-  wyd: [
+  yourNameError: [
+    "You need to provide a name.",
+    "I can't save an empty name. Please tell me your name.",
+    "It looks like you didn't say your name.",
+    "I need a name to remember you.",
+    "Your name is missing. Can you try again?",
+    "I can't save a blank name. What should I call you?",
+  ],
+  howAreYou: [
     "how are you today?",
     "how can I help you?",
     "is there anything I can do for you?",
@@ -111,16 +119,97 @@ function getRandomAnswer(answer) {
   return answer[Math.floor(Math.random() * answer.length)];
 }
 
+function fetchRandomHello(command) {
+  let userName = command.split(" ").slice(-1)[0];
+  if (userName === "") {
+    return `${getRandomAnswer(voiceAssistant.yourNameError)}`;
+  } else {
+    userData.userName = userName;
+    return `${getRandomAnswer(
+      voiceAssistant.hello
+    )} ${userName} ${getRandomAnswer(voiceAssistant.howAreYou)}`;
+  }
+}
+
+function addToTodoList(command) {
+  let todoItem = command.toLowerCase().match(/add (.+?) to my todo/i)[1];
+  if (!userData.todoList) {
+    userData.todoList = [];
+  }
+  if (userData.todoList.includes(todoItem)) {
+    return `${todoItem} ${getRandomAnswer(voiceAssistant.todoExists)}`;
+  }
+  userData.todoList.push(todoItem);
+  return `${todoItem} ${getRandomAnswer(voiceAssistant.add)}`;
+}
+
+function removeFromTodoList(command) {
+  let todoItem = command.toLowerCase().match(/remove (.+?) from my todo/i)[1];
+  let itemIndex = userData.todoList.indexOf(todoItem);
+  if (itemIndex > -1) {
+    userData.todoList.splice(itemIndex, 1);
+    return `${todoItem} ${getRandomAnswer(voiceAssistant.remove)}`;
+  } else {
+    return `${todoItem} ${getRandomAnswer(voiceAssistant.todoNotExists)}`;
+  }
+}
+
+function setTimer(command) {
+  let timerMatch = command.match(/(\d+)\s*minutes/);
+  if (timerMatch) {
+    let minutes = parseInt(timerMatch[1]);
+    setTimeout(() => {
+      console.log("Timer done!");
+    }, minutes * 60 * 1000);
+    return `${getRandomAnswer(voiceAssistant.timer)} ${minutes} minutes`;
+  } else {
+    return `${getRandomAnswer(voiceAssistant.timerError)}`;
+  }
+}
+
+function doBasicMath(command) {
+  let calculationMatch = command.match(/\d+\s*[\+\-\*/]\s*\d+/);
+  //I could not figure this out myself. had to use chat gpt as
+  //There is clearly not enough material explaining regex on the web.
+  //As far as i understood \d+ is to match the digits 1<
+  //s* to match all spaces, [\+\-\*/] to match operators
+  if (calculationMatch) {
+    let calculation = calculationMatch[0];
+    {
+      let result = eval(calculation);
+      return `${getRandomAnswer(voiceAssistant.result)} ${result}`;
+    }
+  } else {
+    return `${getRandomAnswer(voiceAssistant.resultError)}`;
+  }
+}
+
+function getDate(command) {
+  let todayDate = new Date();
+  let day = todayDate.getDate();
+  let month = todayDate.toLocaleString("default", { month: "long" });
+  let year = todayDate.getFullYear();
+  let formattedDate = `${day}. of ${month} ${year}`;
+  return `${getRandomAnswer(voiceAssistant.day)} ${formattedDate}`;
+}
+
+function whatIsOnTodoList(command) {
+  if (!userData.todoList || !userData.todoList.length) {
+    return `${getRandomAnswer(voiceAssistant.todoEmpty)}`;
+  }
+  let reply = `${getRandomAnswer(voiceAssistant.todo)}`;
+  for (i = 0; i < userData.todoList.length; i++) {
+    reply += `\n ${i + 1}. ${userData.todoList[i]}`;
+  }
+  return reply;
+}
+
 function getReply(command) {
   if (
     command.toLowerCase().includes("hello") &&
     command.toLowerCase().includes("my name is")
   ) {
-    let userName = command.split(" ").slice(-1)[0];
-    userData.userName = userName;
-    return `${getRandomAnswer(
-      voiceAssistant.hello
-    )} ${userName} ${getRandomAnswer(voiceAssistant.wyd)}`;
+    return fetchRandomHello(command);
   }
 
   if (
@@ -134,55 +223,28 @@ function getReply(command) {
     command.toLowerCase().includes("add") &&
     command.toLowerCase().includes("to my todo")
   ) {
-    let todoItem = command.toLowerCase().match(/add (.+?) to my todo/i)[1];
-    if (!userData.todoList) {
-      userData.todoList = [];
-    }
-    if (userData.todoList.includes(todoItem)) {
-      return `${todoItem} ${getRandomAnswer(voiceAssistant.todoExists)}`;
-    }
-    userData.todoList.push(todoItem);
-    return `${todoItem} ${getRandomAnswer(voiceAssistant.add)}`;
+    return addToTodoList(command);
   }
 
   if (
     command.toLowerCase().includes("remove") &&
     command.toLowerCase().includes("from my todo")
   ) {
-    let todoItem = command.toLowerCase().match(/remove (.+?) from my todo/i)[1];
-    let itemIndex = userData.todoList.indexOf(todoItem);
-    if (itemIndex > -1) {
-      userData.todoList.splice(itemIndex, 1);
-      return `${todoItem} ${getRandomAnswer(voiceAssistant.remove)}`;
-    } else {
-      return `${todoItem} ${getRandomAnswer(voiceAssistant.todoNotExists)}`;
-    }
+    return removeFromTodoList(command);
   }
 
   if (
     command.toLowerCase().includes("what") &&
     command.toLowerCase().includes("on my todo")
   ) {
-    if (!userData.todoList || !userData.todoList.length) {
-      return `${getRandomAnswer(voiceAssistant.todoEmpty)}`;
-    }
-    let reply = `${getRandomAnswer(voiceAssistant.todo)}`;
-    for (i = 0; i < userData.todoList.length; i++) {
-      reply += `\n ${i + 1}. ${userData.todoList[i]}`;
-    }
-    return reply;
+    return whatIsOnTodoList(command);
   }
 
   if (
     command.toLowerCase().includes("what day") &&
     command.toLowerCase().includes("today")
   ) {
-    let todayDate = new Date();
-    let day = todayDate.getDate();
-    let month = todayDate.toLocaleString("default", { month: "long" });
-    let year = todayDate.getFullYear();
-    let formattedDate = `${day}. of ${month} ${year}`;
-    return `${getRandomAnswer(voiceAssistant.day)} ${formattedDate}`;
+    return getDate(command);
   }
 
   if (
@@ -192,20 +254,7 @@ function getReply(command) {
       command.includes("+") ||
       command.includes("-"))
   ) {
-    let calculationMatch = command.match(/\d+\s*[\+\-\*/]\s*\d+/);
-    //I could not figure this out myself. had to use chat gpt as
-    //There is clearly not enough material explaining regex on the web.
-    //As far as i understood \d+ is to match the digits 1<
-    //s* to match all spaces, [\+\-\*/] to match operators
-    if (calculationMatch) {
-      let calculation = calculationMatch[0];
-      {
-        let result = eval(calculation);
-        return `${getRandomAnswer(voiceAssistant.result)} ${result}`;
-      }
-    } else {
-      return `${getRandomAnswer(voiceAssistant.resultError)}`;
-    }
+    return doBasicMath(command);
   }
 
   if (
@@ -213,25 +262,14 @@ function getReply(command) {
     command.toLowerCase().includes("timer") &&
     command.toLowerCase().includes("for")
   ) {
-    let timerMatch = command.match(/(\d+)\s*minutes/);
-
-    if (timerMatch) {
-      let minutes = parseInt(timerMatch[1]);
-
-      setTimeout(() => {
-        console.log("Timer done!");
-      }, minutes * 60 * 1000);
-
-      return `${getRandomAnswer(voiceAssistant.timer)} ${minutes} minutes`;
-    } else {
-      return `${getRandomAnswer(voiceAssistant.timerError)}`;
-    }
+    return setTimer(command);
   }
 
   return;
 }
 
 console.log(getReply("Hello my name is Benjamin"));
+console.log(getReply("Hello my name is "));
 console.log(getReply("What is my name?"));
 console.log(getReply("Add Fishing to my todo"));
 console.log(getReply("Add Fishing to my todo"));
