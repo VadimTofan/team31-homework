@@ -1,7 +1,7 @@
 console.log("===========Voice Assistant===========");
 
 let voiceAssistant = {
-  hello: ["Hello", "Hi there", "Greetings", "Hey", "Good to see you"],
+  hello: ["Hello", "Hi there", "Greetings", "Hey", "Good to see you", "Howdy"],
   yourName: [
     "Your name is:",
     "Have you forgotten that your name is:",
@@ -9,35 +9,35 @@ let voiceAssistant = {
     "As far as i can remember, your name is:",
   ],
   wyd: [
-    "How are you today?",
-    "How can I help you?",
-    "Is there anything I can do for you?",
-    "What's on your mind?",
-    "How's your day going?",
-    "Need any assistance?",
+    "how are you today?",
+    "how can I help you?",
+    "is there anything I can do for you?",
+    "what's on your mind?",
+    "how's your day going?",
+    "need any assistance?",
   ],
   todo: [
-    "Your todo list contains",
-    "You have added the following to your todo list",
+    "Your todo list contains:",
+    "You have added the following to your todo list:",
     "Last time I checked, your todo list had the following items:",
     "Here's what's on your todo list:",
     "Your tasks for today are:",
   ],
   add: [
-    "has been added to your todo list",
-    "was just added to the list",
-    "is added to your todo list",
-    "is now on your todo list",
-    "has been successfully added",
-    "is added to your tasks",
+    "has been added to your todo list.",
+    "was just added to the list.",
+    "is added to your todo list.",
+    "is now on your todo list.",
+    "has been successfully added.",
+    "is added to your tasks.",
   ],
   remove: [
-    "has been removed from your todo list",
-    "was just removed from the list",
-    "is removed from your todo list",
-    "has been deleted from your tasks",
-    "is no longer on your todo list",
-    "has been cleared from your list",
+    "has been removed from your todo list.",
+    "was just removed from the list.",
+    "is removed from your todo list.",
+    "has been deleted from your tasks.",
+    "is no longer on your todo list.",
+    "has been cleared from your list.",
   ],
   day: [
     "Today is",
@@ -47,7 +47,7 @@ let voiceAssistant = {
     "The date is",
     "It's currently",
   ],
-  calc: [
+  result: [
     "The total amount is:",
     "The result is:",
     "Bruv, quick maffs got me:",
@@ -78,7 +78,9 @@ function getReply(command) {
   ) {
     let userName = command.split(" ").slice(-1)[0];
     userData.userName = userName;
-    return `${getRandomAnswer(voiceAssistant.hello)} ${userName}`;
+    return `${getRandomAnswer(
+      voiceAssistant.hello
+    )} ${userName} ${getRandomAnswer(voiceAssistant.wyd)}`;
   }
 
   if (
@@ -130,6 +132,42 @@ function getReply(command) {
     }
     return reply;
   }
+
+  if (
+    command.toLowerCase().includes("what day") &&
+    command.toLowerCase().includes("today")
+  ) {
+    let todayDate = new Date();
+    let day = todayDate.getDate();
+    let month = todayDate.toLocaleString("default", { month: "long" });
+    let year = todayDate.getFullYear();
+    let formattedDate = `${day}. of ${month} ${year}`;
+    return `${getRandomAnswer(voiceAssistant.day)} ${formattedDate}`;
+  }
+
+  if (
+    command.toLowerCase().includes("what is") &&
+    (command.includes("/") ||
+      command.includes("*") ||
+      command.includes("+") ||
+      command.includes("-"))
+  ) {
+    let calculationMatch = command.match(/\d+\s*[\+\-\*/]\s*\d+/);
+    //I could not figure this out myself. had to use chat gpt as
+    //There is clearly not enough material explaining regex on the web.
+    //As far as i understood \d+ is to match the digits 1<
+    //s* to match all spaces, [\+\-\*/] to match operators
+    if (calculationMatch) {
+      let calculation = calculationMatch[0];
+      {
+        let result = eval(calculation);
+        return `${getRandomAnswer(voiceAssistant.result)} ${result}.`;
+      }
+    } else {
+      return "Sorry, I couldn't find a valid calculation.";
+    }
+  }
+
   return;
 }
 
@@ -142,4 +180,5 @@ console.log(getReply("Add Fishing to my todo"));
 console.log(getReply("Add Singing in the Shower to my todo"));
 console.log(getReply("Remove Fishing from my todo"));
 console.log(getReply("What is on my todo"));
-console.log(userData.todoList[0]);
+console.log(getReply("What day is it today?"));
+console.log(getReply("What is 3 + 2?"));
