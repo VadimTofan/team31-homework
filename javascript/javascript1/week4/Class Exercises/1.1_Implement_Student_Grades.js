@@ -13,7 +13,6 @@ createStudent("Eva", 20, [12, 7, 10, 2, 12]);
 createStudent("Grace", 22, [7, 10, 7, 10, 7]);
 createStudent("Henry", 21, [4, 7, 7, 4, 4]);
 createStudent("Irene", 23, [2, 7, 7, 4, 0]);
-console.log(students);
 
 function calculateAverageGrade(student) {
   let averageGrade = 0;
@@ -23,28 +22,18 @@ function calculateAverageGrade(student) {
   const averageGrades = averageGrade / student.grades.length;
   return `The average grade of ${student.name} is ${averageGrades.toFixed(2)}`;
 }
-console.log(calculateAverageGrade(students[1]));
 
-function calculateAverageGradeOfAll() {
-  let highestAverage = 0;
-  let topStudent;
-  for (let i = 0; i < students.length; i++) {
-    let student = students[i];
-    let studentAverage = calculateAverageGrade(student);
-
-    if (studentAverage > highestAverage) {
-      highestAverage = studentAverage;
-      topStudent = student;
+function findTopStudent(students) {
+  let topStudent = [];
+  let averageGrades = 0;
+  for (i = 0; i < students.length; i++) {
+    let student = calculateAverageGrade(students[i]);
+    if (averageGrades[i] > averageGrades) {
+      topStudent = student[i];
+      averageGrades = averageGrades[i];
+      console.log(student);
     }
+    console.log(student);
   }
-
-  if (topStudent) {
-    console.log(
-      `The student with the highest average grade is ${
-        topStudent.name
-      } with an average grade of ${highestAverage.toFixed(2)}`
-    );
-  }
+  console.log(student);
 }
-
-calculateAverageGradeOfAll();
