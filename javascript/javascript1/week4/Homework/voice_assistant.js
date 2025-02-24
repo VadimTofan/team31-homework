@@ -139,7 +139,7 @@ function getReply(command) {
       userData.todoList = [];
     }
     if (userData.todoList.includes(todoItem)) {
-      return `${todoItem} ${getRandomAnswer(voiceAssistant.todoExists)}.`;
+      return `${todoItem} ${getRandomAnswer(voiceAssistant.todoExists)}`;
     }
     userData.todoList.push(todoItem);
     return `${todoItem} ${getRandomAnswer(voiceAssistant.add)}`;
@@ -201,7 +201,7 @@ function getReply(command) {
       let calculation = calculationMatch[0];
       {
         let result = eval(calculation);
-        return `${getRandomAnswer(voiceAssistant.result)} ${result}.`;
+        return `${getRandomAnswer(voiceAssistant.result)} ${result}`;
       }
     } else {
       return `${getRandomAnswer(voiceAssistant.resultError)}`;
@@ -222,7 +222,7 @@ function getReply(command) {
         console.log("Timer done!");
       }, minutes * 60 * 1000);
 
-      return `${getRandomAnswer(voiceAssistant.timer)} ${minutes} minutes.`;
+      return `${getRandomAnswer(voiceAssistant.timer)} ${minutes} minutes`;
     } else {
       return `${getRandomAnswer(voiceAssistant.timerError)}`;
     }
