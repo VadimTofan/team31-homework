@@ -40,12 +40,12 @@ const voiceAssistant = {
     "is in your todo list. Anything else?",
   ],
   todoNotExists: [
-    "{item} is not in your todo list.",
-    "{item} is missing from your list.",
-    "{item} isn't on your todo list.",
-    "{item} was not found in your tasks.",
-    "{item} doesn't seem to be in your list.",
-    "{item} isn't on the list. Want to add it?",
+    "not in your todo list.",
+    "is missing from your list.",
+    "isn't on your todo list.",
+    "was not found in your tasks.",
+    "doesn't seem to be in your list.",
+    "isn't on the list. Want to add it?",
   ],
   todoEmpty: [
     "Your todo list is empty.",
@@ -169,7 +169,7 @@ function whatIsOnTodoList() {
     return `${sayTodoEmpty}`;
   }
   let reply = `${sayTodoList}`;
-  for (i = 0; i < userData.todoList.length; i++) {
+  for (let i = 0; i < userData.todoList.length; i++) {
     reply += `\n ${i + 1}. ${userData.todoList[i]}`;
   }
   return reply;
@@ -234,6 +234,11 @@ function getReply(command) {
   ) {
     const sayName = getRandomAnswer(voiceAssistant.yourName);
     const sayUserName = userData.userName;
+    const sayUserNameError = getRandomAnswer(voiceAssistant.yourNameError);
+
+    if (!userData.userName) {
+      return `${sayUserNameError}`;
+    }
     return `${sayName} ${sayUserName}`;
   }
 
