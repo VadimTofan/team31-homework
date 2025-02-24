@@ -255,14 +255,14 @@ function getReply(command) {
     command.toLowerCase().includes("what") &&
     command.toLowerCase().includes("on my todo")
   ) {
-    return whatIsOnTodoList(command);
+    return whatIsOnTodoList();
   }
 
   if (
     command.toLowerCase().includes("what day") &&
     command.toLowerCase().includes("today")
   ) {
-    return getDate(command);
+    return getDate();
   }
 
   if (
