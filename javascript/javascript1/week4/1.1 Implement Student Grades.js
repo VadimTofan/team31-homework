@@ -29,7 +29,7 @@ function calculateAverageGradeOfAll() {
   let highestAverage = 0;
   let topStudent;
   for (let i = 0; i < students.length; i++) {
-    let student = students[i];
+    let student = [i];
     let studentAverage = calculateAverageGrade(student);
 
     if (studentAverage > highestAverage) {
