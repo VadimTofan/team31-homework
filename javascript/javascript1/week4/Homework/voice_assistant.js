@@ -168,7 +168,7 @@ function getReply(command) {
     }
     let reply = `${getRandomAnswer(voiceAssistant.todo)}`;
     for (i = 0; i < userData.todoList.length; i++) {
-      reply += `\n- ${userData.todoList[i]}`;
+      reply += `\n ${i + 1}. ${userData.todoList[i]}`;
     }
     return reply;
   }
@@ -237,6 +237,8 @@ console.log(getReply("Add Fishing to my todo"));
 console.log(getReply("Add Fishing to my todo"));
 console.log(getReply("Add Fishing to my todo"));
 console.log(getReply("Add Fishing to my todo"));
+console.log(getReply("Add Camping to my todo"));
+console.log(getReply("Add Buy groceries to my todo"));
 console.log(getReply("Add Singing in the Shower to my todo"));
 console.log(getReply("Remove Fishing from my todo"));
 console.log(getReply("What is on my todo"));
