@@ -121,14 +121,13 @@ function getRandomAnswer(answer) {
 
 function fetchRandomHello(command) {
   let userName = command.split(" ").slice(-1)[0];
-  if (userName === "") {
+  if (!userName) {
     return `${getRandomAnswer(voiceAssistant.yourNameError)}`;
-  } else {
-    userData.userName = userName;
-    return `${getRandomAnswer(
-      voiceAssistant.hello
-    )} ${userName} ${getRandomAnswer(voiceAssistant.howAreYou)}`;
   }
+  userData.userName = userName;
+  return `${getRandomAnswer(
+    voiceAssistant.hello
+  )} ${userName} ${getRandomAnswer(voiceAssistant.howAreYou)}`;
 }
 
 function addToTodoList(command) {
@@ -136,6 +135,7 @@ function addToTodoList(command) {
   if (!userData.todoList) {
     userData.todoList = [];
   }
+
   if (userData.todoList.includes(todoItem)) {
     return `${todoItem} ${getRandomAnswer(voiceAssistant.todoExists)}`;
   }
@@ -149,9 +149,8 @@ function removeFromTodoList(command) {
   if (itemIndex > -1) {
     userData.todoList.splice(itemIndex, 1);
     return `${todoItem} ${getRandomAnswer(voiceAssistant.remove)}`;
-  } else {
-    return `${todoItem} ${getRandomAnswer(voiceAssistant.todoNotExists)}`;
   }
+  return `${todoItem} ${getRandomAnswer(voiceAssistant.todoNotExists)}`;
 }
 
 function setTimer(command) {
@@ -162,9 +161,8 @@ function setTimer(command) {
       console.log("Timer done!");
     }, minutes * 60 * 1000);
     return `${getRandomAnswer(voiceAssistant.timer)} ${minutes} minutes`;
-  } else {
-    return `${getRandomAnswer(voiceAssistant.timerError)}`;
   }
+  return `${getRandomAnswer(voiceAssistant.timerError)}`;
 }
 
 function doBasicMath(command) {
@@ -179,9 +177,8 @@ function doBasicMath(command) {
       let result = eval(calculation);
       return `${getRandomAnswer(voiceAssistant.result)} ${result}`;
     }
-  } else {
-    return `${getRandomAnswer(voiceAssistant.resultError)}`;
   }
+  return `${getRandomAnswer(voiceAssistant.resultError)}`;
 }
 
 function getDate(command) {
