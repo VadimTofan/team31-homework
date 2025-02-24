@@ -23,6 +23,30 @@ let voiceAssistant = {
     "Here's what's on your todo list:",
     "Your tasks for today are:",
   ],
+  todoExists: [
+    "is already in your todo list!",
+    "is already added to your list.",
+    "is already on your todo.",
+    "is already planned for.",
+    "is already listed. No need to add it again!",
+    "is in your todo list. Anything else?",
+  ],
+  todoNotExists: [
+    "{item} is not in your todo list.",
+    "{item} is missing from your list.",
+    "{item} isn't on your todo list.",
+    "{item} was not found in your tasks.",
+    "{item} doesn't seem to be in your list.",
+    "{item} isn't on the list. Want to add it?",
+  ],
+  todoEmpty: [
+    "Your todo list is empty.",
+    "There's nothing on your todo list right now.",
+    "Your task list is currently empty.",
+    "You have no tasks in your todo list.",
+    "Your todo list is blank. Want to add something?",
+    "Looks like your todo list is empty. Need any tasks?",
+  ],
   add: [
     "has been added to your todo list.",
     "was just added to the list.",
@@ -55,6 +79,14 @@ let voiceAssistant = {
     "The answer is:",
     "Here's the result:",
   ],
+  resultError: [
+    "I couldn't calculate that.",
+    "Sorry, I couldn't process that calculation.",
+    "That doesn't seem to be a valid calculation.",
+    "I'm not sure how to compute that.",
+    "I couldn't figure that one out.",
+    "Hmm, that doesn't look like a valid math problem.",
+  ],
   timer: [
     "Timer was set for",
     "I've set timer for",
@@ -62,6 +94,14 @@ let voiceAssistant = {
     "Your timer is set for",
     "Countdown starts now for",
     "Timer activated for",
+  ],
+  timerError: [
+    "Sorry, I couldn't understand the timer duration.",
+    "I didn't catch the time you wanted for the timer.",
+    "Can you repeat that? I couldn't set the timer.",
+    "I need a clear duration to set the timer.",
+    "Hmm, I couldn't figure out how long to set the timer for.",
+    "Please specify a valid time for the timer.",
   ],
 };
 
@@ -99,7 +139,7 @@ function getReply(command) {
       userData.todoList = [];
     }
     if (userData.todoList.includes(todoItem)) {
-      return `${todoItem} is already on the todo list.`;
+      return `${todoItem} ${getRandomAnswer(voiceAssistant.todoExists)}.`;
     }
     userData.todoList.push(todoItem);
     return `${todoItem} ${getRandomAnswer(voiceAssistant.add)}`;
@@ -115,7 +155,7 @@ function getReply(command) {
       userData.todoList.splice(itemIndex, 1);
       return `${todoItem} ${getRandomAnswer(voiceAssistant.remove)}`;
     } else {
-      return `${todoItem} is not in your todo list.`;
+      return `${todoItem} ${getRandomAnswer(voiceAssistant.todoNotExists)}`;
     }
   }
 
@@ -124,7 +164,7 @@ function getReply(command) {
     command.toLowerCase().includes("on my todo")
   ) {
     if (!userData.todoList || !userData.todoList.length) {
-      return "Your todo list is empty.";
+      return `${getRandomAnswer(voiceAssistant.todoEmpty)}`;
     }
     let reply = `${getRandomAnswer(voiceAssistant.todo)}`;
     for (i = 0; i < userData.todoList.length; i++) {
@@ -164,7 +204,27 @@ function getReply(command) {
         return `${getRandomAnswer(voiceAssistant.result)} ${result}.`;
       }
     } else {
-      return "Sorry, I couldn't find a valid calculation.";
+      return `${getRandomAnswer(voiceAssistant.resultError)}`;
+    }
+  }
+
+  if (
+    command.toLowerCase().includes("set") &&
+    command.toLowerCase().includes("timer") &&
+    command.toLowerCase().includes("for")
+  ) {
+    let timerMatch = command.match(/(\d+)\s*minutes/);
+
+    if (timerMatch) {
+      let minutes = parseInt(timerMatch[1]);
+
+      setTimeout(() => {
+        console.log("Timer done!");
+      }, minutes * 60 * 1000);
+
+      return `${getRandomAnswer(voiceAssistant.timer)} ${minutes} minutes.`;
+    } else {
+      return `${getRandomAnswer(voiceAssistant.timerError)}`;
     }
   }
 
@@ -182,3 +242,6 @@ console.log(getReply("Remove Fishing from my todo"));
 console.log(getReply("What is on my todo"));
 console.log(getReply("What day is it today?"));
 console.log(getReply("What is 3 + 2?"));
+console.log(getReply("What is three + two?"));
+console.log(getReply("Set timer for 5 minutes"));
+console.log(getReply("Set timer for five minutes"));
