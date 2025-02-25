@@ -120,14 +120,15 @@ function getRandomAnswer(answer) {
 }
 
 function fetchRandomHello(command) {
-  const userName = command.split(" ").slice(-1)[0];
-  const sayNameError = getRandomAnswer(voiceAssistant.yourNameError);
-  const sayHowAreYou = getRandomAnswer(voiceAssistant.howAreYou);
+  const match = command.match(/name is (.+)/i);
   const sayHello = getRandomAnswer(voiceAssistant.hello);
+  const sayHowAreYou = getRandomAnswer(voiceAssistant.howAreYou);
+  const sayYourNameError = getRandomAnswer(voiceAssistant.yourNameError);
 
-  if (!userName) {
-    return `${sayNameError}`;
+  if (!match) {
+    return `${sayYourNameError}`;
   }
+  const userName = match[1];
   userData.userName = userName;
 
   return `${sayHello} ${userName} ${sayHowAreYou}`;
@@ -189,20 +190,31 @@ function getDate() {
 function doBasicMath(command) {
   const sayMath = getRandomAnswer(voiceAssistant.result);
   const sayMathError = getRandomAnswer(voiceAssistant.resultError);
-  const calculationMatch = command.match(/\d+\s*[\+\-\*/]\s*\d+/);
-  //I could not figure this out myself. had to use chat gpt as
-  //There is clearly not enough material explaining regex on the web.
-  //As far as i understood \d+ is to match the digits 1<
-  //s* to match all spaces, [\+\-\*/] to match operators
+  const replacedCommand = command.replace(/\D/g, " ");
+  const trimmedInput = replacedCommand.trim();
+  const splitInput = trimmedInput.split(/\s+/);
+  const filteredInput = splitInput.filter((str) => str !== "");
+  const numbers = filteredInput.map(Number);
 
-  if (calculationMatch) {
-    const calculation = calculationMatch[0];
-    {
-      const result = eval(calculation);
-      return `${sayMath} ${result}`;
-    }
+  command = command.toLowerCase();
+
+  let result;
+
+  if (numbers.length === 0) {
+    return `${sayMathError}`;
   }
-  return `${sayMathError}`;
+  if (command.includes("+") || command.includes("sum")) {
+    result = numbers.reduce((acc, num) => acc + num, 0);
+  } else if (command.includes("-") || command.includes("subtract")) {
+    result = numbers.reduce((acc, num) => acc - num);
+  } else if (command.includes("*") || command.includes("multiply")) {
+    result = numbers.reduce((acc, num) => acc * num, 1);
+  } else if (command.includes("/") || command.includes("divide")) {
+    result = numbers.reduce((acc, num) => acc / num);
+  } else if (command.includes("%") || command.includes("remainder")) {
+    result = numbers.reduce((acc, num) => acc % num);
+  }
+  return `${sayMath} ${result}`;
 }
 
 function setTimer(command) {
@@ -306,5 +318,5 @@ console.log(getReply("What is on my todo"));
 console.log(getReply("What day is it today?"));
 console.log(getReply("What is 3 + 2?"));
 console.log(getReply("What is three + two?"));
-console.log(getReply("Set timer for 5 minutes"));
+console.log(getReply("Set timer for 1 minutes"));
 console.log(getReply("Set timer for five minutes"));
