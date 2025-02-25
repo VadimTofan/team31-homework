@@ -304,10 +304,9 @@ function getReply(command) {
 }
 
 console.log(getReply("Hello my name is Benjamin"));
-console.log(getReply("Hello my name is "));
+console.log(getReply("Hello my name is Benjamin Franklin"));
+console.log(getReply("Hello my name is"));
 console.log(getReply("What is my name?"));
-console.log(getReply("Add Fishing to my todo"));
-console.log(getReply("Add Fishing to my todo"));
 console.log(getReply("Add Fishing to my todo"));
 console.log(getReply("Add Fishing to my todo"));
 console.log(getReply("Add Camping to my todo"));
