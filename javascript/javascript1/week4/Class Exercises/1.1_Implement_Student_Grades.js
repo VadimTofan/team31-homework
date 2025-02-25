@@ -1,6 +1,7 @@
 console.log("=======1.1 Implement Student Grades=======");
 
-students = [];
+let students = [];
+
 function createStudent(studentName, age, grades) {
   students.push({ name: studentName, age: age, grades: grades });
 }
@@ -15,27 +16,41 @@ createStudent("Henry", 21, [4, 7, 7, 4, 4]);
 createStudent("Irene", 23, [2, 7, 7, 4, 0]);
 
 function calculateAverageGrade(student) {
-  let averageGrade = 0;
+  let totalGrade = 0;
   for (let i = 0; i < student.grades.length; i++) {
-    averageGrade = student.grades[i] + averageGrade;
+    totalGrade += student.grades[i];
   }
-  const averageGrades = averageGrade / student.grades.length;
-  return `The average grade of ${student.name} is ${averageGrades.toFixed(2)}`;
+  const averageGrade = totalGrade / student.grades.length;
+  return averageGrade;
 }
 
 function findTopStudent(students) {
-  let topStudent = [];
-  let averageGrades = 0;
-  for (i = 0; i < students.length; i++) {
-    let student = calculateAverageGrade(students[i]);
-    if (averageGrades[i] > averageGrades) {
-      topStudent = student[i];
-      averageGrades = averageGrades[i];
-      console.log(student);
+  let topStudent;
+  let highestAverageGrade = -Infinity;
+
+  for (let i = 0; i < students.length; i++) {
+    const averageGrade = calculateAverageGrade(students[i]);
+    if (averageGrade > highestAverageGrade) {
+      highestAverageGrade = averageGrade;
+      topStudent = students[i];
     }
-    console.log(student);
   }
-  console.log(student);
+
+  return topStudent;
 }
 
-// Unfinished
+students.forEach((student) => {
+  const averageGrade = calculateAverageGrade(student);
+  console.log(
+    `The average grade of ${student.name} is ${averageGrade.toFixed(2)}`
+  );
+});
+
+const topStudent = findTopStudent(students);
+if (topStudent) {
+  console.log(
+    `The top student is ${
+      topStudent.name
+    } with an average grade of ${calculateAverageGrade(topStudent).toFixed(2)}`
+  );
+}
