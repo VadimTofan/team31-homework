@@ -20,5 +20,5 @@ let movieData = [
 console.log(filter(movieData));
 
 // This function filters the array of ojbects (movieData)
-// and pushes the object names of movis with rating more than 8
+// and pushes the object names of movies with rating more than 8
 // into a new array called (array)
