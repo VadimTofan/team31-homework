@@ -1,4 +1,5 @@
 console.log("=======1.2 IMDB Review=======");
+
 function filter(movie) {
   let array = [];
   for (let i = 0; i < movie.length; i++) {
