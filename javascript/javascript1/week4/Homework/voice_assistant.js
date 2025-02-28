@@ -196,22 +196,34 @@ function doBasicMath(command) {
   const filteredInput = splitInput.filter((str) => str !== "");
   const numbers = filteredInput.map(Number);
 
-  command = command.toLowerCase();
+  loweredCommand = command.toLowerCase();
 
   let result;
 
   if (numbers.length === 0) {
     return `${sayMathError}`;
   }
-  if (command.includes("+") || command.includes("sum")) {
+  if (loweredCommand.includes("+") || loweredCommand.includes("sum")) {
     result = numbers.reduce((acc, num) => acc + num, 0);
-  } else if (command.includes("-") || command.includes("subtract")) {
+  } else if (
+    loweredCommand.includes("-") ||
+    loweredCommand.includes("subtract")
+  ) {
     result = numbers.reduce((acc, num) => acc - num);
-  } else if (command.includes("*") || command.includes("multiply")) {
+  } else if (
+    loweredCommand.includes("*") ||
+    loweredCommand.includes("multiply")
+  ) {
     result = numbers.reduce((acc, num) => acc * num, 1);
-  } else if (command.includes("/") || command.includes("divide")) {
+  } else if (
+    loweredCommand.includes("/") ||
+    loweredCommand.includes("divide")
+  ) {
     result = numbers.reduce((acc, num) => acc / num);
-  } else if (command.includes("%") || command.includes("remainder")) {
+  } else if (
+    loweredCommand.includes("%") ||
+    loweredCommand.includes("remainder")
+  ) {
     result = numbers.reduce((acc, num) => acc % num);
   }
   return `${sayMath} ${result}`;
@@ -233,17 +245,15 @@ function setTimer(command) {
 }
 
 function getReply(command) {
+  loweredCommand = command.toLowerCase();
   if (
-    command.toLowerCase().includes("hello") &&
-    command.toLowerCase().includes("my name is")
+    loweredCommand.includes("hello") &&
+    loweredCommand.includes("my name is")
   ) {
     return fetchRandomHello(command);
   }
 
-  if (
-    command.toLowerCase().includes("what") &&
-    command.toLowerCase().includes("my name")
-  ) {
+  if (loweredCommand.includes("what") && loweredCommand.includes("my name")) {
     const sayName = getRandomAnswer(voiceAssistant.yourName);
     const sayUserName = userData.userName;
     const sayUserNameError = getRandomAnswer(voiceAssistant.yourNameError);
@@ -254,48 +264,42 @@ function getReply(command) {
     return `${sayName} ${sayUserName}`;
   }
 
-  if (
-    command.toLowerCase().includes("add") &&
-    command.toLowerCase().includes("to my todo")
-  ) {
+  if (loweredCommand.includes("add") && loweredCommand.includes("to my todo")) {
     return addToTodoList(command);
   }
 
   if (
-    command.toLowerCase().includes("remove") &&
-    command.toLowerCase().includes("from my todo")
+    loweredCommand.includes("remove") &&
+    loweredCommand.includes("from my todo")
   ) {
     return removeFromTodoList(command);
   }
 
   if (
-    command.toLowerCase().includes("what") &&
-    command.toLowerCase().includes("on my todo")
+    loweredCommand.includes("what") &&
+    loweredCommand.includes("on my todo")
   ) {
     return whatIsOnTodoList();
   }
 
-  if (
-    command.toLowerCase().includes("what day") &&
-    command.toLowerCase().includes("today")
-  ) {
+  if (loweredCommand.includes("what day") && loweredCommand.includes("today")) {
     return getDate();
   }
 
   if (
-    command.toLowerCase().includes("what is") &&
-    (command.includes("/") ||
-      command.includes("*") ||
-      command.includes("+") ||
-      command.includes("-"))
+    loweredCommand.includes("what is") &&
+    (loweredCommand.includes("/") ||
+      loweredCommand.includes("*") ||
+      loweredCommand.includes("+") ||
+      loweredCommand.includes("-"))
   ) {
     return doBasicMath(command);
   }
 
   if (
-    command.toLowerCase().includes("set") &&
-    command.toLowerCase().includes("timer") &&
-    command.toLowerCase().includes("for")
+    loweredCommand.includes("set") &&
+    loweredCommand.includes("timer") &&
+    loweredCommand.includes("for")
   ) {
     return setTimer(command);
   }
