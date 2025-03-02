@@ -49,6 +49,9 @@
 //     console.log("I pressed A");
 //   }
 // });
+// function getRandomColor() {
+//   return `#${Math.floor(Math.random() * 16777215).toString(16)}`;
+// }
 
 const button = document.querySelector("#main-button");
 button.addEventListener("click", function () {
@@ -56,10 +59,11 @@ button.addEventListener("click", function () {
 });
 
 document.addEventListener("click", darkMode);
+const colorMode = document.getElementById("body");
 function darkMode() {
-  document.getElementById("body").style.backgroundColor = "grey";
-}
-
-function getRandomColor() {
-  return `#${Math.floor(Math.random() * 16777215).toString(16)}`;
+  if (colorMode === "grey") {
+    colorMode.style.backgroundColor === "white";
+  } else {
+    document.getElementById("body").style.backgroundColor = "grey";
+  }
 }
