@@ -1,0 +1,21 @@
+body {
+  background-color: teal;
+}
+
+.cards {
+  padding: 0 10%;
+}
+.cards__grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  text-align: center;
+  padding: 5%;
+}
+
+.card__info {
+  max-width: 100px;
+  max-height: 140px;
+  padding: 25px;
+  border-radius: 1px;
+}
