@@ -117,3 +117,12 @@ function generateRandomCard() {
   return;
 }
 generateRandomCard();
+
+function preloadImages() {
+  cardsArray.forEach((card) => {
+    const img = new Image();
+    img.src = card.cardUrl;
+  });
+}
+
+preloadImages();
