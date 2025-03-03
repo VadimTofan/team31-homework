@@ -2,3 +2,5 @@ node_modules/
 package-lock.json
 package.json
 .gitignore
+javascript/javascript2/week1/Homework/styles.scss
+javascript/javascript2/week1/Homework/styles.min.css
