@@ -58,14 +58,64 @@ const cardsArray = [
   { cardName: "King of Clubs", cardUrl: "./cards/KC.jpg" },
 ];
 
+// for (let i = 1; i <= 12; i++) {
+//   let card = document.getElementById(`card-${i}`);
+//   console.log(card);
+// }
+
+const cardOne = document.getElementById("card-one");
+const cardTwo = document.getElementById("card-two");
+const cardThree = document.getElementById("card-three");
+const cardFour = document.getElementById("card-four");
+const cardFive = document.getElementById("card-five");
+const cardSix = document.getElementById("card-six");
+const cardSeven = document.getElementById("card-seven");
+const cardEight = document.getElementById("card-eight");
+const cardNine = document.getElementById("card-nine");
+const cardTen = document.getElementById("card-ten");
+const cardEleven = document.getElementById("card-eleven");
+const cardTwelve = document.getElementById("card-twelve");
+
+const duplicateCheckArray = [cardOne.src, cardTwo.src, cardThree.src, cardFour.src, cardFive.src, cardSix.src, cardSeven.src, cardEight.src, cardNine.src, cardTen.src, cardEleven.src, cardTwelve.src];
+console.log(duplicateCheckArray);
+const cardStorageArray = [{}];
+console.log(cardStorageArray);
 const backSrc = "./cards/cardBack.png";
+
 function toggleCard(event) {
   const card = event.target;
   const cardSrc = card.src.split("/").pop();
-  const random = Math.floor(Math.random() * (sixCards.length + 1));
+
+  for (let i = 0; i < cardStorageArray.length; i++) {
+    if (cardStorageArray[i].cardId === card.id) {
+      if (card.src.includes("cardBack")) {
+        card.src = cardStorageArray[i].cardSource;
+        card.alt = cardStorageArray[i].cardAlt;
+      } else {
+        card.src = backSrc;
+        card.alt = `back side of a playing card`;
+      }
+      return;
+    }
+  }
+
   if (cardSrc.includes("cardBack")) {
-    card.src = sixCards[random].cardUrl;
-    card.alt = `${sixCards[random].cardName}`;
+    if (!sixCards.length) return;
+
+    const random = Math.floor(Math.random() * sixCards.length);
+    const selectedCard = sixCards[random];
+
+    card.src = selectedCard.cardUrl;
+    card.alt = selectedCard.cardName;
+    console.log(card);
+
+    const cardStorageObject = {
+      cardId: card.id,
+      cardSource: card.src,
+      cardAlt: card.alt,
+    };
+
+    cardStorageArray.push(cardStorageObject);
     sixCards.splice(random, 1);
   } else {
     card.src = backSrc;
@@ -88,4 +138,3 @@ function generateRandomCard() {
   return;
 }
 generateRandomCard();
-console.log(sixCards);
