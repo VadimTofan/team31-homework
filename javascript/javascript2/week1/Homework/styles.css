@@ -30,7 +30,7 @@ body {
 
 @media (min-width: 1024px) {
   .cards__grid {
-    max-width: 800px;
+    max-width: 750px;
   }
 }
 
