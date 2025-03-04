@@ -1,5 +1,7 @@
 console.log("==============Spirit animal name generator==============");
 
+// optionalhomework.netlify.app;  deployed for checking
+
 const animals = [
   "Blue-Moon Wolf",
   "Elder Capybara",
