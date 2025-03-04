@@ -1,0 +1,48 @@
+body {
+  background-color: teal;
+}
+
+.cards {
+  padding: 10%;
+  display: flex;
+  justify-content: center;
+
+  &__grid {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    padding: 1%;
+  }
+
+  &__info {
+    max-width: 100px;
+    max-height: 140px;
+    padding: 10px;
+    border-radius: 1px;
+  }
+}
+
+@media (min-width: 612px) {
+  .cards {
+    &__grid {
+      max-width: 550px;
+    }
+  }
+}
+
+@media (min-width: 1024px) {
+  .cards {
+    &__grid {
+      max-width: 800px;
+    }
+  }
+}
+
+@media (min-width: 1830px) {
+  .cards {
+    &__grid {
+      max-width: 1800px;
+    }
+  }
+}
