@@ -1,5 +1,21 @@
-const cardSelector = document.querySelectorAll("#card-one, #card-two, #card-three, #card-four, #card-five, #card-six, #card-seven, #card-eight, #card-nine, #card-ten, #card-eleven, #card-twelve");
+let gameSize = 0;
 
+function choseDifficulty() {
+  if (!gameSize) {
+    let input = prompt("Please enter the amount of pairs you want to play with!", "8");
+
+    if (input !== null && input.trim() !== "" && !isNaN(input) && Number(input) > 0) {
+      gameSize = Number(input);
+      document.getElementById("landing-text").style.display = "none";
+      gameDifficulty(gameSize);
+      generateRandomCard();
+    } else {
+      alert("Please enter a valid number.");
+    }
+  }
+}
+
+console.log(gameSize);
 const cardsArray = [];
 const suits = ["Hearts", "Diamonds", "Clubs", "Spades"];
 const deck = ["Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Jack", "Queen", "King", "Ace"];
@@ -13,8 +29,6 @@ deck.forEach((deckCard) => {
     cardsArray.push({ cardName: `${deckCard} of ${suits[i]}`, cardUrl: `./cards/${deckCard + suitsFirstLetter[i]}.webp` });
   }
 });
-
-console.log(cardsArray);
 
 const cardStorageArray = [{}];
 const backSrc = "./cards/cardBack.webp";
@@ -37,10 +51,10 @@ function toggleCard(event) {
   }
 
   if (cardSrc.includes("cardBack")) {
-    if (!sixCards.length) return;
+    if (!randomCardsArray.length) return;
 
-    const random = Math.floor(Math.random() * sixCards.length);
-    const selectedCard = sixCards[random];
+    const random = Math.floor(Math.random() * randomCardsArray.length);
+    const selectedCard = randomCardsArray[random];
 
     card.src = selectedCard.cardUrl;
     card.alt = selectedCard.cardName;
@@ -53,28 +67,40 @@ function toggleCard(event) {
     };
 
     cardStorageArray.push(cardStorageObject);
-    sixCards.splice(random, 1);
+    randomCardsArray.splice(random, 1);
   } else {
     card.src = backSrc;
   }
 }
 
-cardSelector.forEach((card) => {
-  card.addEventListener("click", toggleCard);
-});
-
-const sixCards = [];
+const randomCardsArray = [];
 function generateRandomCard() {
-  if (sixCards.length === 0) {
-    for (let i = 0; i < 6; i++) {
+  if (randomCardsArray.length === 0) {
+    for (let i = 0; i < gameSize; i++) {
       const randomNumber = Math.floor(Math.random() * cardsArray.length);
-      sixCards.push(cardsArray[randomNumber]);
-      sixCards.push(cardsArray[randomNumber]);
+      const luckyCard = cardsArray[randomNumber];
+      randomCardsArray.push(luckyCard, luckyCard);
     }
   }
   return;
 }
-generateRandomCard();
+
+const cardId = 0;
+const img = document.createElement("img");
+const cardDiv = document.getElementById("cards-grid");
+
+function gameDifficulty(cardPairs) {
+  for (let i = 0; i < cardPairs * 2; i++) {
+    const img = document.createElement("img");
+    img.src = backSrc;
+    img.alt = "Back side of a playing Card";
+    img.classList.add("card__info");
+    img.id = `card-${i + 1}`;
+    img.addEventListener("click", toggleCard);
+    cardDiv.appendChild(img);
+  }
+}
+gameDifficulty(gameSize);
 
 function preloadImages() {
   cardsArray.forEach((card) => {
