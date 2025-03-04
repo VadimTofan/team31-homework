@@ -15,9 +15,9 @@ body {
   padding: 1%;
 }
 
-.cards__info {
-  max-width: 100px;
-  max-height: 140px;
+.card__info {
+  width: 90px;
+  height: 150px;
   padding: 10px;
   border-radius: 1px;
 }
