@@ -15,7 +15,6 @@ function choseDifficulty() {
   }
 }
 
-console.log(gameSize);
 const cardsArray = [];
 const suits = ["Hearts", "Diamonds", "Clubs", "Spades"];
 const deck = ["Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Jack", "Queen", "King", "Ace"];
