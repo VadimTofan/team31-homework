@@ -1,5 +1,19 @@
 let gameSize = 0;
 
+const cardId = 0;
+const img = document.createElement("img");
+const cardDiv = document.getElementById("cards-grid");
+const cardStorageArray = [];
+const randomCardsArray = [];
+const backSrc = "./cards/cardBack.webp";
+const cardsArray = [];
+const suits = ["Hearts", "Diamonds", "Clubs", "Spades"];
+const deck = ["Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Jack", "Queen", "King", "Ace"];
+
+const suitsFirstLetter = suits.map((firstLetter) => {
+  return firstLetter[0];
+});
+
 function choseDifficulty() {
   if (!gameSize) {
     let input = prompt("Please enter the amount of pairs you want to play with!", "8");
@@ -15,22 +29,11 @@ function choseDifficulty() {
   }
 }
 
-const cardsArray = [];
-const suits = ["Hearts", "Diamonds", "Clubs", "Spades"];
-const deck = ["Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Jack", "Queen", "King", "Ace"];
-
-const suitsFirstLetter = suits.map((firstLetter) => {
-  return firstLetter[0];
-});
-
 deck.forEach((deckCard) => {
   for (let i = 0; i < suits.length; i++) {
     cardsArray.push({ cardName: `${deckCard} of ${suits[i]}`, cardUrl: `./cards/${deckCard + suitsFirstLetter[i]}.webp` });
   }
 });
-
-const cardStorageArray = [{}];
-const backSrc = "./cards/cardBack.webp";
 
 function toggleCard(event) {
   const card = event.target;
@@ -72,7 +75,6 @@ function toggleCard(event) {
   }
 }
 
-const randomCardsArray = [];
 function generateRandomCard() {
   if (randomCardsArray.length === 0) {
     for (let i = 0; i < gameSize; i++) {
@@ -83,10 +85,6 @@ function generateRandomCard() {
   }
   return;
 }
-
-const cardId = 0;
-const img = document.createElement("img");
-const cardDiv = document.getElementById("cards-grid");
 
 function gameDifficulty(cardPairs) {
   for (let i = 0; i < cardPairs * 2; i++) {
@@ -99,7 +97,6 @@ function gameDifficulty(cardPairs) {
     cardDiv.appendChild(img);
   }
 }
-gameDifficulty(gameSize);
 
 function preloadImages() {
   cardsArray.forEach((card) => {

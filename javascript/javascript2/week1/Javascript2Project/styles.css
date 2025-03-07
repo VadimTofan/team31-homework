@@ -35,7 +35,7 @@ button:hover {
   justify-content: center;
 }
 
-.cards__grid {
+.cards__box {
   display: flex;
   flex-wrap: wrap;
   gap: 15px;
@@ -44,19 +44,19 @@ button:hover {
 }
 
 @media (min-width: 612px) {
-  .cards__grid {
+  .cards__box {
     max-width: 550px;
   }
 }
 
 @media (min-width: 1024px) {
-  .cards__grid {
+  .cards__box {
     max-width: 750px;
   }
 }
 
 @media (min-width: 1830px) {
-  .cards__grid {
+  .cards__box {
     max-width: 1800px;
   }
 }
