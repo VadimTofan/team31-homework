@@ -1,7 +1,6 @@
 let gameSize = 0;
 
 const cardId = 0;
-const img = document.createElement("img");
 const cardDiv = document.getElementById("cards-grid");
 const cardStorageArray = [];
 const randomCardsArray = [];
@@ -31,7 +30,10 @@ function choseDifficulty() {
 
 deck.forEach((deckCard) => {
   for (let i = 0; i < suits.length; i++) {
-    cardsArray.push({ cardName: `${deckCard} of ${suits[i]}`, cardUrl: `./cards/${deckCard + suitsFirstLetter[i]}.webp` });
+    cardsArray.push({
+      cardName: `${deckCard} of ${suits[i]}`,
+      cardUrl: `./cards/${deckCard + suitsFirstLetter[i]}.webp`,
+    });
   }
 });
 
