@@ -1,15 +1,5 @@
 {
-  "cSpell.words": [
-    "Amet",
-    "Bruv",
-    "buttonsvg",
-    "Codewars",
-    "hawt",
-    "maffs",
-    "totalnow",
-    "totalpermonth",
-    "Vadim"
-  ],
+  "cSpell.words": ["Amet", "Bruv", "buttonsvg", "Codewars", "grød", "hawt", "maffs", "mousaka", "røde", "totalnow", "totalpermonth", "Vadim"],
   "editor.formatOnSave": true,
   "notebook.defaultFormatter": "esbenp.prettier-vscode",
   "editor.defaultFormatter": "esbenp.prettier-vscode"
