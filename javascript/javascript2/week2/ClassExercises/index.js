@@ -74,20 +74,36 @@
 //   return mentor.name;
 // });
 
-const italianAndPizzaRestaurants = [];
-for (let i = 0; i < restaurants.length; i++) {
-  const type = restaurants[i].type.toLowerCase();
-  if (type.includes("pizza") || type.includes("italian")) {
-    italianAndPizzaRestaurants.push(restaurants[i]);
-  }
-}
-console.log(italianAndPizzaRestaurants);
+// const italianAndPizzaRestaurants = [];
+// for (let i = 0; i < restaurants.length; i++) {
+//   const type = restaurants[i].type.toLowerCase();
+//   if (type === "pizza" || type === "italian") {
+//     italianAndPizzaRestaurants.push(restaurants[i]);
+//   }
+// }
+// console.log(italianAndPizzaRestaurants);
 
-const italianAndPizzaPlaces = restaurants.filter(function (restaurant) {
-  const type = restaurant.type.toLowerCase();
-  if (type.includes("pizza") || type.includes("italian")) {
-    return true;
-  }
-  return false;
+// const italianAndPizzaPlaces = restaurants.filter(function (restaurant) {
+//   const type = restaurant.type.toLowerCase();
+//   if (type === "pizza" || type === "italian") {
+//     return true;
+//   }
+//   return false;
+// });
+// console.log(italianAndPizzaPlaces);
+
+// mentors.sort(function (itemA, itemB) {
+//   if (itemA.yearsOfExperience > itemB.yearsOfExperience) {
+//     return 1;
+//   }
+//   if (itemA.yearsOfExperience < itemB.yearsOfExperience) {
+//     return -1;
+//   }
+//   return 0;
+// });
+
+restaurants.sort(function (a, b) {
+  return a.rating < b.rating ? 1 : -1;
 });
-console.log(italianAndPizzaPlaces);
+
+console.log(restaurants);
