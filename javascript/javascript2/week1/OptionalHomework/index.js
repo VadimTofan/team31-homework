@@ -8,7 +8,32 @@ function removeChar(str) {
 
 console.log("==============Remove First and Last Character==============");
 
-const sheep = [true, true, true, false, true, true, true, true, true, false, true, false, true, false, false, true, true, true, true, true, false, false, true, true];
+const sheep = [
+  true,
+  true,
+  true,
+  false,
+  true,
+  true,
+  true,
+  true,
+  true,
+  false,
+  true,
+  false,
+  true,
+  false,
+  false,
+  true,
+  true,
+  true,
+  true,
+  true,
+  false,
+  false,
+  true,
+  true,
+];
 
 function countSheeps(sheep) {
   let sheepCount = 0;
@@ -23,10 +48,7 @@ console.log(countSheeps(sheep));
 
 console.log("==============String ends with?==============");
 function solution(str, ending) {
-  if (str.endsWith(ending)) {
-    return true;
-  }
-  return false;
+  return str.endsWith(ending);
 }
 
 console.log("==============7kyu Odd or Even?==============");
@@ -51,7 +73,7 @@ function countDanishletters(string) {
   let sumA = 0;
   let sumO = 0;
   let sumAE = 0;
-  for (let char of string) {
+  for (let char of string.toLowerCase()) {
     if (char === "å") {
       sumA += 1;
     }

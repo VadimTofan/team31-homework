@@ -14,7 +14,7 @@ const suitsFirstLetter = suits.map((firstLetter) => {
 });
 
 function choseDifficulty() {
-  if (!gameSize) {
+  if (!gameSize) {``
     let input = prompt("Please enter the amount of pairs you want to play with!", "8");
 
     if (input !== null && input.trim() !== "" && !isNaN(input) && Number(input) > 0) {
@@ -85,7 +85,6 @@ function generateRandomCard() {
       randomCardsArray.push(luckyCard, luckyCard);
     }
   }
-  return;
 }
 
 function gameDifficulty(cardPairs) {
