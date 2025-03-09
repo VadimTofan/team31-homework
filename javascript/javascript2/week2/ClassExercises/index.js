@@ -2,7 +2,7 @@
 //   console.log(restaurants[i]);
 // }
 
-// restaurants.forEach(function (restaurant) {
+// restaurants.forEach((restaurant) => {
 //   console.log(restaurant);
 // });
 
@@ -29,7 +29,7 @@
 // }
 // console.log(mentorNamesTrad);
 
-// const mentorsNamesMap = mentors.map(function (mentor, i) {
+// const mentorsNamesMap = mentors.map((mentor, i) => {
 //   return changeCase(mentor.name);
 // });
 
@@ -41,7 +41,7 @@
 // }
 // console.log(restaurantNames);
 
-// const restaurantNamesMap = restaurants.map(function (restaurant) {
+// const restaurantNamesMap = restaurants.map((restaurant) => {
 //   return restaurant.name;
 // });
 // console.log(restaurantNamesMap);
@@ -49,7 +49,7 @@
 // const mentorsWithDbSkills = [];
 // for (i = 0; i < mentors.length; i++) {
 //   const mentor = mentors[i];
-//   const subjectsLowerCase = mentor.subjects.map(function (subject) {
+//   const subjectsLowerCase = mentor.subjects.map((subject) => {
 //     return subject.toLowerCase();
 //   });
 //   if (subjects.includes("database") || subjects.includes("db")) {
@@ -58,8 +58,8 @@
 // }
 // console.log(mentorsWithDbSkills);
 
-// const mentorsTeachingDb = mentors.filter(function (mentor) {
-//   const subjectsLowerCase = mentor.subjects.map(function (subject) {
+// const mentorsTeachingDb = mentors.filter((mentor) => {
+//   const subjectsLowerCase = mentor.subjects.map((subject) => {
 //     return subject.toLowerCase();
 //   });
 
@@ -70,7 +70,7 @@
 // });
 // console.log(mentorsTeachingDb);
 
-// const namesOfMentorsTeachingDb = mentorsTeachingDb.map(function (mentor) {
+// const namesOfMentorsTeachingDb = mentorsTeachingDb.map((mentor) => {
 //   return mentor.name;
 // });
 
@@ -83,7 +83,7 @@
 // }
 // console.log(italianAndPizzaRestaurants);
 
-// const italianAndPizzaPlaces = restaurants.filter(function (restaurant) {
+// const italianAndPizzaPlaces = restaurants.filter((restaurant) => {
 //   const type = restaurant.type.toLowerCase();
 //   if (type === "pizza" || type === "italian") {
 //     return true;
@@ -92,7 +92,7 @@
 // });
 // console.log(italianAndPizzaPlaces);
 
-// mentors.sort(function (itemA, itemB) {
+// mentors.sort((itemA, itemB) => {
 //   if (itemA.yearsOfExperience > itemB.yearsOfExperience) {
 //     return 1;
 //   }
@@ -102,8 +102,28 @@
 //   return 0;
 // });
 
-restaurants.sort(function (a, b) {
-  return a.rating < b.rating ? 1 : -1;
-});
+// restaurants.sort((a, b) => {
+//   return a.rating < b.rating ? 1 : -1;
+// });
 
-console.log(restaurants);
+// console.log(restaurants);
+
+// const newMentors = mentors.map((mentor) => {
+//   return mentor;
+// });
+// console.log(`New Mentors: `, newMentors);
+
+const italianAndPizzaPlacesSorted = restaurants
+  .filter((restaurant) => {
+    const type = restaurant.type.toLowerCase();
+    return type === "pizza" || type === "italian" ? 1 : 0;
+  })
+  .sort((a, b) => {
+    return a.rating > b.rating ? -1 : 1;
+  })
+
+  .map((resto) => {
+    return resto.name;
+  });
+
+console.log(italianAndPizzaPlacesSorted);
