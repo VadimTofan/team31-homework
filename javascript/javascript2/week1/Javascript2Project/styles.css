@@ -28,36 +28,33 @@ button:hover {
 }
 
 .cards {
-  padding-top: 10%;
+  padding: 10% 0;
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
 }
 
 .cards__box {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 15px;
-  padding: 20px;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  justify-items: center;
 }
 
 @media (min-width: 612px) {
   .cards__box {
-    max-width: 550px;
+    grid-template-columns: repeat(6, 1fr);
   }
 }
 
 @media (min-width: 1024px) {
   .cards__box {
-    max-width: 750px;
+    grid-template-columns: repeat(9, 1fr);
   }
 }
 
 @media (min-width: 1830px) {
   .cards__box {
-    max-width: 1800px;
+    grid-template-columns: repeat(12, 1fr);
   }
 }
 

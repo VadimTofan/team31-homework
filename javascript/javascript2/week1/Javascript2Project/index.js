@@ -2,7 +2,6 @@ let gameSize = 0;
 
 const cardId = 0;
 const cardDiv = document.getElementById("cards-grid");
-const allCards = document.querySelectorAll(".card__info");
 const cardStorageArray = [];
 const randomCardsArray = [];
 const backSrc = "./cards/cardBack.webp";
@@ -48,6 +47,12 @@ function toggleCard(event) {
         card.src = cardStorageArray[i].cardSource;
         card.alt = cardStorageArray[i].cardAlt;
       }
+      // The below block of code is disabled for now
+      // Normally it flips the card back.
+      // else {
+      //   card.src = backSrc;
+      //   card.alt = `back side of a playing card`;
+      // }
       return;
     }
   }
@@ -70,7 +75,7 @@ function toggleCard(event) {
     cardStorageArray.push(cardStorageObject);
     randomCardsArray.splice(random, 1);
 
-    let openedCards = [];
+    const openedCards = [];
     document.querySelectorAll(".card__info").forEach((img) => {
       if (img.src === card.src) openedCards.push(img);
     });
@@ -78,6 +83,7 @@ function toggleCard(event) {
     if (openedCards.length > 1) {
       setTimeout(() => {
         openedCards.forEach((img) => (img.style.display = "none"));
+        resetGame();
       }, 300);
     }
   } else {
@@ -112,6 +118,21 @@ function preloadImages() {
     const img = new Image();
     img.src = card.cardUrl;
   });
+}
+
+function resetGame() {
+  const allCards = document.querySelectorAll(".card__info");
+  const hiddenCards = Array.from(allCards).filter((card) => card.style.display === "none");
+
+  if (hiddenCards.length === allCards.length) {
+    setTimeout(() => {
+      cardDiv.innerHTML = "";
+      gameSize = 0;
+      cardStorageArray.length = 0;
+      randomCardsArray.length = 0;
+      document.getElementById("landing-text").style.display = "block";
+    }, 100);
+  }
 }
 
 preloadImages();
