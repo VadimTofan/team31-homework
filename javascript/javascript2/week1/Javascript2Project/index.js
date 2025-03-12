@@ -2,6 +2,7 @@ let gameSize = 0;
 
 const cardId = 0;
 const cardDiv = document.getElementById("cards-grid");
+const allCards = document.querySelectorAll(".card__info");
 const cardStorageArray = [];
 const randomCardsArray = [];
 const backSrc = "./cards/cardBack.webp";
@@ -14,7 +15,7 @@ const suitsFirstLetter = suits.map((firstLetter) => {
 });
 
 function choseDifficulty() {
-  if (!gameSize) {``
+  if (!gameSize) {
     let input = prompt("Please enter the amount of pairs you want to play with!", "8");
 
     if (input !== null && input.trim() !== "" && !isNaN(input) && Number(input) > 0) {
@@ -46,9 +47,6 @@ function toggleCard(event) {
       if (card.src.includes("cardBack")) {
         card.src = cardStorageArray[i].cardSource;
         card.alt = cardStorageArray[i].cardAlt;
-      } else {
-        card.src = backSrc;
-        card.alt = `back side of a playing card`;
       }
       return;
     }
@@ -62,7 +60,6 @@ function toggleCard(event) {
 
     card.src = selectedCard.cardUrl;
     card.alt = selectedCard.cardName;
-    console.log(card);
 
     const cardStorageObject = {
       cardId: card.id,
@@ -72,6 +69,17 @@ function toggleCard(event) {
 
     cardStorageArray.push(cardStorageObject);
     randomCardsArray.splice(random, 1);
+
+    let openedCards = [];
+    document.querySelectorAll(".card__info").forEach((img) => {
+      if (img.src === card.src) openedCards.push(img);
+    });
+
+    if (openedCards.length > 1) {
+      setTimeout(() => {
+        openedCards.forEach((img) => (img.style.display = "none"));
+      }, 300);
+    }
   } else {
     card.src = backSrc;
   }
