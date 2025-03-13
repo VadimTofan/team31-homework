@@ -40,6 +40,19 @@ button:hover {
   justify-items: center;
 }
 
+.card__info {
+  width: 90px;
+  height: 150px;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  transition: transform 1s ease-out;
+  cursor: pointer;
+}
+
+.card__info--flipped {
+  transform: rotateY(-360deg);
+}
+
 @media (min-width: 612px) {
   .cards__box {
     grid-template-columns: repeat(6, 1fr);
@@ -56,17 +69,4 @@ button:hover {
   .cards__box {
     grid-template-columns: repeat(12, 1fr);
   }
-}
-
-.card__info {
-  width: 90px;
-  height: 150px;
-  border-radius: 5px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-  transition: transform 0.3s ease-in-out;
-  cursor: pointer;
-}
-
-.card__info:hover {
-  transform: scale(1.1);
 }

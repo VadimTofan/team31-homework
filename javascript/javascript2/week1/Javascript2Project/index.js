@@ -13,9 +13,9 @@ const suitsFirstLetter = suits.map((firstLetter) => {
   return firstLetter[0];
 });
 
-function choseDifficulty() {
+function startGame() {
   if (!gameSize) {
-    let input = prompt("Please enter the amount of pairs you want to play with!", "8");
+    const input = prompt("Please enter the amount of pairs you want to play with!", "8");
 
     if (isNaN(input) || input <= 0) {
       alert("Please enter a valid number.");
@@ -23,7 +23,7 @@ function choseDifficulty() {
       createCardDeck();
       gameSize = Number(input);
       document.getElementById("landing-text").style.display = "none";
-      gameDifficulty(gameSize);
+      choseGameDifficulty(gameSize);
       generateRandomCard();
     }
   }
@@ -43,7 +43,9 @@ function createCardDeck() {
 function toggleCard(event) {
   const card = event.target;
   const cardSrc = card.src.split("/").pop();
+  card.classList.add("card__info--flipped");
 
+  // Check if the card was already flipped before
   for (let i = 0; i < cardStorageArray.length; i++) {
     if (cardStorageArray[i].cardId === card.id) {
       if (card.src.includes("cardBack")) {
@@ -61,8 +63,6 @@ function toggleCard(event) {
   }
 
   if (cardSrc.includes("cardBack")) {
-    if (!randomCardsArray.length) return;
-
     const random = Math.floor(Math.random() * randomCardsArray.length);
     const selectedCard = randomCardsArray[random];
 
@@ -78,16 +78,22 @@ function toggleCard(event) {
     cardStorageArray.push(cardStorageObject);
     randomCardsArray.splice(random, 1);
 
-    const openedCards = [];
+    let openedCards = [];
     document.querySelectorAll(".card__info").forEach((img) => {
-      if (img.src === card.src) openedCards.push(img);
+      if (img.src === card.src) {
+        openedCards.push(img);
+      }
     });
 
-    if (openedCards.length > 1) {
+    if (openedCards.length % 2 === 0) {
       setTimeout(() => {
-        openedCards.forEach((img) => (img.style.opacity = "0.1"));
+        openedCards.forEach((img) => {
+          img.style.opacity = "0.1";
+          img.removeEventListener("click", toggleCard);
+        });
+        openedCards.length = 0;
         resetGame();
-      }, 300);
+      }, 1000);
     }
   } else {
     card.src = backSrc;
@@ -104,7 +110,7 @@ function generateRandomCard() {
   }
 }
 
-function gameDifficulty(cardPairs) {
+function choseGameDifficulty(cardPairs) {
   for (let i = 0; i < cardPairs * 2; i++) {
     const img = document.createElement("img");
     img.src = backSrc;
