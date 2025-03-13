@@ -17,25 +17,29 @@ function choseDifficulty() {
   if (!gameSize) {
     let input = prompt("Please enter the amount of pairs you want to play with!", "8");
 
-    if (input !== null && input.trim() !== "" && !isNaN(input) && Number(input) > 0) {
+    if (isNaN(input) || input <= 0) {
+      alert("Please enter a valid number.");
+    } else {
+      createCardDeck();
       gameSize = Number(input);
       document.getElementById("landing-text").style.display = "none";
       gameDifficulty(gameSize);
       generateRandomCard();
-    } else {
-      alert("Please enter a valid number.");
     }
   }
 }
 
-deck.forEach((deckCard) => {
-  for (let i = 0; i < suits.length; i++) {
-    cardsArray.push({
-      cardName: `${deckCard} of ${suits[i]}`,
-      cardUrl: `./cards/${deckCard + suitsFirstLetter[i]}.webp`,
-    });
-  }
-});
+function createCardDeck() {
+  deck.forEach((deckCard) => {
+    for (let i = 0; i < suits.length; i++) {
+      cardsArray.push({
+        cardName: `${deckCard} of ${suits[i]}`,
+        cardUrl: `./cards/${deckCard + suitsFirstLetter[i]}.webp`,
+      });
+      console.log(cardsArray);
+    }
+  });
+}
 
 function toggleCard(event) {
   const card = event.target;
