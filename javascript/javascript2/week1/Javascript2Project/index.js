@@ -31,13 +31,12 @@ function choseDifficulty() {
 
 function createCardDeck() {
   deck.forEach((deckCard) => {
-    for (let i = 0; i < suits.length; i++) {
+    suits.forEach((suit, index) => {
       cardsArray.push({
-        cardName: `${deckCard} of ${suits[i]}`,
-        cardUrl: `./cards/${deckCard + suitsFirstLetter[i]}.webp`,
+        cardName: `${deckCard} of ${suit}`,
+        cardUrl: `./cards/${deckCard}${suitsFirstLetter[index]}.webp`,
       });
-      console.log(cardsArray);
-    }
+    });
   });
 }
 
@@ -86,7 +85,7 @@ function toggleCard(event) {
 
     if (openedCards.length > 1) {
       setTimeout(() => {
-        openedCards.forEach((img) => (img.style.display = "none"));
+        openedCards.forEach((img) => (img.style.opacity = "0.1"));
         resetGame();
       }, 300);
     }
@@ -126,7 +125,7 @@ function preloadImages() {
 
 function resetGame() {
   const allCards = document.querySelectorAll(".card__info");
-  const hiddenCards = Array.from(allCards).filter((card) => card.style.display === "none");
+  const hiddenCards = Array.from(allCards).filter((card) => card.style.opacity === "0.1");
 
   if (hiddenCards.length === allCards.length) {
     setTimeout(() => {
@@ -135,7 +134,7 @@ function resetGame() {
       cardStorageArray.length = 0;
       randomCardsArray.length = 0;
       document.getElementById("landing-text").style.display = "block";
-    }, 100);
+    }, 400);
   }
 }
 
