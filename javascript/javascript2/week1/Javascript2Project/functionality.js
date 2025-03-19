@@ -91,9 +91,6 @@ function startTimer() {
     const seconds = time % 60;
 
     let timeString = "";
-    if (hours === 1) {
-      timeString += `${hours} hour`;
-    }
     if (hours > 0) {
       if (hours === 1) {
         timeString += `${hours} hour`;
@@ -112,7 +109,7 @@ function startTimer() {
       if (seconds === 1) {
         timeString += `${seconds} second`;
       } else {
-        timeString += `${seconds} second`;
+        timeString += `${seconds} seconds`;
       }
     }
 
