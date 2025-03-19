@@ -7,6 +7,7 @@ function startGame(pairs) {
     createCardDeck();
     addTimer();
     generateRandomCard();
+
     const timerElement = document.getElementById("timer");
     if (timerElement.style.display === "none" || timerElement.style.display === "") {
       timerElement.style.display = "block";
@@ -43,7 +44,7 @@ function toggleCard(event) {
     }
   } else {
     // If card is not stored, assign a random one
-    if (randomCardsArray.length === 0) return; // Ensure there are cards left
+    if (!randomCardsArray.length) return;
     const random = Math.floor(Math.random() * randomCardsArray.length);
     const selectedCard = randomCardsArray[random];
 

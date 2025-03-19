@@ -1,5 +1,6 @@
 // Creating a card deck from cards and suits
 function createCardDeck() {
+  cardsArray.length = 0;
   cards.forEach((deckCard) => {
     suits.forEach((suit, index) => {
       cardsArray.push({
@@ -13,10 +14,11 @@ function createCardDeck() {
 // Generate random cards from the deck, the amount of cards is determined by user in gameSize
 function generateRandomCard() {
   if (randomCardsArray.length === 0) {
+    let shuffledCards = [...cardsArray].sort(() => Math.random() - 0.5); // Shuffle the deck
+
     for (let i = 0; i < gameSize; i++) {
-      const randomNumber = Math.floor(Math.random() * cardsArray.length);
-      const luckyCard = cardsArray[randomNumber];
-      randomCardsArray.push(luckyCard, luckyCard);
+      const selectedCard = shuffledCards[i]; // Pick a unique card
+      randomCardsArray.push(selectedCard, selectedCard); // Add the pair
     }
   }
 }
@@ -93,16 +95,16 @@ function startTimer() {
     let timeString = "";
     if (hours > 0) {
       if (hours === 1) {
-        timeString += `${hours} hour`;
+        timeString += `${hours} hour `;
       } else {
-        timeString += `${hours} hours`;
+        timeString += `${hours} hours `;
       }
     }
     if (minutes > 0) {
       if (minutes === 1) {
-        timeString += `${minutes} minute`;
+        timeString += `${minutes} minute `;
       } else {
-        timeString += `${minutes} minutes`;
+        timeString += `${minutes} minutes `;
       }
     }
     if (seconds >= 0) {

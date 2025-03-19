@@ -14,12 +14,13 @@ const suitsFirstLetter = suits.map((firstLetter) => firstLetter[0]);
 let cardDiv;
 let landingMenu;
 
+// Added this as Valentin suggested.
+// Used template literals as Yasen suggested
 document.addEventListener("DOMContentLoaded", () => {
   document.body.innerHTML = `
     <section id="cards" class="cards">
       <div id="landing-menu">
         <h1>This is a Memory Card Game</h1>
-        <h2>Choose your difficulty:</h2>
         <div id="difficulty-buttons" class="difficulty__buttons">
           <button class="difficulty__button" data-pairs="4">Easy</button>
           <button class="difficulty__button" data-pairs="6">Medium</button>
