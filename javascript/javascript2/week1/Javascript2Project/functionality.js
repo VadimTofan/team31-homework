@@ -47,6 +47,8 @@ function checkWinCondition() {
     setTimeout(() => {
       alert(`You won! Total moves: ${moveCounter}`);
       resetGame();
+      const timerDiv = document.getElementById("timer");
+      timerDiv.style.opacity = "0";
     }, 500);
   }
 }

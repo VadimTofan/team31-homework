@@ -42,7 +42,6 @@ body {
 }
 
 .cards {
-  margin-top: -10%;
   display: flex;
   align-items: center;
   flex-direction: column-reverse;
@@ -128,6 +127,9 @@ body {
 }
 
 @media (min-width: 1830px) {
+  .cards {
+    padding-top: 5%;
+  }
   .cards__box {
     grid-template-columns: repeat(8, 1fr);
   }
