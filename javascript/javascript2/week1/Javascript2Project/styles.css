@@ -34,7 +34,7 @@ body {
 }
 
 .difficulty__button:hover {
-  background-color: #0056b3;
+  background: linear-gradient(135deg, #4a1a7a 0%, #6f8fc7 25%, #2a4d8e 50%, #3b6cb0 75%, #b39fcc 100%);
 }
 
 .difficulty__button:active {
