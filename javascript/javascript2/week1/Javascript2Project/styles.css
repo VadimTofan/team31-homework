@@ -12,6 +12,10 @@ body {
   min-height: 100vh;
 }
 
+.landing__menu {
+  margin-top: -10%;
+}
+
 .difficulty__buttons {
   display: flex;
   flex-wrap: wrap;
@@ -46,6 +50,7 @@ body {
   align-items: center;
   flex-direction: column-reverse;
   gap: 30px;
+  margin-bottom: 5%;
 }
 
 .cards__box {
