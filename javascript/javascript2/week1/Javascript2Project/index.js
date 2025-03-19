@@ -27,6 +27,8 @@ function toggleCard(event) {
 
   // Starting the timer when first card is flipped
   if (!startTime) startTimer();
+  const timerDiv = document.getElementById("timer");
+  timerDiv.style.opacity = "1";
 
   // Check if the card is already stored (has an assigned image)
   let storedCard = cardStorageArray.find((c) => c.cardId === card.id);

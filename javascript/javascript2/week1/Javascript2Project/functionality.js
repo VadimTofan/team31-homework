@@ -78,6 +78,7 @@ function addTimer() {
     timerDiv.id = "timer";
     timerDiv.classList.add("timer");
     cardsDiv.appendChild(timerDiv);
+    timerDiv.style.opacity = "0";
   }
 }
 
