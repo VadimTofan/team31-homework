@@ -70,37 +70,11 @@ body {
   cursor: pointer;
   position: relative;
   transform-style: preserve-3d;
+  transform: rotateY(180deg);
 }
 
 .card__info--flipped {
-  transform: rotateY(360deg);
-}
-
-.card__info::before,
-.card__info::after {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  backface-visibility: hidden;
-}
-
-.card__info::before {
-  background-color: #ffffff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 24px;
-  color: #004d40;
-}
-
-.card__info::after {
-  background-color: #007bff;
-  transform: rotateY(360deg);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 24px;
-  color: #fff;
+  transform: rotateY(0);
 }
 
 .timer {

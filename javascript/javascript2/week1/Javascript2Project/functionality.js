@@ -13,13 +13,13 @@ function createCardDeck() {
 
 // Generate random cards from the deck, the amount of cards is determined by user in gameSize
 function generateRandomCard() {
-  if (randomCardsArray.length === 0) {
-    let shuffledCards = [...cardsArray].sort(() => Math.random() - 0.5); // Shuffle the deck
+  if (randomCardsArray.length) return;
 
-    for (let i = 0; i < gameSize; i++) {
-      const selectedCard = shuffledCards[i]; // Pick a unique card
-      randomCardsArray.push(selectedCard, selectedCard); // Add the pair
-    }
+  let shuffledCards = [...cardsArray].sort(() => Math.random() - 0.5); // Shuffle the deck
+
+  for (let i = 0; i < gameSize; i++) {
+    const selectedCard = shuffledCards[i]; // Pick a unique card
+    randomCardsArray.push(selectedCard, selectedCard); // Add the pair
   }
 }
 
@@ -59,15 +59,13 @@ function resetGame() {
   const hiddenCards = Array.from(allCards).filter((card) => card.style.opacity === "0.1");
 
   if (hiddenCards.length === allCards.length) {
-    setTimeout(() => {
-      cardDiv.innerHTML = "";
-      gameSize = 0;
-      moveCounter = 0;
-      cardStorageArray.length = 0;
-      randomCardsArray.length = 0;
-      resetTimer();
-      if (landingMenu) landingMenu.style.display = "block";
-    }, 400);
+    cardDiv.innerHTML = "";
+    gameSize = 0;
+    moveCounter = 0;
+    cardStorageArray.length = 0;
+    randomCardsArray.length = 0;
+    resetTimer();
+    if (landingMenu) landingMenu.style.display = "block";
   }
 }
 
