@@ -1,36 +1,56 @@
 body {
-  background-color: #004d40;
+  background: linear-gradient(135deg, #4a1a7a 0%, #6f8fc7 25%, #2a4d8e 50%, #3b6cb0 75%, #b39fcc 100%);
   color: #fff;
-  font-family: Arial, sans-serif;
+  font-family: "Arial", sans-serif;
   text-align: center;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
 }
 
-h1,
-h2,
-p {
-  margin: 10px 0;
+.landing__menu {
+  margin-top: -10%;
 }
 
-button {
-  background-color: #ff9800;
-  border: none;
-  padding: 5px 35px;
+.difficulty__buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.difficulty__button {
+  padding: 10px 20px;
   font-size: 16px;
   font-weight: bold;
-  color: black;
+  color: #fff;
+  width: 75%;
+  background-color: #007bff;
+  border: none;
   border-radius: 5px;
   cursor: pointer;
-  transition: background 0.3s;
+  transition: background-color 0.3s ease;
 }
 
-button:hover {
-  background-color: #e68900;
+.difficulty__button:hover {
+  background: linear-gradient(135deg, #4a1a7a 0%, #6f8fc7 25%, #2a4d8e 50%, #3b6cb0 75%, #b39fcc 100%);
+}
+
+.difficulty__button:active {
+  background-color: #004080;
 }
 
 .cards {
-  padding: 10% 0;
   display: flex;
-  justify-content: center;
+  align-items: center;
+  flex-direction: column-reverse;
+  gap: 30px;
+  margin-bottom: 5%;
 }
 
 .cards__box {
@@ -38,35 +58,58 @@ button:hover {
   grid-template-columns: repeat(3, 1fr);
   gap: 10px;
   justify-items: center;
+  align-content: center;
 }
 
 .card__info {
   width: 90px;
   height: 150px;
-  border-radius: 5px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-  transition: transform 1s ease-out;
+  border-radius: 7px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  transition: transform 0.6s ease-out, box-shadow 0.3s ease;
   cursor: pointer;
+  position: relative;
+  transform-style: preserve-3d;
+  transform: rotateY(180deg);
 }
 
 .card__info--flipped {
-  transform: rotateY(-360deg);
+  transform: rotateY(0);
+}
+
+.timer {
+  font-size: 3rem;
+  font-weight: bold;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 20px 40px;
+  border-radius: 10px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  margin-bottom: 20px;
+  max-width: 80%;
+  justify-content: center;
 }
 
 @media (min-width: 612px) {
   .cards__box {
     grid-template-columns: repeat(6, 1fr);
   }
+  .difficulty__button {
+    width: 35%;
+  }
 }
 
 @media (min-width: 1024px) {
   .cards__box {
-    grid-template-columns: repeat(9, 1fr);
+    grid-template-columns: repeat(8, 1fr);
   }
 }
 
 @media (min-width: 1830px) {
+  .cards {
+    padding-top: 5%;
+  }
   .cards__box {
-    grid-template-columns: repeat(12, 1fr);
+    grid-template-columns: repeat(8, 1fr);
   }
 }
