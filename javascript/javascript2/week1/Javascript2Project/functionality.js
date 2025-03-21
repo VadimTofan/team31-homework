@@ -58,28 +58,27 @@ function resetGame() {
   const allCards = document.querySelectorAll(".card__info");
   const hiddenCards = Array.from(allCards).filter((card) => card.style.opacity === "0.1");
 
-  if (hiddenCards.length === allCards.length) {
-    cardDiv.innerHTML = "";
-    gameSize = 0;
-    moveCounter = 0;
-    cardStorageArray.length = 0;
-    randomCardsArray.length = 0;
-    resetTimer();
-    if (landingMenu) landingMenu.style.display = "block";
-  }
+  if (hiddenCards.length !== allCards.length) return;
+  cardDiv.innerHTML = "";
+  gameSize = 0;
+  moveCounter = 0;
+  cardStorageArray.length = 0;
+  randomCardsArray.length = 0;
+  resetTimer();
+  if (landingMenu) landingMenu.style.display = "block";
 }
 
 // Add html for timer
 function addTimer() {
-  if (!document.getElementById("timer")) {
-    const cardsDiv = document.getElementById("cards");
-    const timerDiv = document.createElement("div");
-    timerDiv.innerText = "0 seconds";
-    timerDiv.id = "timer";
-    timerDiv.classList.add("timer");
-    cardsDiv.appendChild(timerDiv);
-    timerDiv.style.opacity = "0";
-  }
+  if (document.getElementById("timer")) return;
+
+  const cardsDiv = document.getElementById("cards");
+  const timerDiv = document.createElement("div");
+  timerDiv.innerText = "0 seconds";
+  timerDiv.id = "timer";
+  timerDiv.classList.add("timer");
+  cardsDiv.appendChild(timerDiv);
+  timerDiv.style.opacity = "0";
 }
 
 // Creating a timer
