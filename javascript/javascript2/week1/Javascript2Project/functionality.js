@@ -2,11 +2,11 @@
 function generateRandomCard() {
   if (randomCardsArray.length) return;
 
-  let shuffledCards = [...cardsArray].sort(() => Math.random() - 0.5); // Shuffle the deck
+  const shuffledCards = [...cardsArray].sort(() => Math.random() - 0.5);
 
   for (let i = 0; i < gameSize; i++) {
-    const selectedCard = shuffledCards[i]; // Pick a unique card
-    randomCardsArray.push(selectedCard, selectedCard); // Add the pair
+    const selectedCard = shuffledCards[i];
+    randomCardsArray.push(selectedCard, selectedCard);
   }
 }
 
@@ -42,7 +42,7 @@ function checkWinCondition() {
 function updateScoreboard() {
   // Calculate the score
   const timeTaken = Math.floor((Date.now() - startTime) / 1000);
-  let score = gameSize * gameSize;
+  let score = Math.pow(gameSize, 2);
 
   if (score >= 150) {
     score = score / 1.5;
@@ -58,7 +58,7 @@ function updateScoreboard() {
   scoreboard.classList.add("scoreboard");
   scoreboard.innerHTML = `
         <h3>Congratulations</h3>
-        <p id="level-difficulty">You just won the game on level: <strong>${getDifficultyLabel(gameSize)}</strong></p>
+        <p id="level-difficulty" class="level-difficulty">You just won the game on level: ${getDifficultyLabel(gameSize)}</></p>
         <div class="score">
           <p>Score:</p>
           <p id="score">${finalScore} Points</p>
@@ -135,6 +135,8 @@ function startTimer() {
     const hours = Math.floor(time / 3600);
     const minutes = Math.floor((time % 3600) / 60);
     const seconds = time % 60;
+    const timerDiv = document.getElementById("timer");
+    timerDiv.style.opacity = "1";
 
     let timeString = "";
     if (hours > 0) {
