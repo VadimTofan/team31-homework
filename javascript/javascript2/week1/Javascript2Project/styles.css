@@ -81,6 +81,48 @@ body {
   margin-bottom: 20px;
 }
 
+.scoreboard {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex-wrap: wrap;
+  font-weight: 500;
+  font-size: 35px;
+  line-height: 10px;
+  width: 90vw;
+  border-radius: 30px;
+  background: linear-gradient(135deg, #4a1a7a 0%, #6f8fc7 25%, #2a4d8e 50%, #3b6cb0 75%, #b39fcc 100%);
+}
+
+.score {
+  padding: 0 15% 5px 15%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.reset {
+  align-self: center;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff;
+  width: 35%;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-bottom: 25px;
+}
+
+.reset:hover {
+  background: linear-gradient(135deg, #3e3647 0%, #6f8fc7 25%, #2a4d8e 50%, #3b6cb0 75%, #b39fcc 100%);
+}
+
+.reset:active {
+  background-color: #004080;
+}
+
 @media (min-width: 612px) {
   .cards__box {
     grid-template-columns: repeat(6, 1fr);
@@ -94,6 +136,9 @@ body {
   .cards__box {
     grid-template-columns: repeat(8, 1fr);
   }
+  .scoreboard {
+    width: 60vw;
+  }
 }
 
 @media (min-width: 1830px) {
@@ -102,5 +147,8 @@ body {
   }
   .cards__box {
     grid-template-columns: repeat(8, 1fr);
+  }
+  .scoreboard {
+    width: 50vw;
   }
 }

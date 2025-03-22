@@ -1,16 +1,3 @@
-// Creating a card deck from cards and suits
-function createCardDeck() {
-  cardsArray.length = 0;
-  cards.forEach((deckCard) => {
-    suits.forEach((suit, index) => {
-      cardsArray.push({
-        cardName: `${deckCard} of ${suit}`,
-        cardUrl: `./cards/${deckCard}${suitsFirstLetter[index]}.webp`,
-      });
-    });
-  });
-}
-
 // Generate random cards from the deck, the amount of cards is determined by user in gameSize
 function generateRandomCard() {
   if (randomCardsArray.length) return;
@@ -26,7 +13,7 @@ function generateRandomCard() {
 // Setting up the game, according to the gameSize
 function choseGameDifficulty(cardPairs) {
   if (!cardDiv) return;
-
+  document.getElementById("cards-grid").style.display = "";
   for (let i = 0; i < cardPairs * 2; i++) {
     const img = document.createElement("img");
     img.src = backSrc;
@@ -45,27 +32,84 @@ function checkWinCondition() {
 
   if (matchedCards.length === allCards.length) {
     setTimeout(() => {
-      alert(`You won! Total moves: ${moveCounter}`);
-      resetGame();
-      const timerDiv = document.getElementById("timer");
-      timerDiv.style.opacity = "0";
+      // Stop the timer
+      clearInterval(timer);
+      updateScoreboard();
     }, 500);
   }
 }
 
+function updateScoreboard() {
+  // Calculate the score
+  const timeTaken = Math.floor((Date.now() - startTime) / 1000);
+  let score = gameSize * gameSize;
+
+  if (score >= 150) {
+    score = score / 1.5;
+  }
+
+  const finalScore = Math.max(score * 2 - timeTaken - moveCounter, 0);
+
+  document.getElementById("cards-grid").style.display = "none";
+  document.getElementById("timer").style.display = "none";
+
+  const scoreboard = document.createElement("section");
+  scoreboard.id = "scoreboard";
+  scoreboard.classList.add("scoreboard");
+  scoreboard.innerHTML = `
+        <h3>Congratulations</h3>
+        <p id="level-difficulty">You just won the game on level: <strong>${getDifficultyLabel(gameSize)}</strong></p>
+        <div class="score">
+          <p>Score:</p>
+          <p id="score">${finalScore} Points</p>
+        </div>
+        <div class="score">
+          <p>Time:</p>
+          <p id="time">${timeTaken} seconds</p>
+        </div>
+        <div class="score">
+          <p>Steps:</p>
+          <p id="moves">${moveCounter} Moves</p>
+        </div>
+        <button id="reset" class="reset">Restart Game</button>
+      `;
+
+  // Append scoreboard to the body
+  document.body.appendChild(scoreboard);
+
+  // Add event listener for reset button
+  document.getElementById("reset").addEventListener("click", resetGame);
+}
+
+// Function to get the difficulty label based on game size
+function getDifficultyLabel(size) {
+  const difficultyLevels = {
+    4: "Easy",
+    6: "Medium",
+    8: "Hard",
+    10: "Very Hard",
+    12: "Insane",
+    16: "Hell",
+    20: "Nightmare",
+    24: "Impossible",
+  };
+  return difficultyLevels[size] || "Unknown";
+}
+
 // If all cards matched, the game reloads.
 function resetGame() {
-  const allCards = document.querySelectorAll(".card__info");
-  const hiddenCards = Array.from(allCards).filter((card) => card.style.opacity === "0.1");
+  const scoreboard = document.getElementById("scoreboard");
+  const timer = document.getElementById("timer");
 
-  if (hiddenCards.length !== allCards.length) return;
   cardDiv.innerHTML = "";
+  scoreboard.remove();
+  timer.remove();
   gameSize = 0;
   moveCounter = 0;
   cardStorageArray.length = 0;
   randomCardsArray.length = 0;
-  resetTimer();
   if (landingMenu) landingMenu.style.display = "block";
+  resetTimer();
 }
 
 // Add html for timer
@@ -116,13 +160,16 @@ function startTimer() {
     }
 
     document.getElementById("timer").textContent = timeString.trim();
-  }, 1000);
+  }, 100);
 }
 
 // Resetting the timer
 function resetTimer() {
   clearInterval(timer);
   startTime = 0;
-  document.getElementById("timer").textContent = "0 seconds";
-  document.getElementById("timer").style.display = "none";
+
+  if (document.getElementById("timer")) {
+    timer.textContent = "0 seconds";
+    timer.style.display = "none";
+  }
 }
