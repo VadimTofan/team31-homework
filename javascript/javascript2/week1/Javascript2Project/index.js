@@ -4,9 +4,8 @@ function startGame(pairs) {
     gameSize = Number(pairs);
     if (landingMenu) landingMenu.style.display = "none";
     choseGameDifficulty(gameSize);
-    createCardDeck();
-    addTimer();
     generateRandomCard();
+    addTimer();
 
     const timerElement = document.getElementById("timer");
     if (timerElement.style.display === "none" || timerElement.style.display === "") {
@@ -94,13 +93,3 @@ function toggleCard(event) {
     }
   }
 }
-
-// Preload images for better performance
-function preloadImages() {
-  cardsArray.forEach((card) => {
-    const img = new Image();
-    img.src = card.cardUrl;
-  });
-}
-
-preloadImages();
