@@ -1,32 +1,21 @@
-// Creating a card deck from cards and suits
-function createCardDeck() {
-  cardsArray.length = 0;
-  cards.forEach((deckCard) => {
-    suits.forEach((suit, index) => {
-      cardsArray.push({
-        cardName: `${deckCard} of ${suit}`,
-        cardUrl: `./cards/${deckCard}${suitsFirstLetter[index]}.webp`,
-      });
-    });
-  });
-}
-
 // Generate random cards from the deck, the amount of cards is determined by user in gameSize
 function generateRandomCard() {
   if (randomCardsArray.length) return;
 
-  let shuffledCards = [...cardsArray].sort(() => Math.random() - 0.5); // Shuffle the deck
+  const shuffledCards = [...cardsArray].sort(() => Math.random() - 0.5);
 
   for (let i = 0; i < gameSize; i++) {
-    const selectedCard = shuffledCards[i]; // Pick a unique card
-    randomCardsArray.push(selectedCard, selectedCard); // Add the pair
+    const selectedCard = shuffledCards[i];
+    randomCardsArray.push(selectedCard, selectedCard);
   }
+
+  randomCardsArray.sort(() => Math.random() - 0.5);
 }
 
 // Setting up the game, according to the gameSize
 function choseGameDifficulty(cardPairs) {
   if (!cardDiv) return;
-
+  document.getElementById("cards-grid").style.display = "";
   for (let i = 0; i < cardPairs * 2; i++) {
     const img = document.createElement("img");
     img.src = backSrc;
@@ -43,29 +32,78 @@ function checkWinCondition() {
   const allCards = document.querySelectorAll(".card__info");
   const matchedCards = document.querySelectorAll(".matched");
 
-  if (matchedCards.length === allCards.length) {
-    setTimeout(() => {
-      alert(`You won! Total moves: ${moveCounter}`);
-      resetGame();
-      const timerDiv = document.getElementById("timer");
-      timerDiv.style.opacity = "0";
-    }, 500);
+  if (matchedCards.length !== allCards.length) return;
+  setTimeout(() => {
+    // Stop the timer
+    clearInterval(timer);
+    updateScoreboard();
+  }, 500);
+}
+
+function updateScoreboard() {
+  let score = Math.pow(gameSize, 2);
+  if (score >= 150) {
+    score = score / 2;
   }
+
+  const finalScore = Math.max(score * 3 - gameTime - moveCounter, 0);
+
+  document.getElementById("cards-grid").style.display = "none";
+  document.getElementById("timer").style.display = "none";
+
+  const scoreboard = document.createElement("section");
+  scoreboard.id = "scoreboard";
+  scoreboard.classList.add("scoreboard");
+  scoreboard.innerHTML = `
+        <h3>Congratulations</h3>
+        <p id="level-difficulty" class="level-difficulty">You just won the game on level: ${getDifficultyLabel(gameSize)}</></p>
+        <div class="score">
+          <p>Score:</p>
+          <p id="score">${finalScore} Points</p>
+        </div>
+        <div class="score">
+          <p>Time:</p>
+          <p id="time">${timeTaken}</p>
+        </div>
+        <div class="score">
+          <p>Steps:</p>
+          <p id="moves">${moveCounter} Moves</p>
+        </div>
+        <button id="reset" class="reset">Restart Game</button>
+      `;
+  document.body.appendChild(scoreboard);
+  document.getElementById("reset").addEventListener("click", resetGame);
+}
+
+// Function to get the difficulty name based on game size
+function getDifficultyLabel(size) {
+  const difficultyLevels = {
+    4: "Easy",
+    6: "Medium",
+    8: "Hard",
+    10: "Very Hard",
+    12: "Insane",
+    16: "Hell",
+    20: "Nightmare",
+    24: "Impossible",
+  };
+  return difficultyLevels[size] || "Unknown";
 }
 
 // If all cards matched, the game reloads.
 function resetGame() {
-  const allCards = document.querySelectorAll(".card__info");
-  const hiddenCards = Array.from(allCards).filter((card) => card.style.opacity === "0.1");
+  const scoreboard = document.getElementById("scoreboard");
+  const timer = document.getElementById("timer");
 
-  if (hiddenCards.length !== allCards.length) return;
   cardDiv.innerHTML = "";
+  if (scoreboard) scoreboard.remove();
+  if (timer) timer.remove();
   gameSize = 0;
   moveCounter = 0;
   cardStorageArray.length = 0;
   randomCardsArray.length = 0;
-  resetTimer();
   if (landingMenu) landingMenu.style.display = "block";
+  resetTimer();
 }
 
 // Add html for timer
@@ -86,11 +124,12 @@ function startTimer() {
   startTime = Date.now();
   timer = setInterval(() => {
     const time = Math.floor((Date.now() - startTime) / 1000);
-
-    // Calculate hours, minutes, and seconds
+    gameTime = time;
     const hours = Math.floor(time / 3600);
     const minutes = Math.floor((time % 3600) / 60);
     const seconds = time % 60;
+    const timerDiv = document.getElementById("timer");
+    timerDiv.style.opacity = "1";
 
     let timeString = "";
     if (hours > 0) {
@@ -116,13 +155,17 @@ function startTimer() {
     }
 
     document.getElementById("timer").textContent = timeString.trim();
-  }, 1000);
+    timeTaken = timeString.trim();
+  }, 100);
 }
 
 // Resetting the timer
 function resetTimer() {
   clearInterval(timer);
   startTime = 0;
-  document.getElementById("timer").textContent = "0 seconds";
-  document.getElementById("timer").style.display = "none";
+
+  if (document.getElementById("timer")) {
+    timer.textContent = "0 seconds";
+    timer.style.display = "none";
+  }
 }

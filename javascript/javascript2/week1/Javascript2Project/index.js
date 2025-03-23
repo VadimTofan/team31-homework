@@ -4,9 +4,8 @@ function startGame(pairs) {
     gameSize = Number(pairs);
     if (landingMenu) landingMenu.style.display = "none";
     choseGameDifficulty(gameSize);
-    createCardDeck();
-    addTimer();
     generateRandomCard();
+    addTimer();
 
     const timerElement = document.getElementById("timer");
     if (timerElement.style.display === "none" || timerElement.style.display === "") {
@@ -27,8 +26,6 @@ function toggleCard(event) {
 
   // Starting the timer when first card is flipped
   if (!startTime) startTimer();
-  const timerDiv = document.getElementById("timer");
-  timerDiv.style.opacity = "1";
 
   // Check if the card is already stored (has an assigned image)
   let storedCard = cardStorageArray.find((c) => c.cardId === card.id);
@@ -94,13 +91,3 @@ function toggleCard(event) {
     }
   }
 }
-
-// Preload images for better performance
-function preloadImages() {
-  cardsArray.forEach((card) => {
-    const img = new Image();
-    img.src = card.cardUrl;
-  });
-}
-
-preloadImages();

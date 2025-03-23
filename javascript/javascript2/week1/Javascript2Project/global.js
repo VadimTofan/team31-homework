@@ -2,6 +2,10 @@ let gameSize = 0;
 let moveCounter = 0;
 let timer = 0;
 let startTime = 0;
+let cardDiv;
+let landingMenu;
+let timeTaken = 0;
+let gameTime = 0;
 
 const cardStorageArray = [];
 const randomCardsArray = [];
@@ -10,9 +14,6 @@ const cardsArray = [];
 const suits = ["Hearts", "Diamonds", "Clubs", "Spades"];
 const cards = ["Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Jack", "Queen", "King", "Ace"];
 const suitsFirstLetter = suits.map((firstLetter) => firstLetter[0]);
-
-let cardDiv;
-let landingMenu;
 
 // Added this as Valentin suggested.
 // Used template literals as Yasen suggested
@@ -44,3 +45,27 @@ document.addEventListener("DOMContentLoaded", () => {
     button.addEventListener("click", () => startGame(button.dataset.pairs));
   });
 });
+
+// Creating a card deck from cards and suits
+function createCardDeck() {
+  cardsArray.length = 0;
+  cards.forEach((deckCard) => {
+    suits.forEach((suit, index) => {
+      cardsArray.push({
+        cardName: `${deckCard} of ${suit}`,
+        cardUrl: `./cards/${deckCard}${suitsFirstLetter[index]}.webp`,
+      });
+    });
+  });
+}
+createCardDeck();
+
+// Preload images for better performance
+function preloadImages() {
+  cardsArray.forEach((card) => {
+    const img = new Image();
+    img.src = card.cardUrl;
+  });
+}
+
+preloadImages();
