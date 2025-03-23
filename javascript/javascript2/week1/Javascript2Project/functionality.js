@@ -2,8 +2,6 @@
 function generateRandomCard() {
   if (randomCardsArray.length) return;
 
-  const shuffledCards = [...cardsArray].sort(() => Math.random() - 0.5);
-
   for (let i = 0; i < gameSize; i++) {
     const selectedCard = shuffledCards[i];
     randomCardsArray.push(selectedCard, selectedCard);
@@ -42,9 +40,6 @@ function checkWinCondition() {
 
 function updateScoreboard() {
   let score = Math.pow(gameSize, 2);
-  if (score >= 150) {
-    score = score / 2;
-  }
 
   const finalScore = Math.max(score * 3 - gameTime - moveCounter, 0);
 
