@@ -4,7 +4,6 @@ let timer = 0;
 let startTime = 0;
 let cardDiv;
 let landingMenu;
-let timerInterval;
 let timeTaken = 0;
 let gameTime = 0;
 

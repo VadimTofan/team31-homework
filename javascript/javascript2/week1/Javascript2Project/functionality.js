@@ -8,6 +8,8 @@ function generateRandomCard() {
     const selectedCard = shuffledCards[i];
     randomCardsArray.push(selectedCard, selectedCard);
   }
+
+  randomCardsArray.sort(() => Math.random() - 0.5);
 }
 
 // Setting up the game, according to the gameSize
@@ -30,19 +32,16 @@ function checkWinCondition() {
   const allCards = document.querySelectorAll(".card__info");
   const matchedCards = document.querySelectorAll(".matched");
 
-  if (matchedCards.length === allCards.length) {
-    setTimeout(() => {
-      // Stop the timer
-      clearInterval(timer);
-      updateScoreboard();
-    }, 500);
-  }
+  if (matchedCards.length !== allCards.length) return;
+  setTimeout(() => {
+    // Stop the timer
+    clearInterval(timer);
+    updateScoreboard();
+  }, 500);
 }
 
 function updateScoreboard() {
-  // Calculate the score
   let score = Math.pow(gameSize, 2);
-
   if (score >= 150) {
     score = score / 2;
   }
@@ -72,15 +71,11 @@ function updateScoreboard() {
         </div>
         <button id="reset" class="reset">Restart Game</button>
       `;
-
-  // Append scoreboard to the body
   document.body.appendChild(scoreboard);
-
-  // Add event listener for reset button
   document.getElementById("reset").addEventListener("click", resetGame);
 }
 
-// Function to get the difficulty label based on game size
+// Function to get the difficulty name based on game size
 function getDifficultyLabel(size) {
   const difficultyLevels = {
     4: "Easy",
@@ -101,8 +96,8 @@ function resetGame() {
   const timer = document.getElementById("timer");
 
   cardDiv.innerHTML = "";
-  scoreboard.remove();
-  timer.remove();
+  if (scoreboard) scoreboard.remove();
+  if (timer) timer.remove();
   gameSize = 0;
   moveCounter = 0;
   cardStorageArray.length = 0;
@@ -130,7 +125,6 @@ function startTimer() {
   timer = setInterval(() => {
     const time = Math.floor((Date.now() - startTime) / 1000);
     gameTime = time;
-    // Calculate hours, minutes, and seconds
     const hours = Math.floor(time / 3600);
     const minutes = Math.floor((time % 3600) / 60);
     const seconds = time % 60;
