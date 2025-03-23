@@ -41,14 +41,13 @@ function checkWinCondition() {
 
 function updateScoreboard() {
   // Calculate the score
-  const timeTaken = Math.floor((Date.now() - startTime) / 1000);
   let score = Math.pow(gameSize, 2);
 
   if (score >= 150) {
-    score = score / 1.5;
+    score = score / 2;
   }
 
-  const finalScore = Math.max(score * 2 - timeTaken - moveCounter, 0);
+  const finalScore = Math.max(score * 3 - gameTime - moveCounter, 0);
 
   document.getElementById("cards-grid").style.display = "none";
   document.getElementById("timer").style.display = "none";
@@ -65,7 +64,7 @@ function updateScoreboard() {
         </div>
         <div class="score">
           <p>Time:</p>
-          <p id="time">${timeTaken} seconds</p>
+          <p id="time">${timeTaken}</p>
         </div>
         <div class="score">
           <p>Steps:</p>
@@ -130,7 +129,7 @@ function startTimer() {
   startTime = Date.now();
   timer = setInterval(() => {
     const time = Math.floor((Date.now() - startTime) / 1000);
-
+    gameTime = time;
     // Calculate hours, minutes, and seconds
     const hours = Math.floor(time / 3600);
     const minutes = Math.floor((time % 3600) / 60);
@@ -162,6 +161,7 @@ function startTimer() {
     }
 
     document.getElementById("timer").textContent = timeString.trim();
+    timeTaken = timeString.trim();
   }, 100);
 }
 

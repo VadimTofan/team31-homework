@@ -5,6 +5,8 @@ let startTime = 0;
 let cardDiv;
 let landingMenu;
 let timerInterval;
+let timeTaken = 0;
+let gameTime = 0;
 
 const cardStorageArray = [];
 const randomCardsArray = [];
