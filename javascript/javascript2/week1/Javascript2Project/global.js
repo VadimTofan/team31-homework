@@ -6,11 +6,11 @@ let cardDiv;
 let landingMenu;
 let timeTaken = 0;
 let gameTime = 0;
+let cardsArray = [];
 
 const cardStorageArray = [];
 const randomCardsArray = [];
 const backSrc = "./cards/cardBack.webp";
-const cardsArray = [];
 const suits = ["Hearts", "Diamonds", "Clubs", "Spades"];
 const cards = ["Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Jack", "Queen", "King", "Ace"];
 const suitsFirstLetter = suits.map((firstLetter) => firstLetter[0]);
@@ -46,18 +46,33 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
+// For sake of training with API i disabled this function
+
+// function createCardDeck() {
+//   cardsArray.length = 0;
+//   cards.forEach((deckCard) => {
+//     suits.forEach((suit, index) => {
+//       cardsArray.push({
+//         cardName: `${deckCard} of ${suit}`,
+//         cardUrl: `./cards/${deckCard}${suitsFirstLetter[index]}.webp`,
+//       });
+//     });
+//   });
+// }
+
 // Creating a card deck from cards and suits
 function createCardDeck() {
-  cardsArray.length = 0;
-  cards.forEach((deckCard) => {
-    suits.forEach((suit, index) => {
-      cardsArray.push({
-        cardName: `${deckCard} of ${suit}`,
-        cardUrl: `./cards/${deckCard}${suitsFirstLetter[index]}.webp`,
+  cardsArray = [];
+  fetch("https://raw.githubusercontent.com/VadimTofan/team31-homework/refs/heads/main/javascript/javascript3/week1/cards.json")
+    .then((response) => response.text())
+    .then((data) => {
+      const myData = JSON.parse(data);
+      myData.forEach((card) => {
+        cardsArray.push(card);
       });
     });
-  });
 }
+
 createCardDeck();
 
 // Preload images for better performance
@@ -69,3 +84,4 @@ function preloadImages() {
 }
 
 preloadImages();
+console.log(cardsArray);
