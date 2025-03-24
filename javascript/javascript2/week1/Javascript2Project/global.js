@@ -11,9 +11,6 @@ let cardsArray = [];
 const cardStorageArray = [];
 const randomCardsArray = [];
 const backSrc = "./cards/cardBack.webp";
-const suits = ["Hearts", "Diamonds", "Clubs", "Spades"];
-const cards = ["Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Jack", "Queen", "King", "Ace"];
-const suitsFirstLetter = suits.map((firstLetter) => firstLetter[0]);
 
 // Added this as Valentin suggested.
 // Used template literals as Yasen suggested
@@ -46,27 +43,12 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-// For sake of training with API i disabled this function
-
-// function createCardDeck() {
-//   cardsArray.length = 0;
-//   cards.forEach((deckCard) => {
-//     suits.forEach((suit, index) => {
-//       cardsArray.push({
-//         cardName: `${deckCard} of ${suit}`,
-//         cardUrl: `./cards/${deckCard}${suitsFirstLetter[index]}.webp`,
-//       });
-//     });
-//   });
-// }
-
 // Creating a card deck from cards and suits
 function createCardDeck() {
   cardsArray = [];
   fetch("https://raw.githubusercontent.com/VadimTofan/team31-homework/refs/heads/main/javascript/javascript3/week1/cards.json")
-    .then((response) => response.text())
-    .then((data) => {
-      const myData = JSON.parse(data);
+    .then((response) => response.json()) // Directly parse as JSON
+    .then((myData) => {
       myData.forEach((card) => {
         cardsArray.push(card);
       });
