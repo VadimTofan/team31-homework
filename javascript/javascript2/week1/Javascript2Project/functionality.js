@@ -2,6 +2,7 @@
 function generateRandomCard() {
   if (randomCardsArray.length) return;
 
+  const shuffledCards = [...cardsArray].sort(() => Math.random() - 0.5);
   for (let i = 0; i < gameSize; i++) {
     const selectedCard = shuffledCards[i];
     randomCardsArray.push(selectedCard, selectedCard);

@@ -6,14 +6,11 @@ let cardDiv;
 let landingMenu;
 let timeTaken = 0;
 let gameTime = 0;
+let cardsArray = [];
 
 const cardStorageArray = [];
 const randomCardsArray = [];
 const backSrc = "./cards/cardBack.webp";
-const cardsArray = [];
-const suits = ["Hearts", "Diamonds", "Clubs", "Spades"];
-const cards = ["Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Jack", "Queen", "King", "Ace"];
-const suitsFirstLetter = suits.map((firstLetter) => firstLetter[0]);
 
 // Added this as Valentin suggested.
 // Used template literals as Yasen suggested
@@ -48,16 +45,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // Creating a card deck from cards and suits
 function createCardDeck() {
-  cardsArray.length = 0;
-  cards.forEach((deckCard) => {
-    suits.forEach((suit, index) => {
-      cardsArray.push({
-        cardName: `${deckCard} of ${suit}`,
-        cardUrl: `./cards/${deckCard}${suitsFirstLetter[index]}.webp`,
+  cardsArray = [];
+  fetch("https://raw.githubusercontent.com/VadimTofan/team31-homework/refs/heads/main/javascript/javascript3/week1/cards.json")
+    .then((response) => response.json()) // Directly parse as JSON
+    .then((myData) => {
+      myData.forEach((card) => {
+        cardsArray.push(card);
       });
     });
-  });
 }
+
 createCardDeck();
 
 // Preload images for better performance
@@ -69,3 +66,4 @@ function preloadImages() {
 }
 
 preloadImages();
+console.log(cardsArray);
