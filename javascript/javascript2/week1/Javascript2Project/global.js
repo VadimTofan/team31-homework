@@ -71,4 +71,3 @@ function preloadImages() {
 }
 
 preloadImages();
-console.log(cardsArray);
