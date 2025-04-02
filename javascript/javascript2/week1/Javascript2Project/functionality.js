@@ -47,6 +47,18 @@ function updateScoreboard() {
   document.getElementById("cards-grid").style.display = "none";
   document.getElementById("timer").style.display = "none";
 
+  setTimeout(() => {
+    document.getElementById("score").textContent = `${finalScore} Points`;
+  }, 1100);
+
+  setTimeout(() => {
+    document.getElementById("time").textContent = `${timeTaken}`;
+  }, 2100);
+
+  setTimeout(() => {
+    document.getElementById("moves").textContent = `${moveCounter} Moves`;
+  }, 3100);
+
   const scoreboard = document.createElement("section");
   scoreboard.id = "scoreboard";
   scoreboard.classList.add("scoreboard");
@@ -54,16 +66,16 @@ function updateScoreboard() {
         <h3>Congratulations</h3>
         <p id="level-difficulty" class="level-difficulty">You just won the game on level: ${getDifficultyLabel(gameSize)}</></p>
         <div class="score">
-          <p>Score:</p>
-          <p id="score">${finalScore} Points</p>
+          <p class="score__score">Score:</p>
+          <p id="score"></p>
         </div>
         <div class="score">
-          <p>Time:</p>
-          <p id="time">${timeTaken}</p>
+          <p class="score__time">Time:</p>
+          <p id="time"></p>
         </div>
         <div class="score">
-          <p>Steps:</p>
-          <p id="moves">${moveCounter} Moves</p>
+          <p class="score__steps">Steps:</p>
+          <p id="moves"></p>
         </div>
         <button id="reset" class="reset">Restart Game</button>
       `;
