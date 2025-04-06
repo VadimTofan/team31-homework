@@ -36,9 +36,9 @@ class Education {
 
 class CV {
   constructor(email) {
+    this.email = email;
     this.jobs = [];
     this.educations = [];
-    this.email = email;
   }
 
   addJob(job) {
@@ -63,18 +63,60 @@ class CV {
       return item.id === education.id;
     });
     if (index > -1) {
-      this.jobs.splice(index, 1);
+      this.educations.splice(index, 1);
     }
   }
+
+  renderCV() {
+    const body = document.querySelector("body");
+    body.innerHTML = `
+        <section class="email" id="email"></section>
+        <section class="education" id="education"></section>
+        <section class="job" id="job"></section>
+    `;
+    const email = document.getElementById("email");
+    const education = document.getElementById("education");
+    const job = document.getElementById("job");
+
+    email.innerHTML = `<p>Email: ${this.email}</p>`;
+    job.innerHTML = this.jobs
+      .map((jobItem) => {
+        return `    
+            <div class="job-item">
+                <h3>${jobItem.title}</h3>
+                <p>${jobItem.description}</p>
+                <p>Start Date: ${jobItem.startDate}</p>
+                <p>End Date: ${jobItem.endDate}</p>
+            </div>
+        `;
+      })
+      .join("");
+
+    this.educations.forEach((educationItem) => {
+      education.innerHTML += `
+            <div class="education-item">
+                <h3>${educationItem.title}</h3>
+                <p>School: ${educationItem.school}</p>
+                <p>Address: ${educationItem.address}</p>
+                <p>Start Date: ${educationItem.startDate}</p>
+                <p>End Date: ${educationItem.endDate}</p>
+            </div>
+        `;
+    });
+  }
 }
-
 const myCv = new CV("vad.tofan@gmail.com");
-const startingDate = new Date(1991, 3, 13);
-const endingDate = new Date(2025, 4, 12);
-const jobOne = new Job(1, "manager", "manage team", `${startingDate.getFullYear()}`, `${endingDate.getFullYear()}`);
-const jobTwo = new Job(2, "not a manager", "will not manage team", `${startingDate.getFullYear()}`, `${endingDate.getFullYear()}`);
+const jobOne = new Job(1, "Manager", "Managed Teams", "11/3/1992", "13/4/2025");
+const jobTwo = new Job(2, "not a manager", "will not manage team", "11/3/1992", "13/4/2025");
+const educationOne = new Education(1, "Marketing", "Small School of Advertising Stuff", "Copenhagen", "11/3/1992", "13/4/2025");
+const educationTwo = new Education(2, "WebDev", "Big School of Deving Stuff", "Copenhagen", "11/3/1992", "13/4/2025");
+const educationThree = new Education(2, "Not a Dev", "Big School of Not Deving Stuff", "Copenhagen", "11/3/1992", "13/4/2025");
 
+myCv.addEducation(educationOne);
+myCv.addEducation(educationTwo);
+myCv.addEducation(educationThree);
 myCv.addJob(jobOne);
 myCv.addJob(jobTwo);
-
-console.log(myCv.jobs);
+myCv.removeEducation(educationOne);
+myCv.removeJob(jobTwo);
+myCv.renderCV();
