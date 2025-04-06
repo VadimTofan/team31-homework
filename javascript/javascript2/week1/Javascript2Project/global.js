@@ -44,15 +44,20 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // Creating a card deck from cards and suits
-function createCardDeck() {
+async function createCardDeck() {
   cardsArray = [];
-  fetch("https://raw.githubusercontent.com/VadimTofan/team31-homework/refs/heads/main/javascript/javascript3/week1/cards.json")
-    .then((response) => response.json()) // Directly parse as JSON
-    .then((myData) => {
-      myData.forEach((card) => {
-        cardsArray.push(card);
-      });
-    });
+  try {
+    const response = await fetch("https://raw.githubusercontent.com/VadimTofan/team31-homework/refs/heads/main/javascript/javascript3/week1/cards.json");
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    const myData = await response.json();
+    cardsArray = myData;
+  } catch (error) {
+    console.error("Error fetching card data:", error);
+  }
 }
 
 createCardDeck();
@@ -66,4 +71,3 @@ function preloadImages() {
 }
 
 preloadImages();
-console.log(cardsArray);
