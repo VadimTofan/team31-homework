@@ -68,8 +68,7 @@ class CV {
   }
 
   renderCV() {
-    const body = document.querySelector("body");
-    body.innerHTML = `
+    document.body.innerHTML = `
         <section class="email" id="email"></section>
         <section class="education" id="education"></section>
         <section class="job" id="job"></section>
