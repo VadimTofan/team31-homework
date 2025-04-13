@@ -5,7 +5,7 @@ Design queries that retrieve the following data sets. Compare with classmates to
     SELECT COUNT(*) FROM task
 
 2) Find out how many tasks in the task table do not have a valid due date
-    SELECT COUNT(*) FROM task WHERE due_date IS NOT NULL;
+    SELECT COUNT(*) FROM task WHERE due_date IS NULL;
 
 3) Find all the tasks that are marked as done
     SELECT * FROM status
