@@ -73,8 +73,9 @@ WHERE price < 90;
 SELECT Meal.*
 FROM Meal
 LEFT JOIN Reservation ON Meal.id = Reservation.meal_id
-WHERE (Reservation.number_of_guests < Meal.max_reservations OR Reservation.number_of_guests IS NULL)
-GROUP BY Meal.id;
+GROUP BY Meal.id
+HAVING SUM(Reservation.number_of_guests) < Meal.max_reservations 
+   OR SUM(Reservation.number_of_guests) IS NULL;
 
 -- Get meals that partially match a title.
 SELECT * FROM Meal 
