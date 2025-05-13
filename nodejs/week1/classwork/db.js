@@ -29,7 +29,7 @@ export async function getMeals() {
   return meals;
 }
 export async function insertMeals() {
-  const mealsToinsert = [
+  const mealsToInsert = [
     {
       id: 1,
       name: "pizza",
@@ -41,7 +41,7 @@ export async function insertMeals() {
       price: 160,
     },
   ];
-  for (const meal of mealsToinsert) {
+  for (const meal of mealsToInsert) {
     await dbClient.raw(`
             insert into meals values(${meal.id},'${meal.name}', '${meal.price}')
             `);
