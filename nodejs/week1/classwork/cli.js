@@ -1,16 +1,16 @@
-import util from "util";
+import util from 'util'
 
 const options = {
   name: {
-    type: "string",
+    type: 'string',
   },
   port: {
-    type: "string",
+    type: 'string',
   },
-};
+}
 
-const result = util.parseArgs({ options });
+const result = util.parseArgs({ options })
 
-const { name, port } = result.values;
+const { name, port } = result.values
 
-console.log("hello", name);
+console.log('hello', name)
