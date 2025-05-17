@@ -5,3 +5,5 @@ package.json
 javascript/javascript2/week1/Homework/styles.scss
 javascript/javascript2/week1/Homework/styles.min.css
 javascript/javascript2/week1/Javascript2Project/newFeatures.js
+.prettierrc
+eslint.config.mjs
