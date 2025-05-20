@@ -40,7 +40,7 @@ const fieldsFilter = async (fields) => filterData(await getDocument(), fields);
 
 const searchData = (array, search) => {
   if (!search) return array;
-  return array.filter((item) => item.name.toLowerCase().includes(search) || item.description.toLowerCase().includes(search) || item.id.includes(search));
+  return array.filter((item) => item.name.toLowerCase().includes(search) || item.description.toLowerCase().includes(search));
 };
 
 const filterData = (array, fields) => {
