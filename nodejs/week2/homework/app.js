@@ -1,5 +1,5 @@
 import express from "express";
-import fs from "fs/promises";
+import { getDocument } from "./document.js";
 
 const app = express();
 const port = process.env.PORT || 8000;
@@ -11,15 +11,12 @@ app.get("/search", async (req, res) => {
   res.send(await searchQuery(search));
 });
 
-app.get("/documents", async (req, res) => {
-  res.status(404).send({ ERROR: `NO ID WAS SPECIFIED` });
-});
-
 app.get("/documents/:id", async (req, res) => {
   const id = req.params.id;
+  if (!id) return res.status(404).send({ error: `Id is mandatory` });
   const docs = await getDocument();
   const doc = docs.find((item) => Number(item.id) === Number(id));
-  if (!doc) return res.status(404).send({ ERROR: `The document has no data with such ID` });
+  if (!doc) return res.status(404).send({ error: `The document has no data with such ID` });
   res.send(doc);
 });
 
@@ -50,8 +47,6 @@ const filterData = (array, fields) => {
   if (!filterResults.length) return "No Matches Found";
   return filterResults;
 };
-
-const getDocument = async () => JSON.parse(await fs.readFile("homework/document.json", "utf8"));
 
 app.get("/", (req, res) => {
   res.send("This is a search engine");
