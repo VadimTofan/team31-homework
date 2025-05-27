@@ -35,6 +35,12 @@ contactsAPIRouter.get("/", async (req, res) => {
   const request = req.query.sort.toString().toLowerCase();
   let sortBy = "id";
   let directBy = "asc";
+
+  // I did it as for loop, because our entry might be not perfect.
+  // This accepts entries such as:
+  // ?sort=id asc || ?sort=id desc || ?sort=id aaaaaasccccc || ?sort=id DDdddEScCcccc
+  // ?sort="id" - = ++ 22222333 "asc" :D
+
   for (let i = 0; i < safeSort.length; i++) {
     if (request.includes(safeSort[i])) {
       sortBy = safeSort[i] || "id";
