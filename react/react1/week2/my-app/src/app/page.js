@@ -2,7 +2,7 @@ import ToggleContent from "@/app/components/toggleContent.jsx";
 import Button from "@/app/components/Button.jsx";
 import Card from "@/app/components/Card.jsx";
 import Layout from "@/app/components/layout.jsx";
-
+import Counter from "@/app/components/Counter.jsx";
 export default function Home() {
   return (
     <>
@@ -14,6 +14,7 @@ export default function Home() {
       />
       <Layout />
       <ToggleContent />
+      <Counter />
     </>
   );
 }
