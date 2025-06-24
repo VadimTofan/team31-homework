@@ -1,12 +1,16 @@
 import "./globals.css";
-import Navbar from "./components/navbar.jsx";
+
+import { Container } from "@mui/material";
+import Navbar from "./components/navbar/navbar.jsx";
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        <Navbar />
-        {children}
+        <Container>
+          <Navbar />
+          {children}
+        </Container>
       </body>
     </html>
   );
