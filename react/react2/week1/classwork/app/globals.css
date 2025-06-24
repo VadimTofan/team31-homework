@@ -40,3 +40,23 @@ a {
     color-scheme: dark;
   }
 }
+
+.navbar {
+  padding: 5px;
+  background-color: teal;
+  height: 45px;
+}
+
+.linkButton {
+  padding: 8px 12px;
+  margin-right: 10px;
+  border: none;
+  border-radius: 6px;
+
+  color: red;
+}
+
+.linkButtonActive {
+  background-color: blue;
+  color: white;
+}
