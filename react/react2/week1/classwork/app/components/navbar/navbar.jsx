@@ -9,6 +9,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import List from "@mui/material/List";
 import { Button, Box } from "@mui/material";
 import { useRouter } from "next/navigation";
+import { useRef } from "react";
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -153,8 +154,6 @@ export function BurgerMenu({ openForm }) {
     </div>
   );
 }
-
-import { useRef } from "react";
 
 function SignupForm({ closeForm }) {
   const nameRef = useRef();
