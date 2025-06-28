@@ -52,8 +52,8 @@ export default function Navbar() {
             <Button
               sx={buttonStyles}
               onClick={() => {
-                localStorage.removeItem("user"); // Clear saved user
-                setUser(null); // Reset state
+                localStorage.removeItem("user");
+                setUser(null);
               }}
             >
               Logout
