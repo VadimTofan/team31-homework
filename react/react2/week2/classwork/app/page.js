@@ -3,6 +3,7 @@
 import TodoList from "./components/todolist";
 import { Counter } from "./components/counterContext";
 import { useLanguage } from "./components/localizationcontext";
+import { Context } from "./components/themecontext";
 import Button from "@mui/material/Button";
 
 export default function Page() {
@@ -10,6 +11,7 @@ export default function Page() {
 
   return (
     <main>
+      <Context />
       <TodoList />
       <div>
         <h1>Current language: {language}</h1>
