@@ -1,40 +1,24 @@
-import { TodoProvider } from "./components/todo";
+import { TodoProvider } from "./components/toodContext";
+import { ThemeProvider } from "./components/themecontext";
+import { AppThemeProvider } from "./components/localizationcontext";
+import { CounterProvider } from "./components/counterContext";
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        <TodoProvider>{children}</TodoProvider>
+        <TodoProvider>
+          <ThemeProvider>
+            <AppThemeProvider>
+              <CounterProvider>{children}</CounterProvider>
+            </AppThemeProvider>
+          </ThemeProvider>
+        </TodoProvider>
       </body>
     </html>
   );
 }
 
-// import { ThemeProvider } from "./components/themecontext";
-
-// export const metadata = {
-//   title: "Classwork React2 Week2",
-// };
-
-// export default function RootLayout({ children }) {
-//   return (
-//     <html lang="en">
-//       <body>
-//         <ThemeProvider>
-//         {children}
-//         </ThemeProvider>
-//       </body>
-//     </html>
-//   );
-// }
-// import { AppThemeProvider } from "./components/localization";
-
-// export default function RootLayout({ children }) {
-//   return (
-//     <html lang="en">
-//       <body>
-//         <AppThemeProvider>{children}</AppThemeProvider>
-//       </body>
-//     </html>
-//   );
-// }
+export const metadata = {
+  title: "Classwork React2 Week2",
+};

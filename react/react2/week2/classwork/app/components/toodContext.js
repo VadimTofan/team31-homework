@@ -11,15 +11,18 @@ const ACTIONS = {
 function todoReducer(state, action) {
   switch (action.type) {
     case ACTIONS.ADD_TODO:
-      return [...state, { id: Date.now(), completed: false }];
+      return [
+        ...state,
+        {
+          id: Date.now(),
+          text: action.payload,
+          completed: false,
+        },
+      ];
     case ACTIONS.REMOVE_TODO:
       return state.filter((todo) => todo.id !== action.payload);
     case ACTIONS.TOGGLE_TODO:
-      return state.map((todo) =>
-        todo.id === action.payload
-          ? { ...todo, completed: !todo.completed }
-          : todo
-      );
+      return state.map((todo) => (todo.id === action.payload ? { ...todo, completed: !todo.completed } : todo));
     default:
       return state;
   }
@@ -32,9 +35,5 @@ export const useTodos = () => useContext(TodoContext);
 export const TodoProvider = ({ children }) => {
   const [todos, dispatch] = useReducer(todoReducer, []);
 
-  return (
-    <TodoContext.Provider value={{ todos, dispatch }}>
-      {children}
-    </TodoContext.Provider>
-  );
+  return <TodoContext.Provider value={{ todos, dispatch }}>{children}</TodoContext.Provider>;
 };

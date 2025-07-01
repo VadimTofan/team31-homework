@@ -1,10 +1,7 @@
 "use client";
 
 import { createContext, useContext, useState } from "react";
-import {
-  createTheme,
-  ThemeProvider as MuiThemeProvider,
-} from "@mui/material/styles";
+import { createTheme, ThemeProvider as MuiThemeProvider } from "@mui/material/styles";
 import { enUS, frFR, zhCN } from "@mui/material/locale";
 import CssBaseline from "@mui/material/CssBaseline";
 
