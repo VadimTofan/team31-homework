@@ -1,6 +1,6 @@
 cucumbers
 tomatoes
-broccoli
+edamame
 spinach
 carrots
 onions
