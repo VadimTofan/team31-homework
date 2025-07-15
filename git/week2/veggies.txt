@@ -1,6 +1,8 @@
 cucumbers
 tomatoes
-broccoli
+brussels sprouts
 spinach
 carrots
 onions
+bell pepper
+beetroot
