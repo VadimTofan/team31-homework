@@ -1,0 +1,6 @@
+cucumbers
+tomatoes
+broccoli
+spinach
+carrots
+onions
