@@ -29,7 +29,9 @@ body a:hover {
   z-index: 2;
 }
 
-body a, body a:visited, body a:active {
+body a,
+body a:visited,
+body a:active {
   color: inherit;
   text-decoration: none;
 }
@@ -54,7 +56,6 @@ body h3 {
   opacity: 90%;
 }
 
-/*----Navigation Bar----*/
 .navigation {
   display: flex;
   justify-content: space-between;
@@ -65,7 +66,6 @@ body h3 {
   z-index: 5;
   width: 80%;
   background: linear-gradient(90deg, #79797d 1%, #a6a6a6 38%, #797879 53%, #b6b5b6 64%, #828282 100%);
-  /*----Burger Menu----*/
 }
 
 .navigation__img {
@@ -141,7 +141,6 @@ body h3 {
   transform: translateY(-18px) rotate(-45deg);
 }
 
-/*----Header----*/
 .header {
   text-align: center;
   width: 100%;
@@ -157,7 +156,6 @@ body h3 {
   margin-bottom: -7px;
 }
 
-/*----Briefly About Me----*/
 .about {
   padding-bottom: 50px;
 }
@@ -235,7 +233,6 @@ body h3 {
   margin-bottom: -6px;
 }
 
-/*----Work Experience----*/
 .work {
   padding-bottom: 50px;
 }
@@ -255,7 +252,6 @@ body h3 {
   opacity: 95%;
 }
 
-/*----Skills & Knowledge----*/
 .skills {
   padding-bottom: 50px;
 }
@@ -309,30 +305,29 @@ body h3 {
 }
 
 .skills__js {
-  width: 10%;
+  width: 80%;
 }
 
 .skills__python, .skills__sql {
-  width: 20%;
+  width: 80%;
 }
 
 .skills__html, .skills__css {
-  width: 35%;
+  width: 100%;
 }
 
 .skills__office {
-  width: 50%;
+  width: 100%;
 }
 
 .skills__english {
-  width: 80%;
+  width: 90%;
 }
 
 .skills__russian, .skills__greek {
   width: 100%;
 }
 
-/*----Portfolio----*/
 .portfolio {
   padding-bottom: 50px;
 }
@@ -359,7 +354,6 @@ body h3 {
   font-size: 24px;
 }
 
-/*----Footer----*/
 .contacts {
   padding: 25px 10%;
   background-color: rebeccapurple;
@@ -424,7 +418,6 @@ body h3 {
 }
 
 @media (min-width: 1024px) {
-  /*----Navigation Bar Desktop----*/
   .navigation {
     padding: 10px 10% 10px 10%;
   }
@@ -459,14 +452,12 @@ body h3 {
   .navigation__container {
     margin: 0 auto;
   }
-  /*----Header Desktop----*/
   .header {
     padding-top: 150px;
   }
   .header__title {
     font-size: 100px;
   }
-  /*----Briefly About Me Desktop----*/
   .about__img {
     max-height: 900px;
   }
@@ -490,7 +481,6 @@ body h3 {
     margin: 0;
     width: 40%;
   }
-  /*----Work Experience Desktop----*/
   .work {
     padding-bottom: 70px;
   }
@@ -507,7 +497,6 @@ body h3 {
     padding: 5px;
     border-radius: 15px;
   }
-  /*----Skills & Knowledge Desktop----*/
   .skills {
     padding-bottom: 45px;
   }
@@ -530,7 +519,6 @@ body h3 {
     height: 75%;
     padding: 0 15px 25px 15px;
   }
-  /*----Portfolio Desktop----*/
   .portfolio {
     margin-bottom: 35px;
   }
@@ -558,7 +546,6 @@ body h3 {
     width: 32%;
     padding-top: 10px;
   }
-  /*----Footer Desktop----*/
   .contacts__container {
     display: flex;
     flex-direction: row;
