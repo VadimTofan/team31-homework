@@ -1,0 +1,59 @@
+PS D:\Coding\reset_playground> git init
+PS D:\Coding\reset_playground> git add .
+PS D:\Coding\reset_playground> git commit -m "Add country Australia to countries.txt"
+
+PS D:\Coding\reset_playground> git add .
+PS D:\Coding\reset_playground> git commit -m "Add country Belgium to countries.txt"
+
+PS D:\Coding\reset_playground> git add .
+PS D:\Coding\reset_playground> git commit -m "Add country Serbia to countries.txt" 
+
+PS D:\Coding\reset_playground> git add .
+PS D:\Coding\reset_playground> git commit -m "Add country Portugal to countries.txt"
+
+PS D:\Coding\reset_playground> git add .
+PS D:\Coding\reset_playground> git commit -m "Add country Senegal to countries.txt" 
+
+PS D:\Coding\reset_playground> git checkout -b feature/more_countries
+
+PS D:\Coding\reset_playground> git add .
+PS D:\Coding\reset_playground> git commit -m "Create file more_countries.txt"
+
+PS D:\Coding\reset_playground> git log --oneline
+a12c70e (HEAD -> feature/more_countries) Create file more_countries.txt
+
+PS D:\Coding\reset_playground> git checkout -
+PS D:\Coding\reset_playground> git cherry-pick a12c70e
+
+PS D:\Coding\reset_playground> git add more_countries.txt
+PS D:\Coding\reset_playground> git add .
+
+PS D:\Coding\reset_playground> git commit -m "Add Iraq to countries.txt  
+>> Cherry pick commit a12c70e"  
+
+PS D:\Coding\reset_playground> git log --oneline
+92ac12a (HEAD -> main) Add Iraq to countries.txt Cherry pick commit a12c70e
+ed363d8 Add country Senegal to countries.txt
+8a9d46d Add country Portugal to countries.txt
+f9495e4 Add country Serbia to countries.txt
+3bb136f Add country Belgium to countries.txt
+445a644 Add country Australia to countries.txt
+
+PS D:\Coding\reset_playground> git reset --soft 92ac12a
+
+PS D:\Coding\reset_playground> git add .
+PS D:\Coding\reset_playground> git commit -m "reverted the action"
+
+PS D:\Coding\reset_playground> git log --oneline
+1b224f2 (HEAD -> main) reverted the action
+8c8cf10 Add Iraq to countries.txt >> Cherry pick commit a12c70e
+92ac12a Add Iraq to countries.txt Cherry pick commit a12c70e
+ed363d8 Add country Senegal to countries.txt
+8a9d46d Add country Portugal to countries.txt
+f9495e4 Add country Serbia to countries.txt
+3bb136f Add country Belgium to countries.txt
+445a644 Add country Australia to countries.txt
+PS D:\Coding\reset_playground> git reset --mixed 8c8cf10
+
+PS D:\Coding\reset_playground> git add .
+PS D:\Coding\reset_playground> git commit -m "Commit the reseted items"

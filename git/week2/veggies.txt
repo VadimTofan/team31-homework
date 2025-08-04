@@ -1,8 +1,11 @@
 cucumbers
 tomatoes
+edamame
 brussels sprouts
 spinach
 carrots
 onions
+lentils
 bell pepper
 beetroot
+
