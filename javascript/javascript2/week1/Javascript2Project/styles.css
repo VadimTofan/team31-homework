@@ -102,7 +102,7 @@ body::before {
 }
 
 .hero__title {
-  white-space: nowrap;
+  white-space: normal;
 }
 
 .hero__text {
@@ -331,7 +331,7 @@ body::before {
   }
 }
 
-@media (min-width: 700px) {
+@media (min-width: 980px) {
   .hero {
     grid-template-columns: minmax(0, 1.3fr) minmax(280px, 1fr);
     align-items: end;
@@ -342,9 +342,9 @@ body::before {
   }
 }
 
-@media (min-width: 700px) and (max-width: 1080px) {
+@media (min-width: 1180px) {
   .hero__title {
-    white-space: normal;
+    white-space: nowrap;
   }
 }
 
