@@ -101,6 +101,10 @@ body::before {
   letter-spacing: -0.04em;
 }
 
+.hero__title {
+  white-space: nowrap;
+}
+
 .hero__text {
   margin: 18px 0 0;
   max-width: 52ch;
@@ -357,6 +361,10 @@ body::before {
   .hero__title,
   .scoreboard__title {
     font-size: clamp(2.6rem, 16vw, 4rem);
+  }
+
+  .hero__title {
+    white-space: normal;
   }
 
   .table__frame {
