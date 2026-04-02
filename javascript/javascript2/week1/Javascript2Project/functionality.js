@@ -1,6 +1,6 @@
 // Generate random cards from the deck, the amount of cards is determined by user in gameSize
 function generateRandomCard() {
-  if (randomCardsArray.length) return;
+  randomCardsArray.length = 0;
 
   const shuffledCards = [...cardsArray].sort(() => Math.random() - 0.5);
   for (let i = 0; i < gameSize; i++) {
@@ -14,13 +14,17 @@ function generateRandomCard() {
 // Setting up the game, according to the gameSize
 function choseGameDifficulty(cardPairs) {
   if (!cardDiv) return;
+  cardDiv.innerHTML = "";
   document.getElementById("cards-grid").style.display = "";
   for (let i = 0; i < cardPairs * 2; i++) {
+    const currentCard = randomCardsArray[i];
     const img = document.createElement("img");
     img.src = backSrc;
     img.alt = "Back side of a playing Card";
     img.classList.add("card__info");
     img.id = `card-${i + 1}`;
+    img.dataset.cardName = currentCard.cardName;
+    img.dataset.cardUrl = currentCard.cardUrl;
     img.addEventListener("click", toggleCard);
     cardDiv.appendChild(img);
   }
@@ -28,10 +32,7 @@ function choseGameDifficulty(cardPairs) {
 
 // Check if all cards matched.
 function checkWinCondition() {
-  const allCards = document.querySelectorAll(".card__info");
-  const matchedCards = document.querySelectorAll(".matched");
-
-  if (matchedCards.length !== allCards.length) return;
+  if (matchedPairs !== totalPairs) return;
   setTimeout(() => {
     // Stop the timer
     clearInterval(timer);
@@ -40,44 +41,54 @@ function checkWinCondition() {
 }
 
 function updateScoreboard() {
-  let score = Math.pow(gameSize, 2);
+  const scoreBase = Math.pow(gameSize, 2);
+  const efficiencyBonus = Math.max(totalPairs * 4 - moveCounter, 0) * 6;
+  const speedBonus = Math.max(totalPairs * 18 - gameTime, 0);
+  const finalScore = Math.max(scoreBase * 10 + efficiencyBonus + speedBonus, 0);
+  const record = {
+    score: finalScore,
+    moves: moveCounter,
+    time: gameTime,
+  };
+  const existingRecord = getBestRecord(gameSize);
+  const isNewBest =
+    !existingRecord ||
+    finalScore > existingRecord.score ||
+    (finalScore === existingRecord.score && gameTime < existingRecord.time);
 
-  const finalScore = Math.max(score * 3 - gameTime - moveCounter, 0);
+  if (isNewBest) {
+    saveBestRecord(gameSize, record);
+  }
+
+  updateHud();
 
   document.getElementById("cards-grid").style.display = "none";
-  document.getElementById("timer").style.display = "none";
-
-  setTimeout(() => {
-    document.getElementById("score").textContent = `${finalScore} Points`;
-  }, 1100);
-
-  setTimeout(() => {
-    document.getElementById("time").textContent = `${timeTaken}`;
-  }, 2100);
-
-  setTimeout(() => {
-    document.getElementById("moves").textContent = `${moveCounter} Moves`;
-  }, 3100);
 
   const scoreboard = document.createElement("section");
   scoreboard.id = "scoreboard";
   scoreboard.classList.add("scoreboard");
   scoreboard.innerHTML = `
-        <h3>Congratulations</h3>
-        <p id="level-difficulty" class="level-difficulty">You just won the game on level: ${getDifficultyLabel(gameSize)}</></p>
+        <p class="scoreboard__eyebrow">Table cleared</p>
+        <h2 class="scoreboard__title">Round complete</h2>
+        <p class="level-difficulty">Difficulty: ${getDifficultyLabel(gameSize)}</p>
         <div class="score">
-          <p class="score__score">Score:</p>
-          <p id="score"></p>
+          <p class="score__label">Score</p>
+          <p class="score__value">${finalScore} pts</p>
         </div>
         <div class="score">
-          <p class="score__time">Time:</p>
-          <p id="time"></p>
+          <p class="score__label">Time</p>
+          <p class="score__value">${timeTaken}</p>
         </div>
         <div class="score">
-          <p class="score__steps">Steps:</p>
-          <p id="moves"></p>
+          <p class="score__label">Moves</p>
+          <p class="score__value">${moveCounter}</p>
         </div>
-        <button id="reset" class="reset">Restart Game</button>
+        <div class="score">
+          <p class="score__label">Best</p>
+          <p class="score__value">${formatBestRecord(getBestRecord(gameSize))}</p>
+        </div>
+        <p class="scoreboard__message">${isNewBest ? "New best record for this level." : "Try again and beat your best run."}</p>
+        <button id="reset" class="reset">Play Again</button>
       `;
   document.body.appendChild(scoreboard);
   document.getElementById("reset").addEventListener("click", resetGame);
@@ -101,30 +112,23 @@ function getDifficultyLabel(size) {
 // If all cards matched, the game reloads.
 function resetGame() {
   const scoreboard = document.getElementById("scoreboard");
-  const timer = document.getElementById("timer");
+  const timerElement = document.getElementById("timer");
+  const gameShell = document.getElementById("game-shell");
 
   cardDiv.innerHTML = "";
   if (scoreboard) scoreboard.remove();
-  if (timer) timer.remove();
+  if (timerElement) timerElement.textContent = "0 seconds";
+  if (gameShell) gameShell.classList.add("game__shell--hidden");
   gameSize = 0;
   moveCounter = 0;
+  matchedPairs = 0;
+  totalPairs = 0;
+  boardLocked = false;
   cardStorageArray.length = 0;
   randomCardsArray.length = 0;
   if (landingMenu) landingMenu.style.display = "block";
   resetTimer();
-}
-
-// Add html for timer
-function addTimer() {
-  if (document.getElementById("timer")) return;
-
-  const cardsDiv = document.getElementById("cards");
-  const timerDiv = document.createElement("div");
-  timerDiv.innerText = "0 seconds";
-  timerDiv.id = "timer";
-  timerDiv.classList.add("timer");
-  cardsDiv.appendChild(timerDiv);
-  timerDiv.style.opacity = "0";
+  updateHud();
 }
 
 // Creating a timer
@@ -133,47 +137,50 @@ function startTimer() {
   timer = setInterval(() => {
     const time = Math.floor((Date.now() - startTime) / 1000);
     gameTime = time;
-    const hours = Math.floor(time / 3600);
-    const minutes = Math.floor((time % 3600) / 60);
-    const seconds = time % 60;
-    const timerDiv = document.getElementById("timer");
-    timerDiv.style.opacity = "1";
-
-    let timeString = "";
-    if (hours > 0) {
-      if (hours === 1) {
-        timeString += `${hours} hour `;
-      } else {
-        timeString += `${hours} hours `;
-      }
-    }
-    if (minutes > 0) {
-      if (minutes === 1) {
-        timeString += `${minutes} minute `;
-      } else {
-        timeString += `${minutes} minutes `;
-      }
-    }
-    if (seconds >= 0) {
-      if (seconds === 1) {
-        timeString += `${seconds} second`;
-      } else {
-        timeString += `${seconds} seconds`;
-      }
-    }
-
-    document.getElementById("timer").textContent = timeString.trim();
-    timeTaken = timeString.trim();
-  }, 100);
+    timeTaken = formatTime(time);
+    updateHud();
+  }, 1000);
 }
 
 // Resetting the timer
 function resetTimer() {
   clearInterval(timer);
+  timer = 0;
   startTime = 0;
+  gameTime = 0;
+  timeTaken = "0 seconds";
 
-  if (document.getElementById("timer")) {
-    timer.textContent = "0 seconds";
-    timer.style.display = "none";
+  const timerElement = document.getElementById("timer");
+  if (timerElement) {
+    timerElement.textContent = "0 seconds";
   }
+}
+
+function updateHud() {
+  const difficultyElement = document.getElementById("difficulty-value");
+  const movesElement = document.getElementById("moves-value");
+  const timerElement = document.getElementById("timer");
+  const progressElement = document.getElementById("progress-value");
+  const bestElement = document.getElementById("best-value");
+
+  if (difficultyElement) {
+    difficultyElement.textContent = gameSize ? getDifficultyLabel(gameSize) : "Waiting";
+  }
+  if (movesElement) {
+    movesElement.textContent = `${moveCounter}`;
+  }
+  if (timerElement) {
+    timerElement.textContent = timeTaken || "0 seconds";
+  }
+  if (progressElement) {
+    progressElement.textContent = `${matchedPairs} / ${totalPairs}`;
+  }
+  if (bestElement) {
+    bestElement.textContent = formatBestRecord(getBestRecord(gameSize));
+  }
+}
+
+function formatBestRecord(record) {
+  if (!record) return "No record";
+  return `${record.score} pts`;
 }
