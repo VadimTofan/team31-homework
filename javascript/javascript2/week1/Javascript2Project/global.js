@@ -77,7 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
       <section class="hero">
         <div class="hero__copy">
           <p class="hero__eyebrow">Card Strategy Drill</p>
-          <h1 class="hero__title">Memory Table</h1>
+          <h1 class="hero__title">Memory Card Game</h1>
           <p class="hero__text">
             Pick a difficulty, keep your turns tight, and clear the table with the fewest moves possible.
           </p>

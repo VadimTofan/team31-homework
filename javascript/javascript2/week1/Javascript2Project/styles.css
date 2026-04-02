@@ -1,18 +1,18 @@
 :root {
-  --bg-900: #0f1a17;
-  --bg-800: #14241f;
-  --bg-700: #1b332b;
-  --surface: rgba(17, 32, 27, 0.78);
-  --surface-strong: rgba(12, 24, 20, 0.92);
-  --surface-soft: rgba(255, 248, 232, 0.08);
-  --line: rgba(214, 188, 122, 0.28);
-  --text-main: #f6efde;
-  --text-muted: #c3b899;
-  --accent: #d6bc7a;
-  --accent-strong: #f2d289;
-  --success: #7bcf9a;
-  --shadow-lg: 0 30px 80px rgba(0, 0, 0, 0.36);
-  --shadow-md: 0 18px 40px rgba(0, 0, 0, 0.24);
+  --bg-900: #fffaf0;
+  --bg-800: #ffe4ba;
+  --bg-700: #ffd4d9;
+  --surface: rgba(255, 255, 255, 0.74);
+  --surface-strong: rgba(255, 255, 255, 0.9);
+  --surface-soft: rgba(255, 255, 255, 0.6);
+  --line: rgba(223, 136, 102, 0.28);
+  --text-main: #4a2f2b;
+  --text-muted: #866961;
+  --accent: #d26d55;
+  --accent-strong: #ef8f62;
+  --success: #4da56c;
+  --shadow-lg: 0 26px 60px rgba(188, 130, 107, 0.2);
+  --shadow-md: 0 14px 32px rgba(188, 130, 107, 0.16);
   --radius-xl: 32px;
   --radius-lg: 20px;
   --radius-md: 14px;
@@ -28,9 +28,9 @@ body {
   color: var(--text-main);
   font-family: "Trebuchet MS", "Segoe UI", sans-serif;
   background:
-    radial-gradient(circle at top, rgba(214, 188, 122, 0.12), transparent 30%),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent 38%),
-    linear-gradient(135deg, var(--bg-900), var(--bg-700));
+    radial-gradient(circle at top, rgba(255, 214, 153, 0.75), transparent 32%),
+    radial-gradient(circle at bottom right, rgba(255, 194, 203, 0.45), transparent 30%),
+    linear-gradient(135deg, var(--bg-900), var(--bg-800) 48%, var(--bg-700));
 }
 
 body::before {
@@ -39,8 +39,8 @@ body::before {
   inset: 0;
   pointer-events: none;
   background-image:
-    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    linear-gradient(rgba(210, 109, 85, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(210, 109, 85, 0.08) 1px, transparent 1px);
   background-size: 32px 32px;
   mask-image: radial-gradient(circle at center, black, transparent 85%);
 }
@@ -59,7 +59,7 @@ body::before {
   border: 1px solid var(--line);
   border-radius: var(--radius-xl);
   background:
-    linear-gradient(145deg, rgba(255, 248, 232, 0.06), rgba(255, 248, 232, 0.02)),
+    linear-gradient(145deg, rgba(255, 255, 255, 0.9), rgba(255, 245, 237, 0.72)),
     var(--surface);
   box-shadow: var(--shadow-lg);
   overflow: hidden;
@@ -72,7 +72,7 @@ body::before {
   width: 320px;
   aspect-ratio: 1;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(214, 188, 122, 0.24), transparent 68%);
+  background: radial-gradient(circle, rgba(239, 143, 98, 0.22), transparent 68%);
 }
 
 .hero__copy {
@@ -136,11 +136,11 @@ body::before {
 .difficulty__button,
 .reset {
   appearance: none;
-  border: 1px solid rgba(214, 188, 122, 0.45);
+  border: 1px solid rgba(210, 109, 85, 0.32);
   border-radius: 999px;
   background:
-    linear-gradient(180deg, rgba(255, 248, 232, 0.08), rgba(255, 248, 232, 0.02)),
-    rgba(214, 188, 122, 0.08);
+    linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(255, 240, 230, 0.82)),
+    rgba(239, 143, 98, 0.12);
   color: var(--text-main);
   font: inherit;
   font-weight: 700;
@@ -157,11 +157,11 @@ body::before {
 .difficulty__button:hover,
 .reset:hover {
   transform: translateY(-2px);
-  border-color: rgba(242, 210, 137, 0.9);
+  border-color: rgba(239, 143, 98, 0.75);
   background:
-    linear-gradient(180deg, rgba(255, 248, 232, 0.16), rgba(255, 248, 232, 0.04)),
-    rgba(214, 188, 122, 0.14);
-  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.22);
+    linear-gradient(180deg, rgba(255, 255, 255, 1), rgba(255, 233, 214, 0.95)),
+    rgba(239, 143, 98, 0.16);
+  box-shadow: 0 10px 22px rgba(210, 109, 85, 0.16);
 }
 
 .difficulty__button:active,
@@ -212,11 +212,11 @@ body::before {
 .table__frame {
   position: relative;
   padding: 22px;
-  border: 1px solid rgba(214, 188, 122, 0.3);
+  border: 1px solid rgba(223, 136, 102, 0.28);
   border-radius: var(--radius-xl);
   background:
-    radial-gradient(circle at top, rgba(255, 255, 255, 0.05), transparent 28%),
-    linear-gradient(160deg, rgba(22, 46, 39, 0.95), rgba(11, 24, 20, 0.96));
+    radial-gradient(circle at top, rgba(255, 255, 255, 0.75), transparent 28%),
+    linear-gradient(160deg, rgba(255, 247, 236, 0.98), rgba(255, 237, 225, 0.96));
   box-shadow: var(--shadow-lg);
 }
 
@@ -224,7 +224,7 @@ body::before {
   content: "";
   position: absolute;
   inset: 12px;
-  border: 1px solid rgba(214, 188, 122, 0.18);
+  border: 1px solid rgba(223, 136, 102, 0.18);
   border-radius: 24px;
   pointer-events: none;
 }
@@ -241,7 +241,7 @@ body::before {
   height: auto;
   aspect-ratio: 5 / 7;
   border-radius: 12px;
-  box-shadow: 0 14px 24px rgba(0, 0, 0, 0.26);
+  box-shadow: 0 12px 20px rgba(197, 140, 116, 0.22);
   cursor: pointer;
   object-fit: cover;
   transform: translateY(0) rotateY(180deg);
@@ -250,7 +250,7 @@ body::before {
 
 .card__info:hover {
   transform: translateY(-4px) rotateY(180deg);
-  box-shadow: 0 18px 30px rgba(0, 0, 0, 0.32);
+  box-shadow: 0 16px 24px rgba(210, 109, 85, 0.18);
 }
 
 .card__info--flipped,
@@ -288,7 +288,7 @@ body::before {
   justify-content: space-between;
   gap: 18px;
   padding: 14px 0;
-  border-top: 1px solid rgba(214, 188, 122, 0.14);
+  border-top: 1px solid rgba(223, 136, 102, 0.16);
 }
 
 .score__label {
