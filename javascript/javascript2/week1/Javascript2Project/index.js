@@ -2,62 +2,44 @@
 function startGame(pairs) {
   if (!gameSize) {
     gameSize = Number(pairs);
-    if (landingMenu) landingMenu.style.display = "none";
-    choseGameDifficulty(gameSize);
-    generateRandomCard();
-    addTimer();
+    totalPairs = gameSize;
+    matchedPairs = 0;
+    moveCounter = 0;
+    boardLocked = false;
+    cardStorageArray.length = 0;
+    randomCardsArray.length = 0;
 
-    const timerElement = document.getElementById("timer");
-    if (timerElement.style.display === "none" || timerElement.style.display === "") {
-      timerElement.style.display = "block";
-    }
+    if (landingMenu) landingMenu.style.display = "none";
+    generateRandomCard();
+    choseGameDifficulty(gameSize);
+
+    const gameShell = document.getElementById("game-shell");
+    if (gameShell) gameShell.classList.remove("game__shell--hidden");
+
+    updateHud();
   }
 }
 
 function toggleCard(event) {
   const card = event.target;
 
+  if (
+    boardLocked ||
+    card.classList.contains("matched") ||
+    card.classList.contains("oneOfTwo")
+  ) {
+    return;
+  }
+
   // Prevent clicking more than two cards at a time
   const flippedCards = document.querySelectorAll(".oneOfTwo");
   if (flippedCards.length >= 2) return;
 
-  // Move counter
-  moveCounter++;
-
   // Starting the timer when first card is flipped
   if (!startTime) startTimer();
 
-  // Check if the card is already stored (has an assigned image)
-  let storedCard = cardStorageArray.find((c) => c.cardId === card.id);
-
-  // Flip the card based on stored data
-  if (storedCard) {
-    if (card.src.includes("cardBack")) {
-      card.src = storedCard.cardSource;
-      card.alt = storedCard.cardAlt;
-    } else {
-      card.src = backSrc;
-      card.alt = "Back side of a playing card";
-      card.classList.remove("card__info--flipped", "oneOfTwo");
-      return;
-    }
-  } else {
-    // If card is not stored, assign a random one
-    if (!randomCardsArray.length) return;
-    const random = Math.floor(Math.random() * randomCardsArray.length);
-    const selectedCard = randomCardsArray[random];
-
-    card.src = selectedCard.cardUrl;
-    card.alt = selectedCard.cardName;
-
-    cardStorageArray.push({
-      cardId: card.id,
-      cardSource: card.src,
-      cardAlt: card.alt,
-    });
-
-    randomCardsArray.splice(random, 1);
-  }
+  card.src = card.dataset.cardUrl;
+  card.alt = card.dataset.cardName;
 
   // Add class to track flipped state
   card.classList.add("card__info--flipped", "oneOfTwo");
@@ -65,28 +47,35 @@ function toggleCard(event) {
   const currentCards = document.querySelectorAll(".oneOfTwo");
 
   if (currentCards.length === 2) {
+    moveCounter++;
+    updateHud();
+
     const [firstCard, secondCard] = currentCards;
 
-    if (firstCard.alt === secondCard.alt) {
+    if (firstCard.dataset.cardName === secondCard.dataset.cardName) {
       // Matched cards logic
       setTimeout(() => {
+        matchedPairs++;
         [firstCard, secondCard].forEach((card) => {
-          card.style.opacity = "0.1";
+          card.style.opacity = "0.35";
           card.removeEventListener("click", toggleCard);
           card.classList.remove("oneOfTwo");
           card.classList.add("matched");
         });
 
+        updateHud();
         checkWinCondition();
       }, 500);
     } else {
       // Unmatched cards flip back
+      boardLocked = true;
       setTimeout(() => {
         [firstCard, secondCard].forEach((card) => {
           card.src = backSrc;
           card.alt = "Back side of a playing card";
           card.classList.remove("card__info--flipped", "oneOfTwo");
         });
+        boardLocked = false;
       }, 1000);
     }
   }
