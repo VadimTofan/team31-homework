@@ -78,7 +78,7 @@ body::before {
 .hero__copy {
   position: relative;
   z-index: 1;
-  max-width: 640px;
+  max-width: 720px;
 }
 
 .hero__eyebrow,
@@ -102,7 +102,7 @@ body::before {
 }
 
 .hero__title {
-  white-space: nowrap;
+  white-space: normal;
 }
 
 .hero__text {
@@ -331,10 +331,20 @@ body::before {
   }
 }
 
-@media (min-width: 700px) {
+@media (min-width: 980px) {
   .hero {
-    grid-template-columns: 1.3fr 1fr;
-    align-items: end;
+    grid-template-columns: minmax(0, 1fr) minmax(320px, 360px);
+    align-items: stretch;
+    gap: 40px;
+  }
+
+  .landing__menu {
+    padding-left: 32px;
+    border-left: 1px solid rgba(223, 136, 102, 0.28);
+  }
+
+  .landing__panel {
+    height: 100%;
   }
 
   .cards__box {
